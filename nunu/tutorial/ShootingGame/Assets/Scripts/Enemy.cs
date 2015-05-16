@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour {
     IEnumerator Start () {
 			
         spaceship = GetComponent<Spaceship>();
-        spaceship.Move(transform.up * -1);
 
 		if (!spaceship.canShot) {
 			yield break;
@@ -28,6 +27,10 @@ public class Enemy : MonoBehaviour {
         }
     
     }
+
+	void Update() {
+		spaceship.Move(transform.up.normalized * -1);
+	}
 
 	void OnTriggerEnter2D(Collider2D c) {
 

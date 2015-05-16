@@ -181,8 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62aa726ad9eedec448f810872f8c1c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: .100000001
-  shotDelay: .300000012
+  speed: 2
+  shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
   canShot: 1
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
