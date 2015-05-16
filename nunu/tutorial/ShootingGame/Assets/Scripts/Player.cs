@@ -27,4 +27,22 @@ public class Player : MonoBehaviour {
         spaceship.Move(direction);
 
 	}
+
+	//被弾判定
+	void OnTriggerEnter2D(Collider2D c) {
+
+		//レイヤーに応じて処理を分岐
+		string layerName = LayerMask.LayerToName(c.gameObject.layer);
+
+		if (layerName == "Bullet(Enemy)") {
+			Destroy(c.gameObject);
+		}
+
+		if (layerName == "Bullet(Enemy)" || layerName == "Enemy") {
+			spaceship.Explosion();
+			Destroy(gameObject);
+		}
+
+
+	}
 }

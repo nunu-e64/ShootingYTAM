@@ -12,6 +12,8 @@ public class Spaceship : MonoBehaviour {
     public GameObject bullet;
 	public bool canShot;
 
+	public GameObject explosion;
+
     //弾の発射
     public void Shot(Transform origin)
     {
@@ -24,14 +26,10 @@ public class Spaceship : MonoBehaviour {
         GetComponent<Rigidbody2D>().velocity = direction * speed;
     }
 
+	//爆発の生成
+	public void Explosion() {
+		Instantiate(explosion, transform.position, transform.rotation);
+	}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }
