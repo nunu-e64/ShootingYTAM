@@ -4,11 +4,14 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
     Spaceship spaceship;
+	BackGround backGround;
+
 
 	// Use this for initialization
 	IEnumerator Start () {  //Updateに書くと他の処理に影響を及ぼす恐れがあるためコルーチンを利用
 
         spaceship = GetComponent<Spaceship> ();
+		backGround = FindObjectOfType<BackGround>();
 
         while (true){
             spaceship.Shot(transform);
@@ -37,9 +40,16 @@ public class Player : MonoBehaviour {
 
 	//移動＋移動制限
 	void Move(Vector2 direction) {
+
+		Vector2 scale = backGround.transform.localScale;
+		Vector2 min = scale * -0.5f;
+		Vector2 max = scale * 0.5f;
+
+		/*
 		//画面左下と右上のワールド座標をカメラのビューポート（0~1）から変換して取得
 		Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
 		Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+		*/
 
 		Vector2 pos = transform.position;
 
