@@ -7,6 +7,8 @@ public class Emitter : MonoBehaviour {
 
 	private int currentWave;
 
+	private Manager manager;
+
 	// Use this for initialization
 	IEnumerator Start () {
 
@@ -14,8 +16,13 @@ public class Emitter : MonoBehaviour {
 			yield break;
 		}
 
+		manager = FindObjectOfType<Manager>();
+
 		while (true) {
-			
+			while (!manager.IsPlaying()) {
+				yield return new WaitForEndOfFrame();
+			}
+
 			//新しいwaveを作成しEmmiterの子要素とする
 			GameObject wave = (GameObject)Instantiate(waves[currentWave], transform.position, Quaternion.identity);
 			wave.transform.parent = transform;
