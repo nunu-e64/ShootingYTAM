@@ -11,13 +11,33 @@ public class Manager : MonoBehaviour {
 	void Start () {
 		title = GameObject.Find("Title");
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
-		if (!IsPlaying()&&Input.GetKeyDown(KeyCode.X)){
+		//Touchクラスを使ってタップを検知する方法
+		//タップでゲームスタート
+		for (int i = 0; i < Input.touchCount; i++) {
+			Touch touch = Input.GetTouch(i);
+			if (!IsPlaying() && touch.phase == TouchPhase.Began) {
+				GameStart();
+			}
+		}
+		
+		//Xキーかクリックでもゲームスタート
+		if (!IsPlaying() && (Input.GetKeyDown(KeyCode.X) || Input.GetMouseButtonDown(0)) ){
 			GameStart();
 		}
 	}
+	
+	/*
+	void OnGUI() {
+		//Eventクラスを使ってクリックやタップを検知する方法
+		if (!IsPlaying() && Event.current.type == EventType.MouseDown) {
+			GameStart();
+		}
+	}
+	*/
 
 	void GameStart() {
 		title.SetActive(false);

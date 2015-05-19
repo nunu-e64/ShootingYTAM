@@ -5,7 +5,13 @@ public class BackGround : MonoBehaviour {
 
 	public float speed = 0.1f;
 
-	
+	void Start() {
+		//画面右上のワールド座標をビューポートから取得
+		Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+		Vector2 scale = max * 2;	//ワールド座標は画面中心が原点になっているので背景画像のスケールは2倍して求める
+		transform.localScale = scale;
+	}
+
 	// Update is called once per frame
 	void Update () {
 	
