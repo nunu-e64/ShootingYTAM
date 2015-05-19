@@ -4,11 +4,13 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
     Spaceship spaceship;
+	private Joystick joystick;
 
 	// Use this for initialization
 	IEnumerator Start () {  //Updateに書くと他の処理に影響を及ぼす恐れがあるためコルーチンを利用
 
         spaceship = GetComponent<Spaceship> ();
+		joystick = FindObjectOfType<Joystick>();
 
         while (true){
             spaceship.Shot(transform);
@@ -19,14 +21,19 @@ public class Player : MonoBehaviour {
         }
 
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
 
-		float x = Input.GetAxisRaw("Horizontal");
-		float y = Input.GetAxisRaw("Vertical");
+		//float x = Input.GetAxisRaw("Horizontal");
+		//float y = Input.GetAxisRaw("Vertical");
 
-		//float x = CrossPlatformInput.GetAxisRaw("Horizontal");
+		float x = joystick.position.x;
+		float y = joystick.position.y;
+
+
+		//float x = FindObjectOfType<Joystick>().GetInput().x;
 		//float y = CrossPlatformInput.GetAxisRaw("Vertical");
 
 		Vector2 direction = new Vector2 (x, y).normalized;

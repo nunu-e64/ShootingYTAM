@@ -55,7 +55,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193208}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
@@ -164,6 +164,7 @@ MonoBehaviour:
   bullet: {fileID: 124180, guid: ceb0688462b26af49ba4bcba4da3a290, type: 2}
   canShot: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
+  animator: {fileID: 0}
 --- !u!114 &11489546
 MonoBehaviour:
   m_ObjectHideFlags: 1
