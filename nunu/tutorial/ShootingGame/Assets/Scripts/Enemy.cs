@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour {
 			
         spaceship = GetComponent<Spaceship>();
 
+
 		if (!spaceship.canShot) {
 			yield break;
 		}
@@ -29,7 +30,14 @@ public class Enemy : MonoBehaviour {
     }
 
 	void Update() {
-		spaceship.Move(transform.up.normalized * -1);
+		//移動
+		Move(transform.up.normalized * -1);
+	}
+
+
+	//移動
+	public void Move(Vector2 direction) {
+		GetComponent<Rigidbody2D>().velocity = direction * spaceship.speed;
 	}
 
 	void OnTriggerEnter2D(Collider2D c) {

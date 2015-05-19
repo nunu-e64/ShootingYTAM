@@ -20,12 +20,6 @@ public class Spaceship : MonoBehaviour {
         Instantiate(bullet, origin.position, origin.rotation);
     }
 
-    //移動
-    public void Move(Vector2 direction)
-    {
-        GetComponent<Rigidbody2D>().velocity = direction * speed;
-    }
-
 	//爆発の生成
 	public void Explosion() {
 		Instantiate(explosion, transform.position, transform.rotation);
