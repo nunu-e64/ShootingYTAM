@@ -3,6 +3,10 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
+	public int point = 100;
+
+	public int hp = 1;
+
     Spaceship spaceship;
 
 
@@ -46,10 +50,21 @@ public class Enemy : MonoBehaviour {
 		string layerName = LayerMask.LayerToName(c.gameObject.layer);
 
 		if (layerName == "Bullet(Player)") {
-			Destroy(c.gameObject);
-			spaceship.Explosion();
-			Destroy(gameObject);
-		}
 
+			//弾の威力に応じてHPを減らし弾を削除
+			//Transform playerBulletTransform = c.transform.parent;
+			Bullet bullet = c.transform.parent.GetComponent<Bullet>();
+			hp -= bullet.power;
+			Destroy(c.gameObject);
+
+			if (hp <= 0) {
+				FindObjectOfType<Score>().AddPoint(point);
+				spaceship.Explosion();
+				Destroy(gameObject);
+			} else {
+				spaceship.GetAnimator().SetTrigger("Damage");
+				//Debug.Log("Damaged");
+			}
+		}
 	}
 }

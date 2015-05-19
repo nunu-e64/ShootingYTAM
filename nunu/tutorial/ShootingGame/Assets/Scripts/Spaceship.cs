@@ -14,6 +14,12 @@ public class Spaceship : MonoBehaviour {
 
 	public GameObject explosion;
 
+	public Animator animator;
+
+	void Start() {
+		animator = GetComponent<Animator>();
+	}
+
     //弾の発射
     public void Shot(Transform origin)
     {
@@ -25,5 +31,8 @@ public class Spaceship : MonoBehaviour {
 		Instantiate(explosion, transform.position, transform.rotation);
 	}
 
+	public Animator GetAnimator(){
+		return animator;
+	}
 
 }

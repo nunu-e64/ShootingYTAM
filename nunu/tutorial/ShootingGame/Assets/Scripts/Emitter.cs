@@ -24,7 +24,7 @@ public class Emitter : MonoBehaviour {
 			}
 
 			//新しいwaveを作成しEmmiterの子要素とする
-			GameObject wave = (GameObject)Instantiate(waves[currentWave], transform.position, Quaternion.identity);
+			GameObject wave = (GameObject)Instantiate(waves[currentWave], waves[currentWave].transform.position, Quaternion.identity);
 			wave.transform.parent = transform;
 		
 			//Waveの子要素のEmenyがすべて削除されるまで待機
@@ -36,6 +36,7 @@ public class Emitter : MonoBehaviour {
 
 			if (waves.Length <= ++currentWave) {
 				currentWave = 0;
+				Debug.Log("currentWave Reset");
 			}
 		}
 
