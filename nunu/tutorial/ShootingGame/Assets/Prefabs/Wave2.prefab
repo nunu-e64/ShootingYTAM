@@ -4500,7 +4500,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11402904
@@ -4530,7 +4530,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11403654
@@ -4599,7 +4599,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11409334
@@ -4629,7 +4629,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11414184
@@ -4685,7 +4685,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11417476
@@ -4702,7 +4702,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11418890
@@ -4745,7 +4745,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11432338
@@ -4762,7 +4762,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11433070
@@ -4792,7 +4792,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11435582
@@ -4809,7 +4809,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11435942
@@ -4826,7 +4826,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11438362
@@ -4856,7 +4856,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11445606
@@ -4873,7 +4873,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11446346
@@ -4903,7 +4903,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11452576
@@ -4920,7 +4920,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11453424
@@ -4937,7 +4937,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11454996
@@ -4967,7 +4967,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11456670
@@ -4984,7 +4984,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11459516
@@ -5001,7 +5001,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11461210
@@ -5031,7 +5031,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11468048
@@ -5074,7 +5074,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11474126
@@ -5091,7 +5091,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11477520
@@ -5134,7 +5134,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11482970
@@ -5216,7 +5216,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11492484
@@ -5233,7 +5233,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11499066
@@ -5250,7 +5250,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 0
+  shotable: 0
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!212 &21204048

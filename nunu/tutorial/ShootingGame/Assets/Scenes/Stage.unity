@@ -102,7 +102,7 @@ GameObject:
   m_Icon: {fileID: -2663371497217273435, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &66148795
 Transform:
   m_ObjectHideFlags: 0
@@ -178,8 +178,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1045457795
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c4e77dc55279e954796113ce7799a02f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 53f1e29ea03fa324ea070b6dfc976161, type: 3}
+  m_Color: {r: .699999988, g: .699999988, b: .699999988, a: 1}
 --- !u!4 &140908194
 Transform:
   m_ObjectHideFlags: 0
@@ -188,7 +188,7 @@ Transform:
   m_GameObject: {fileID: 140908191}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: .588534355, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1680424677}
   m_RootOrder: 0
@@ -386,6 +386,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 514156152}
   - 95: {fileID: 514156153}
+  - 114: {fileID: 514156154}
   m_Layer: 0
   m_Name: GaugeManager
   m_TagString: Untagged
@@ -424,6 +425,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &514156154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 514156151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f703cbcb090627a4194593a6870464a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerShotable: 1
 --- !u!1 &943501710
 GameObject:
   m_ObjectHideFlags: 0

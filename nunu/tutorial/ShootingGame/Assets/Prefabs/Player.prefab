@@ -162,7 +162,7 @@ MonoBehaviour:
   speed: 10
   shotDelay: .0500000007
   bullet: {fileID: 124180, guid: ceb0688462b26af49ba4bcba4da3a290, type: 2}
-  canShot: 0
+  canShot: 1
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11489546

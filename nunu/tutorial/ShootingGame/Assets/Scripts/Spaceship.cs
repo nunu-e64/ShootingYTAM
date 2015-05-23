@@ -10,7 +10,7 @@ public class Spaceship : MonoBehaviour {
     public float speed;
     public float shotDelay;
     public GameObject bullet;
-	public bool canShot;
+	public bool shotable = true;
 
 	public GameObject explosion;
 

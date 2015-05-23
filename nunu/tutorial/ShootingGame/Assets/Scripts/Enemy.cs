@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour {
         spaceship = GetComponent<Spaceship>();
 
 
-		if (!spaceship.canShot) {
+		if (!spaceship.shotable) {
 			yield break;
 		}
 			

@@ -4,20 +4,21 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
     Spaceship spaceship;
-	private Joystick joystick;
+	//private Joystick joystick;
 
 	// Use this for initialization
 	IEnumerator Start () {  //Updateに書くと他の処理に影響を及ぼす恐れがあるためコルーチンを利用
 
         spaceship = GetComponent<Spaceship> ();
-		joystick = FindObjectOfType<Joystick>();
+		FindObjectOfType<GaugeManager>().SetPlayer(spaceship);
+		//joystick = FindObjectOfType<Joystick>();
 
         while (true){
-            spaceship.Shot(transform);
-
-			GetComponent<AudioSource>().Play();
-
-            yield return new WaitForSeconds(spaceship.shotDelay);
+			if (spaceship.shotable) {
+				spaceship.Shot(transform);
+				GetComponent<AudioSource>().Play();
+			}
+			yield return new WaitForSeconds(spaceship.shotDelay);
         }
 
 	}
