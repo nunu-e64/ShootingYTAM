@@ -204,7 +204,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: ecf05cb87ce1e0a49ba200431da67239, type: 3}
+      value: {fileID: 21300000, guid: 53f1e29ea03fa324ea070b6dfc976161, type: 3}
     attribute: m_Sprite
     path: Gauge/HeatGauge
     classID: 212
@@ -259,7 +259,7 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: ecf05cb87ce1e0a49ba200431da67239, type: 3}
+    - {fileID: 21300000, guid: 53f1e29ea03fa324ea070b6dfc976161, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
