@@ -26,34 +26,45 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		//キーボード入力
 		//float x = Input.GetAxisRaw("Horizontal");
 		//float y = Input.GetAxisRaw("Vertical");
 
-		float x = joystick.position.x;
-		float y = joystick.position.y;
+		//仮想ジョイステック入力
+		//float x = joystick.position.x;
+		//float y = joystick.position.y;
 
+		Vector2 targetWorldPosition;
+		if (Input.touchCount > 0) {	//タッチ入力
+			targetWorldPosition = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+			Move(targetWorldPosition);
+		} else if (Input.GetMouseButton(0)) {	//マウス入力
+			targetWorldPosition = Camera.main.ScreenToWorldPoint((Vector2)Input.mousePosition);
+			Move(targetWorldPosition);
+		}
 
-		//float x = FindObjectOfType<Joystick>().GetInput().x;
-		//float y = CrossPlatformInput.GetAxisRaw("Vertical");
-
-		Vector2 direction = new Vector2 (x, y).normalized;
-        
-		//spaceship.Move(direction);
-
-		//移動
-		Move(direction);
 	}
 
 
 	//移動＋移動制限
-	void Move(Vector2 direction) {
+	void Move(Vector2 targetPos) {
+		
 		//画面左下と右上のワールド座標をカメラのビューポート（0~1）から変換して取得
 		Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
 		Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
-
+		
 		Vector2 pos = transform.position;
+		Vector2 header = (targetPos - (Vector2)transform.position);
+		float moveDistance = spaceship.speed * Time.deltaTime;
 
-		pos += direction * spaceship.speed * Time.deltaTime;
+
+		//目標座標が近ければ目標座標に自機座標を一致させ, 目標座標が遠ければSpeed分だけ移動
+		if (header.sqrMagnitude < moveDistance * moveDistance) {	//平方根計算、二乗計算は負荷が高いため避ける
+			pos = targetPos;
+		} else {
+			Vector2 direction = header.normalized;
+			pos += direction * moveDistance;
+		}
 
 		pos.x = Mathf.Clamp(pos.x, min.x, max.x);
 		pos.y = Mathf.Clamp(pos.y, min.y, max.y);
