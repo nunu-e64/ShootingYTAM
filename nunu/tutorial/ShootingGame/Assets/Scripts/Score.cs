@@ -26,7 +26,7 @@ public class Score : MonoBehaviour {
 		}
 
 		scoreGUIText.text = score.ToString();
-		highScoreGUIText.text = "HighScore:" + highScore.ToString();
+		highScoreGUIText.text = highScore.ToString();
 	}
 
 	private void Initialize() {

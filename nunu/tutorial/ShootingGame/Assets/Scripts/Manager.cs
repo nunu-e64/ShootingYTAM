@@ -4,12 +4,17 @@ using System.Collections;
 public class Manager : MonoBehaviour {
 
 	public GameObject player;
+	public GameObject heatGauge;
+	public GameObject score;
 
 	private GameObject title;
+
+
 
 	// Use this for initialization
 	void Start () {
 		title = GameObject.Find("Title");
+		heatGauge.SetActive(false);
 	}
 
 	
@@ -41,11 +46,13 @@ public class Manager : MonoBehaviour {
 
 	void GameStart() {
 		title.SetActive(false);
+		heatGauge.SetActive(true);
 		Instantiate(player, player.transform.position, player.transform.rotation);
 	}
 
 	public void GameOver() {
 		FindObjectOfType<Score>().Save();
+		heatGauge.SetActive(false);
 		title.SetActive(true);
 	}
 
