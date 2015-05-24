@@ -29,8 +29,7 @@ public class Manager : MonoBehaviour {
 
 		switch (gameMode) {
 		case mode_tag.PLAYING:
-			if (Input.GetMouseButtonDown(1)) {
-				Debug.Log("RightClick");
+			if (Input.GetMouseButtonDown(2) || Input.GetKeyDown(KeyCode.Escape)) {
 				FindObjectOfType<Player>().GetComponent<Spaceship>().Explosion();
 				Destroy(FindObjectOfType<Player>().gameObject);
 				GameOver();

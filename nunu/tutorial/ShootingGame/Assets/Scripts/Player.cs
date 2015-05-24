@@ -51,7 +51,8 @@ public class Player : MonoBehaviour {
 			Move(targetWorldPosition);
 		}
 
-		if (Input.GetMouseButtonDown(2)) {
+		//スペシャルアタック（仮）
+		if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Space)) {
 			gameObject.GetComponent<Animator>().SetTrigger("Special");
 		}
 	}
