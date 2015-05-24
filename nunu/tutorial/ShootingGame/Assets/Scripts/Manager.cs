@@ -30,8 +30,9 @@ public class Manager : MonoBehaviour {
 		switch (gameMode) {
 		case mode_tag.PLAYING:
 			if (Input.GetMouseButtonDown(1)) {
-				//FindObjectOfType<Player>().GetComponent<Spaceship>().Explosion();
-				//Destroy(FindObjectOfType<Player>().gameObject);
+				Debug.Log("RightClick");
+				FindObjectOfType<Player>().GetComponent<Spaceship>().Explosion();
+				Destroy(FindObjectOfType<Player>().gameObject);
 				GameOver();
 			}
 			break;
@@ -89,10 +90,8 @@ public class Manager : MonoBehaviour {
 		FindObjectOfType<Score>().Save();
 		gameOver.transform.Find("Score").GetComponent<GUIText>().text = "Score " + FindObjectOfType<Score>().GetScore().ToString();
 
-		while (true) {
-			heatGauge.SetActive(false);
-			gameOver.SetActive(true);
-		}
+		heatGauge.SetActive(false);
+		gameOver.SetActive(true);
 	}
 
 	private void ShowTitle() {
