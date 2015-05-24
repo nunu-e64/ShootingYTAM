@@ -7,31 +7,63 @@ public class Manager : MonoBehaviour {
 	public GameObject heatGauge;
 	public GameObject score;
 
-	private GameObject title;
+	public GameObject title;
+	public GameObject gameOver;
 
+	public enum mode_tag {
+		TITLE,
+		PLAYING,
+		GAMEOVER
+	}
+	private mode_tag gameMode;
 
 
 	// Use this for initialization
 	void Start () {
-		title = GameObject.Find("Title");
-		heatGauge.SetActive(false);
+		ShowTitle();
 	}
 
 	
 	// Update is called once per frame
-	void Update () {
-		//Touchクラスを使ってタップを検知する方法
-		//タップでゲームスタート
-		for (int i = 0; i < Input.touchCount; i++) {
-			Touch touch = Input.GetTouch(i);
-			if (!IsPlaying() && touch.phase == TouchPhase.Began) {
-				GameStart();
+	void Update() {
+
+		switch (gameMode) {
+		case mode_tag.PLAYING:
+			if (Input.GetMouseButtonDown(1)) {
+				FindObjectOfType<Player>().GetComponent<Spaceship>().Explosion();
+				Destroy(FindObjectOfType<Player>().gameObject);
+				GameOver();
 			}
-		}
-		
-		//Xキーかクリックでもゲームスタート
-		if (!IsPlaying() && (Input.GetKeyDown(KeyCode.X) || Input.GetMouseButtonDown(0)) ){
-			GameStart();
+			break;
+
+		case mode_tag.TITLE:
+			//タップorクリックorＸキーでゲーム開始
+			if (Input.GetKeyDown(KeyCode.X) || Input.GetMouseButtonDown(0)) {
+				GameStart();
+			} else {
+				for (int i = 0; i < Input.touchCount; i++) {
+					Touch touch = Input.GetTouch(i);
+					if (touch.phase == TouchPhase.Began) {
+						GameStart();
+						break;
+					}
+				}
+			}
+			break;
+
+		case mode_tag.GAMEOVER:
+			if (Input.GetKeyDown(KeyCode.X) || Input.GetMouseButtonDown(0)) {
+				ShowTitle();
+			} else {
+				for (int i = 0; i < Input.touchCount; i++) {
+					Touch touch = Input.GetTouch(i);
+					if (touch.phase == TouchPhase.Began) {
+						ShowTitle();
+						break;
+					}
+				}
+			}
+			break;
 		}
 	}
 	
@@ -45,18 +77,34 @@ public class Manager : MonoBehaviour {
 	*/
 
 	void GameStart() {
+		gameMode = mode_tag.PLAYING;
 		title.SetActive(false);
 		heatGauge.SetActive(true);
 		Instantiate(player, player.transform.position, player.transform.rotation);
 	}
 
 	public void GameOver() {
+		gameMode = mode_tag.GAMEOVER;
+		
 		FindObjectOfType<Score>().Save();
-		heatGauge.SetActive(false);
+		gameOver.transform.Find("Score").GetComponent<GUIText>().text = "Score " + FindObjectOfType<Score>().GetScore().ToString();
+
+		while (true) {
+			heatGauge.SetActive(false);
+			gameOver.SetActive(true);
+			
+
+		}
+	}
+
+	private void ShowTitle() {
+		gameMode = mode_tag.TITLE;
 		title.SetActive(true);
+		gameOver.SetActive(false);
+		heatGauge.SetActive(false);
 	}
 
 	public bool IsPlaying() {
-		return (!title.activeSelf);
+		return (gameMode == mode_tag.PLAYING);
 	}
 }
