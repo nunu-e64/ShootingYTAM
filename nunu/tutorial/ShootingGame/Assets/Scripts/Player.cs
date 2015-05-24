@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
+	public float shotNum;
+
     Spaceship spaceship;
 	//private Joystick joystick;
 
@@ -15,7 +17,12 @@ public class Player : MonoBehaviour {
 
         while (true){
 			if (spaceship.shotable) {
-				spaceship.Shot(transform);
+
+				//子要素を全て取得
+				for (int i = 0; i < transform.childCount && i < (int)shotNum; i++) {
+					Transform shotPosition = transform.GetChild(i);
+					spaceship.Shot(shotPosition);
+				}
 				GetComponent<AudioSource>().Play();
 			}
 			yield return new WaitForSeconds(spaceship.shotDelay);
@@ -44,6 +51,9 @@ public class Player : MonoBehaviour {
 			Move(targetWorldPosition);
 		}
 
+		if (Input.GetMouseButtonDown(2)) {
+			gameObject.GetComponent<Animator>().SetTrigger("Special");
+		}
 	}
 
 

@@ -4,7 +4,7 @@ using System.Collections;
 public class GaugeManager : MonoBehaviour {
 
 	private Spaceship playerSpaceShip = null;
-	public bool playerShotable;
+	private bool playerShotable;
 
 	// Use this for initialization
 	void Start () {
