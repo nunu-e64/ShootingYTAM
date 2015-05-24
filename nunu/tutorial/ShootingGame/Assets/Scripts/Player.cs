@@ -6,14 +6,14 @@ public class Player : MonoBehaviour {
 	public float shotNum;
 
     Spaceship spaceship;
-	//private Joystick joystick;
 
 	// Use this for initialization
 	IEnumerator Start () {  //Updateに書くと他の処理に影響を及ぼす恐れがあるためコルーチンを利用
 
         spaceship = GetComponent<Spaceship> ();
+		
+		//オーバーヒート時の処理のためにGaugeManagerに自分を渡しておく
 		FindObjectOfType<GaugeManager>().SetPlayer(spaceship);
-		//joystick = FindObjectOfType<Joystick>();
 
         while (true){
 			if (spaceship.shotable) {
@@ -99,7 +99,6 @@ public class Player : MonoBehaviour {
 
 			FindObjectOfType<Manager>().GameOver();
 		}
-
 
 	}
 }

@@ -30,8 +30,8 @@ public class Manager : MonoBehaviour {
 		switch (gameMode) {
 		case mode_tag.PLAYING:
 			if (Input.GetMouseButtonDown(1)) {
-				FindObjectOfType<Player>().GetComponent<Spaceship>().Explosion();
-				Destroy(FindObjectOfType<Player>().gameObject);
+				//FindObjectOfType<Player>().GetComponent<Spaceship>().Explosion();
+				//Destroy(FindObjectOfType<Player>().gameObject);
 				GameOver();
 			}
 			break;
@@ -92,8 +92,6 @@ public class Manager : MonoBehaviour {
 		while (true) {
 			heatGauge.SetActive(false);
 			gameOver.SetActive(true);
-			
-
 		}
 	}
 
