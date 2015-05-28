@@ -5,7 +5,9 @@ class UsersController extends AppController {
 	public $uses = array('Score','User');
 
 	public function index(){
-		$data = $this->Score->find('all');
+		$this->autoRender = false;
+		$data = $this->User->find('all');
+		json_encode($data);
 		$this->set('data',$data);
 	}
 	//ユーザ登録
