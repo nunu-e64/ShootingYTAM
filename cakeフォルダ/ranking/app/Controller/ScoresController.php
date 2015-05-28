@@ -11,6 +11,18 @@ class ScoresController extends AppController{
 		echo json_encode($data);
 		 $this->set('data',$data);
 	}
+	public function user_score(){
+		$this->autoRender = false;
+		$data = $this->Score->find('all',array(
+			'fields' => array('Score.user_id','Score.score'),
+			'conditions' => array('Score.user_id' => $this->request->query['user_id']),
+			'order' => '',
+			'group' => '',
+			'limit' => '',
+			)
+		);
+		echo json_encode($data);
+	}
 	//スコアの追加
 	public function add(){
 		$this->autoRender = false;
