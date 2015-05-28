@@ -16,7 +16,7 @@ class ScoresController extends AppController{
 		$data = $this->Score->find('all',array(
 			'fields' => array('Score.user_id','Score.score'),
 			'conditions' => array('Score.user_id' => $this->request->query['user_id']),
-			'order' => '',
+			'order' => 'Score.score DESC',
 			'group' => '',
 			'limit' => '',
 			)
