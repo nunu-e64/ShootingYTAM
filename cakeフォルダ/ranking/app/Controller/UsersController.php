@@ -10,14 +10,10 @@ class UsersController extends AppController {
 	}
 	//ユーザ登録
 	public function add(){
-		$data = 0;
-		if($this->request->isPost()){
-			$record = $this->data;
-			$flg = $this->User->save($record);
-			if($flg){
-				$this->redirect('.');
-			}
-		}
+		$this->autoRender = false;
+		$record['User']['name'] = $this->request->query['name'];
+		print_r($this->request->query['name']);
+		$this->User->save($record);
 	}
 
 }
