@@ -3,21 +3,29 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
+	public float shotNum;
+
     Spaceship spaceship;
-	private Joystick joystick;
 
 	// Use this for initialization
 	IEnumerator Start () {  //Updateに書くと他の処理に影響を及ぼす恐れがあるためコルーチンを利用
 
         spaceship = GetComponent<Spaceship> ();
-		joystick = FindObjectOfType<Joystick>();
+		
+		//オーバーヒート時の処理のためにGaugeManagerに自分を渡しておく
+		FindObjectOfType<GaugeManager>().SetPlayer(spaceship);
 
         while (true){
-            spaceship.Shot(transform);
+			if (spaceship.shotable) {
 
-			GetComponent<AudioSource>().Play();
-
-            yield return new WaitForSeconds(spaceship.shotDelay);
+				//子要素を全て取得
+				for (int i = 0; i < transform.childCount && i < (int)shotNum; i++) {
+					Transform shotPosition = transform.GetChild(i);
+					spaceship.Shot(shotPosition);
+				}
+				GetComponent<AudioSource>().Play();
+			}
+			yield return new WaitForSeconds(spaceship.shotDelay);
         }
 
 	}
@@ -43,6 +51,10 @@ public class Player : MonoBehaviour {
 			Move(targetWorldPosition);
 		}
 
+		//スペシャルアタック（仮）
+		if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Space)) {
+			gameObject.GetComponent<Animator>().SetTrigger("Special");
+		}
 	}
 
 
@@ -88,7 +100,6 @@ public class Player : MonoBehaviour {
 
 			FindObjectOfType<Manager>().GameOver();
 		}
-
 
 	}
 }
