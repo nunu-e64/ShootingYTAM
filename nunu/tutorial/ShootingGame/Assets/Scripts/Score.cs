@@ -32,7 +32,7 @@ public class Score : MonoBehaviour {
 	}
 	
 
-	private void Initialize() {
+	public void Initialize() {
 		score = 0;
 		highScore = PlayerPrefs.GetInt(highScoreKey, 0);
 
@@ -53,8 +53,6 @@ public class Score : MonoBehaviour {
 	public void Save() {
 		PlayerPrefs.SetInt(highScoreKey, highScore);
 		PlayerPrefs.Save();
-
-		Initialize();
 	}
 
 	public int GetScore() {

@@ -86,8 +86,8 @@ public class Manager : MonoBehaviour {
 	public void GameOver() {
 		gameMode = mode_tag.GAMEOVER;
 		
-		FindObjectOfType<Score>().Save();
 		gameOver.transform.Find("Score").GetComponent<GUIText>().text = "Score " + FindObjectOfType<Score>().GetScore().ToString();
+		FindObjectOfType<Score> ().Save ();
 
 		heatGauge.SetActive(false);
 		gameOver.SetActive(true);
@@ -98,6 +98,7 @@ public class Manager : MonoBehaviour {
 		title.SetActive(true);
 		gameOver.SetActive(false);
 		heatGauge.SetActive(false);
+		FindObjectOfType<Score> ().Initialize ();
 	}
 
 	public bool IsPlaying() {
