@@ -4,13 +4,16 @@ using System.Collections;
 public class Manager : MonoBehaviour {
 
 	public GameObject player;
-	public GameObject heatGauge;
+	public GameObject gauge;
 	public GameObject score;
 
 	public GameObject title;
 	public GameObject gameOver;
+	public GameObject signUp;
+	public GameObject titleMessage;
 
 	public enum mode_tag {
+		SIGNUP,
 		TITLE,
 		PLAYING,
 		GAMEOVER
@@ -20,7 +23,7 @@ public class Manager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		ShowTitle();
+		ShowSignUp();
 	}
 
 	
@@ -28,6 +31,18 @@ public class Manager : MonoBehaviour {
 	void Update() {
 
 		switch (gameMode) {
+		case mode_tag.SIGNUP:
+			string userName;
+			if ((userName = signUp.GetComponent<SignUp>().GetUserName ()).Length > 0) {
+				Debug.Log (userName);
+				//Debug.Log (GameObject.Find ("DeleteMessage").activeSelf);
+				//Debug.Log (GameObject.Find ("Name").activeSelf);
+				Debug.Log (titleMessage.transform.Find ("Name").GetComponent<GUIText> ().text);
+				titleMessage.transform.Find ("Name").GetComponent<GUIText> ().text = "ID : " + userName; 
+				ShowTitle ();
+			}
+			break;
+
 		case mode_tag.PLAYING:
 			if (Input.GetMouseButtonDown(2) || Input.GetKeyDown(KeyCode.Escape)) {
 				FindObjectOfType<Player>().GetComponent<Spaceship>().Explosion();
@@ -48,10 +63,14 @@ public class Manager : MonoBehaviour {
 						break;
 					}
 				}
+			} 
+			if (Input.GetKeyDown(KeyCode.Delete)){
+				if (GameObject.Find("DeleteMessage").activeSelf) DeletePlayerPrefs();
 			}
 			break;
 
 		case mode_tag.GAMEOVER:
+			//タップorクリックorＸキーでタイトルに戻る
 			if (Input.GetKeyDown(KeyCode.X) || Input.GetMouseButtonDown(0)) {
 				ShowTitle();
 			} else {
@@ -79,7 +98,8 @@ public class Manager : MonoBehaviour {
 	void GameStart() {
 		gameMode = mode_tag.PLAYING;
 		title.SetActive(false);
-		heatGauge.SetActive(true);
+		titleMessage.SetActive (false);
+		gauge.SetActive(true);
 		Instantiate(player, player.transform.position, player.transform.rotation);
 	}
 
@@ -89,19 +109,37 @@ public class Manager : MonoBehaviour {
 		gameOver.transform.Find("Score").GetComponent<GUIText>().text = "Score " + FindObjectOfType<Score>().GetScore().ToString();
 		FindObjectOfType<Score> ().Save ();
 
-		heatGauge.SetActive(false);
+		gauge.SetActive(false);
 		gameOver.SetActive(true);
 	}
 
 	private void ShowTitle() {
 		gameMode = mode_tag.TITLE;
-		title.SetActive(true);
+		title.SetActive (true);
+		titleMessage.SetActive (true);
 		gameOver.SetActive(false);
-		heatGauge.SetActive(false);
+		gauge.SetActive(false);
+		signUp.SetActive (false);
 		FindObjectOfType<Score> ().Initialize ();
+	}
+
+	private void ShowSignUp () {
+		gameMode = mode_tag.SIGNUP;
+		title.SetActive (true);
+		titleMessage.SetActive (false);
+		gameOver.SetActive (false);
+		gauge.SetActive (false);
+		signUp.SetActive (true);
 	}
 
 	public bool IsPlaying() {
 		return (gameMode == mode_tag.PLAYING);
+	}
+
+	private void DeletePlayerPrefs () {
+		PlayerPrefs.DeleteAll ();
+		FindObjectOfType<Score> ().Initialize ();
+		signUp.GetComponent<SignUp>().Initialize ();
+		ShowSignUp ();
 	}
 }
