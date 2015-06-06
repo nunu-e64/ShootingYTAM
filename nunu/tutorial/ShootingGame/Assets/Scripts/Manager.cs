@@ -66,9 +66,9 @@ public class Manager : MonoBehaviour {
 			break;
 		}
 	}
-	
+
 	/*
-	void OnGUI() {
+	void OnGUI() { 
 		//Eventクラスを使ってクリックやタップを検知する方法
 		if (!IsPlaying() && Event.current.type == EventType.MouseDown) {
 			GameStart();
