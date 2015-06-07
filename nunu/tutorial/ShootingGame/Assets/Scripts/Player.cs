@@ -34,22 +34,17 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		//キーボード入力
-		//float x = Input.GetAxisRaw("Horizontal");
-		//float y = Input.GetAxisRaw("Vertical");
-
-		//仮想ジョイステック入力
-		//float x = joystick.position.x;
-		//float y = joystick.position.y;
-
 		Vector2 targetWorldPosition;
+
 		if (Input.touchCount > 0) {	//タッチ入力
 			targetWorldPosition = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-			Move(targetWorldPosition);
 		} else if (Input.GetMouseButton(0)) {	//マウス入力
 			targetWorldPosition = Camera.main.ScreenToWorldPoint((Vector2)Input.mousePosition);
-			Move(targetWorldPosition);
+		} else {
+			targetWorldPosition = new Vector2 (transform.position.x + spaceship.speed * Input.GetAxisRaw ("Horizontal"),
+				transform.position.y + spaceship.speed * Input.GetAxisRaw ("Vertical"));
 		}
+		Move (targetWorldPosition);
 
 		//スペシャルアタック（仮）
 		if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Space)) {
