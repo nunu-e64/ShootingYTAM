@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-	public float shotNum;
+	public int shotNum = 1;
+	public float touchPosGapY = 1.0f;
 
     Spaceship spaceship;
 
@@ -37,9 +38,11 @@ public class Player : MonoBehaviour {
 		Vector2 targetWorldPosition;
 
 		if (Input.touchCount > 0) {	//タッチ入力
-			targetWorldPosition = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+			targetWorldPosition = Camera.main.ScreenToWorldPoint (Input.GetTouch (0).position);
+			targetWorldPosition.y += touchPosGapY;
 		} else if (Input.GetMouseButton(0)) {	//マウス入力
 			targetWorldPosition = Camera.main.ScreenToWorldPoint((Vector2)Input.mousePosition);
+			targetWorldPosition.y += touchPosGapY;
 		} else {
 			targetWorldPosition = new Vector2 (transform.position.x + spaceship.speed * Input.GetAxisRaw ("Horizontal"),
 				transform.position.y + spaceship.speed * Input.GetAxisRaw ("Vertical"));

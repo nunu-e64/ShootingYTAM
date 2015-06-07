@@ -401,6 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotNum: 1
+  touchPosGapY: 1
 --- !u!212 &21273294
 SpriteRenderer:
   m_ObjectHideFlags: 1
