@@ -34,10 +34,7 @@ public class Manager : MonoBehaviour {
 		case mode_tag.SIGNUP:
 			string userName;
 			if ((userName = signUp.GetComponent<SignUp>().GetUserName ()).Length > 0) {
-				Debug.Log (userName);
-				//Debug.Log (GameObject.Find ("DeleteMessage").activeSelf);
-				//Debug.Log (GameObject.Find ("Name").activeSelf);
-				Debug.Log (titleMessage.transform.Find ("Name").GetComponent<GUIText> ().text);
+				Debug.Log ("userName:" + userName);
 				titleMessage.transform.Find ("Name").GetComponent<GUIText> ().text = "ID : " + userName; 
 				ShowTitle ();
 			}

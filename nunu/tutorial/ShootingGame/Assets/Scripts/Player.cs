@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-	public float shotNum;
+	public float shotNum = 1;			//Animatorから変更するためにintではなくfloatでないといけない
+	public float touchPosGapY = 1.0f;
 
     Spaceship spaceship;
 
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour {
 	IEnumerator Start () {  //Updateに書くと他の処理に影響を及ぼす恐れがあるためコルーチンを利用
 
         spaceship = GetComponent<Spaceship> ();
+		AudioSource shotAudio = GetComponent<AudioSource> ();
 		
 		//オーバーヒート時の処理のためにGaugeManagerに自分を渡しておく
 		FindObjectOfType<GaugeManager>().SetPlayer(spaceship);
@@ -23,7 +25,7 @@ public class Player : MonoBehaviour {
 					Transform shotPosition = transform.GetChild(i);
 					spaceship.Shot(shotPosition);
 				}
-				GetComponent<AudioSource>().Play();
+				shotAudio.Play();
 			}
 			yield return new WaitForSeconds(spaceship.shotDelay);
         }
@@ -34,26 +36,23 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		//キーボード入力
-		//float x = Input.GetAxisRaw("Horizontal");
-		//float y = Input.GetAxisRaw("Vertical");
-
-		//仮想ジョイステック入力
-		//float x = joystick.position.x;
-		//float y = joystick.position.y;
-
 		Vector2 targetWorldPosition;
+
 		if (Input.touchCount > 0) {	//タッチ入力
-			targetWorldPosition = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-			Move(targetWorldPosition);
+			targetWorldPosition = Camera.main.ScreenToWorldPoint (Input.GetTouch (0).position);
+			targetWorldPosition.y += touchPosGapY;
 		} else if (Input.GetMouseButton(0)) {	//マウス入力
 			targetWorldPosition = Camera.main.ScreenToWorldPoint((Vector2)Input.mousePosition);
-			Move(targetWorldPosition);
+			targetWorldPosition.y += touchPosGapY;
+		} else {
+			targetWorldPosition = new Vector2 (transform.position.x + spaceship.speed * Input.GetAxisRaw ("Horizontal"),
+				transform.position.y + spaceship.speed * Input.GetAxisRaw ("Vertical"));
 		}
+		Move (targetWorldPosition);
 
 		//スペシャルアタック（仮）
 		if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Space)) {
-			gameObject.GetComponent<Animator>().SetTrigger("Special");
+			GetComponent<Animator>().SetTrigger("Special");
 		}
 	}
 

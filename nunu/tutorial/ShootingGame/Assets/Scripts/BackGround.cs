@@ -21,4 +21,8 @@ public class BackGround : MonoBehaviour {
 		GetComponent<Renderer>().sharedMaterial.SetTextureOffset("_MainTex", offset);
 
 	}
+
+	void OnDestroy () {
+		GetComponent<Renderer> ().sharedMaterial.SetTextureOffset ("_MainTex", new Vector2 (0, 0));
+	}
 }
