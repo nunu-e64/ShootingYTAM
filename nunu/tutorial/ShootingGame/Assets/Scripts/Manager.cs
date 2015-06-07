@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Manager : MonoBehaviour {
@@ -11,6 +12,7 @@ public class Manager : MonoBehaviour {
 	public GameObject gameOver;
 	public GameObject signUp;
 	public GameObject titleMessage;
+	public GameObject rankingButton;
 
 	public enum mode_tag {
 		SIGNUP,
@@ -50,6 +52,7 @@ public class Manager : MonoBehaviour {
 
 		case mode_tag.TITLE:
 			//タップorクリックorＸキーでゲーム開始
+			//rankingButton.GetComponent<Button>().
 			if (Input.GetKeyDown(KeyCode.X) || Input.GetMouseButtonDown(0)) {
 				GameStart();
 			} else {
@@ -96,6 +99,7 @@ public class Manager : MonoBehaviour {
 		gameMode = mode_tag.PLAYING;
 		title.SetActive(false);
 		titleMessage.SetActive (false);
+		rankingButton.SetActive (false);
 		gauge.SetActive(true);
 		Instantiate(player, player.transform.position, player.transform.rotation);
 	}
@@ -114,6 +118,7 @@ public class Manager : MonoBehaviour {
 		gameMode = mode_tag.TITLE;
 		title.SetActive (true);
 		titleMessage.SetActive (true);
+		rankingButton.SetActive (true);
 		gameOver.SetActive(false);
 		gauge.SetActive(false);
 		signUp.SetActive (false);
@@ -124,10 +129,12 @@ public class Manager : MonoBehaviour {
 		gameMode = mode_tag.SIGNUP;
 		title.SetActive (true);
 		titleMessage.SetActive (false);
+		rankingButton.SetActive (false);
 		gameOver.SetActive (false);
 		gauge.SetActive (false);
 		signUp.SetActive (true);
 	}
+
 
 	public bool IsPlaying() {
 		return (gameMode == mode_tag.PLAYING);
@@ -138,5 +145,11 @@ public class Manager : MonoBehaviour {
 		FindObjectOfType<Score> ().Initialize ();
 		signUp.GetComponent<SignUp>().Initialize ();
 		ShowSignUp ();
+	}
+
+
+	//ランキング表示シーンに遷移
+	public void GoToRanking () {
+		Application.LoadLevel ("Ranking");
 	}
 }

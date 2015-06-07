@@ -32,7 +32,7 @@ public class RankingManager : MonoBehaviour {
 
 
 	//Jsonデータをパースしてセット///////////////////////////////////////////////
-	bool SetRankingData (string dataText) {
+	public bool SetRankingData (string dataText) {
 
 		Debug.Log (dataText);	//DEBUG: wwwの内容一覧表示
 		var json = Json.Deserialize (dataText);
@@ -48,7 +48,6 @@ public class RankingManager : MonoBehaviour {
 		foreach (Dictionary<string, object> node in list) {
 			++i;
 			RankingDataNode item = new RankingDataNode (-1, "", -1);
-			Debug.Log (node["score"]);
 			item.Score = (int) (long) node["score"];
 			item.Name = node["name"] as string;
 			item.Rank = i;
@@ -58,6 +57,7 @@ public class RankingManager : MonoBehaviour {
 	}
 	////////////////////////////////////////////////////////////////////////////
 
+	//ランキングデータ要素クラス
 	private class RankingDataNode {
 		public RankingDataNode (int rank, string name, int score) {
 			Rank = rank;
@@ -81,5 +81,10 @@ public class RankingManager : MonoBehaviour {
 			get { return name; }
 			set { name = value; }
 		}
+	}
+
+	//タイトルに戻る
+	public void BackToTitle () {
+		Application.LoadLevel ("Stage");
 	}
 }
