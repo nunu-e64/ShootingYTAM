@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-	public int shotNum = 1;
+	public float shotNum = 1;			//Animatorから変更するためにintではなくfloatでないといけない
 	public float touchPosGapY = 1.0f;
 
     Spaceship spaceship;
@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
 	IEnumerator Start () {  //Updateに書くと他の処理に影響を及ぼす恐れがあるためコルーチンを利用
 
         spaceship = GetComponent<Spaceship> ();
+		AudioSource shotAudio = GetComponent<AudioSource> ();
 		
 		//オーバーヒート時の処理のためにGaugeManagerに自分を渡しておく
 		FindObjectOfType<GaugeManager>().SetPlayer(spaceship);
@@ -24,7 +25,7 @@ public class Player : MonoBehaviour {
 					Transform shotPosition = transform.GetChild(i);
 					spaceship.Shot(shotPosition);
 				}
-				GetComponent<AudioSource>().Play();
+				shotAudio.Play();
 			}
 			yield return new WaitForSeconds(spaceship.shotDelay);
         }
@@ -51,7 +52,7 @@ public class Player : MonoBehaviour {
 
 		//スペシャルアタック（仮）
 		if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Space)) {
-			gameObject.GetComponent<Animator>().SetTrigger("Special");
+			GetComponent<Animator>().SetTrigger("Special");
 		}
 	}
 
