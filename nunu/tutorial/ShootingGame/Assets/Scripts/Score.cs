@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Score : MonoBehaviour {
 
-	public GUIText scoreGUIText;
-	public GUIText highScoreGUIText;
+	public Text scoreText;
+	public Text highScoreText;
 	public int timeBonusPoint;
 	public float timeBonusPeriod;
 
@@ -36,8 +37,10 @@ public class Score : MonoBehaviour {
 		score = 0;
 		highScore = PlayerPrefs.GetInt(highScoreKey, 0);
 
-		scoreGUIText.text = score.ToString();
-		highScoreGUIText.text = highScore.ToString();
+		scoreText.text = score.ToString();
+		highScoreText.text = highScore.ToString();
+		scoreText.color = Color.white;
+		highScoreText.color = Color.white;
 	}
 
 	public void AddPoint(int point) {
@@ -45,9 +48,11 @@ public class Score : MonoBehaviour {
 
 		if (score > highScore) {
 			highScore = score;
+			scoreText.color = Color.red;
+			highScoreText.color = Color.red;
 		}
-		scoreGUIText.text = score.ToString();
-		highScoreGUIText.text = highScore.ToString();
+		scoreText.text = score.ToString();
+		highScoreText.text = highScore.ToString();
 	}
 
 	public void Save() {

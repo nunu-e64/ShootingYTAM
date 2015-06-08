@@ -24,7 +24,11 @@ public class Manager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 		ShowSignUp ();
+		if (signUp.GetComponent<SignUp> ().Initialize ()) {
+			SignUpComplete ();
+		}
 	}
 
 	
@@ -52,8 +56,8 @@ public class Manager : MonoBehaviour {
 						break;
 					}
 				}
-			} 
-			if (Input.GetKeyDown(KeyCode.Delete)){
+			}
+			if (Input.GetKeyDown (KeyCode.Delete) || Input.GetMouseButtonDown (2)) {
 				if (GameObject.Find("DeleteMessage").activeSelf) DeletePlayerPrefs();
 			}
 			break;
@@ -139,13 +143,14 @@ public class Manager : MonoBehaviour {
 		Application.LoadLevel ("Ranking");
 	}
 
-	//サインアップ完了を受け取る
+	//サインアップ完了を受け取る。登録済み:Start()から　新規登録：SignUp.NewNameSignUpから呼び出し
 	public void SignUpComplete () {
-		string userName;
-		if ((userName = signUp.GetComponent<SignUp>().GetUserName ()).Length > 0) {
-			Debug.Log ("userName:" + userName);
-			titleMessage.transform.Find ("Name").GetComponent<Text> ().text = "ID : " + userName; 
-			ShowTitle ();
+		string userName = signUp.GetComponent<SignUp>().UserName;
+		if (userName.Length == 0) {
+			Debug.LogError("userName.Legnth = 0");	//DEBUG: チェックは他でしているが当面の予防的措置
 		}
+		
+		titleMessage.transform.Find ("Name").GetComponent<Text> ().text = "ID : " + userName; 
+		ShowTitle ();
 	}
 }
