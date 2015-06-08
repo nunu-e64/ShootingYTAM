@@ -12,7 +12,6 @@ public class Manager : MonoBehaviour {
 	public GameObject gameOver;
 	public GameObject signUp;
 	public GameObject titleMessage;
-	public GameObject rankingButton;
 
 	public enum mode_tag {
 		SIGNUP,
@@ -25,7 +24,7 @@ public class Manager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		ShowSignUp();
+		ShowSignUp ();
 	}
 
 	
@@ -33,15 +32,6 @@ public class Manager : MonoBehaviour {
 	void Update() {
 
 		switch (gameMode) {
-		case mode_tag.SIGNUP:
-			string userName;
-			if ((userName = signUp.GetComponent<SignUp>().GetUserName ()).Length > 0) {
-				Debug.Log ("userName:" + userName);
-				titleMessage.transform.Find ("Name").GetComponent<GUIText> ().text = "ID : " + userName; 
-				ShowTitle ();
-			}
-			break;
-
 		case mode_tag.PLAYING:
 			if (Input.GetMouseButtonDown(2) || Input.GetKeyDown(KeyCode.Escape)) {
 				FindObjectOfType<Player>().GetComponent<Spaceship>().Explosion();
@@ -52,7 +42,6 @@ public class Manager : MonoBehaviour {
 
 		case mode_tag.TITLE:
 			//タップorクリックorＸキーでゲーム開始
-			//rankingButton.GetComponent<Button>().
 			if (Input.GetKeyDown(KeyCode.X) || Input.GetMouseButtonDown(0)) {
 				GameStart();
 			} else {
@@ -99,7 +88,6 @@ public class Manager : MonoBehaviour {
 		gameMode = mode_tag.PLAYING;
 		title.SetActive(false);
 		titleMessage.SetActive (false);
-		rankingButton.SetActive (false);
 		gauge.SetActive(true);
 		Instantiate(player, player.transform.position, player.transform.rotation);
 	}
@@ -107,7 +95,7 @@ public class Manager : MonoBehaviour {
 	public void GameOver() {
 		gameMode = mode_tag.GAMEOVER;
 		
-		gameOver.transform.Find("Score").GetComponent<GUIText>().text = "Score " + FindObjectOfType<Score>().GetScore().ToString();
+		gameOver.transform.Find("Score").GetComponent<Text>().text = "Score " + FindObjectOfType<Score>().GetScore().ToString();
 		FindObjectOfType<Score> ().Save ();
 
 		gauge.SetActive(false);
@@ -118,7 +106,6 @@ public class Manager : MonoBehaviour {
 		gameMode = mode_tag.TITLE;
 		title.SetActive (true);
 		titleMessage.SetActive (true);
-		rankingButton.SetActive (true);
 		gameOver.SetActive(false);
 		gauge.SetActive(false);
 		signUp.SetActive (false);
@@ -129,7 +116,6 @@ public class Manager : MonoBehaviour {
 		gameMode = mode_tag.SIGNUP;
 		title.SetActive (true);
 		titleMessage.SetActive (false);
-		rankingButton.SetActive (false);
 		gameOver.SetActive (false);
 		gauge.SetActive (false);
 		signUp.SetActive (true);
@@ -143,13 +129,23 @@ public class Manager : MonoBehaviour {
 	private void DeletePlayerPrefs () {
 		PlayerPrefs.DeleteAll ();
 		FindObjectOfType<Score> ().Initialize ();
-		signUp.GetComponent<SignUp>().Initialize ();
 		ShowSignUp ();
+		signUp.GetComponent<SignUp> ().Initialize ();
 	}
 
 
 	//ランキング表示シーンに遷移
 	public void GoToRanking () {
 		Application.LoadLevel ("Ranking");
+	}
+
+	//サインアップ完了を受け取る
+	public void SignUpComplete () {
+		string userName;
+		if ((userName = signUp.GetComponent<SignUp>().GetUserName ()).Length > 0) {
+			Debug.Log ("userName:" + userName);
+			titleMessage.transform.Find ("Name").GetComponent<Text> ().text = "ID : " + userName; 
+			ShowTitle ();
+		}
 	}
 }
