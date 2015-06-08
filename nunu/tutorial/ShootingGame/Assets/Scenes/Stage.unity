@@ -1948,7 +1948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 193208, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
   gauge: {fileID: 880903338}
-  score: {fileID: 1987335913}
+  scoreManager: {fileID: 1987335915}
   title: {fileID: 262596707}
   gameOver: {fileID: 1956822434}
   signUp: {fileID: 1432221736}
@@ -2710,7 +2710,7 @@ GameObject:
   - 224: {fileID: 1987335914}
   - 114: {fileID: 1987335915}
   m_Layer: 0
-  m_Name: Score
+  m_Name: ScoreManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

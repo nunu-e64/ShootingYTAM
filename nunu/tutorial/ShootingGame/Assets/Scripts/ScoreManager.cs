@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Score : MonoBehaviour {
+public class ScoreManager : MonoBehaviour {
 
 	public Text scoreText;
 	public Text highScoreText;
@@ -62,5 +62,9 @@ public class Score : MonoBehaviour {
 
 	public int GetScore() {
 		return score;
+	}
+
+	public bool IsHighScore () {
+		return (score == highScore);
 	}
 }

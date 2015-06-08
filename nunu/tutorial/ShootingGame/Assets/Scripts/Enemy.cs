@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour {
 			Destroy(c.gameObject);
 
 			if (hp <= 0) {
-				FindObjectOfType<Score>().AddPoint(point);
+				FindObjectOfType<ScoreManager>().AddPoint(point);
 				spaceship.Explosion();
 				Destroy(gameObject);
 			} else {

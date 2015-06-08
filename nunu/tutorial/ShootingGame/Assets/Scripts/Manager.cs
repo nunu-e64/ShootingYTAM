@@ -6,7 +6,7 @@ public class Manager : MonoBehaviour {
 
 	public GameObject player;
 	public GameObject gauge;
-	public GameObject score;
+	public ScoreManager scoreManager;
 
 	public GameObject title;
 	public GameObject gameOver;
@@ -83,14 +83,6 @@ public class Manager : MonoBehaviour {
 		}
 	}
 
-	/*
-	void OnGUI() { 
-		//Eventクラスを使ってクリックやタップを検知する方法
-		if (!IsPlaying() && Event.current.type == EventType.MouseDown) {
-			GameStart();
-		}
-	}
-	*/
 
 	public void GameStart() {
 		gameMode = mode_tag.PLAYING;
@@ -102,10 +94,17 @@ public class Manager : MonoBehaviour {
 
 	public void GameOver() {
 		gameMode = mode_tag.GAMEOVER;
-		
-		gameOver.transform.Find("Score").GetComponent<Text>().text = "Score " + FindObjectOfType<Score>().GetScore().ToString();
-		FindObjectOfType<Score> ().Save ();
 
+		int score = scoreManager.GetScore ();
+		gameOver.transform.Find("Score").GetComponent<Text>().text = "Score " + score.ToString();
+		scoreManager.Save ();
+
+		//ハイスコア更新時にはランキング送信
+		if (scoreManager.IsHighScore ()) {
+			//SendRanking(signUp.GetComponent<SignUp> ().UserName, score);
+			Debug.Log ("SendRanking:" + signUp.GetComponent<SignUp> ().UserName + "," + score);
+		}
+		
 		gauge.SetActive(false);
 		gameOver.SetActive(true);
 	}
@@ -117,7 +116,7 @@ public class Manager : MonoBehaviour {
 		gameOver.SetActive(false);
 		gauge.SetActive(false);
 		signUp.SetActive (false);
-		FindObjectOfType<Score> ().Initialize ();
+		FindObjectOfType<ScoreManager> ().Initialize ();
 	}
 
 	private void ShowSignUp () {
@@ -136,7 +135,7 @@ public class Manager : MonoBehaviour {
 
 	private void DeletePlayerPrefs () {
 		PlayerPrefs.DeleteAll ();
-		FindObjectOfType<Score> ().Initialize ();
+		FindObjectOfType<ScoreManager> ().Initialize ();
 		ShowSignUp ();
 		signUp.GetComponent<SignUp> ().Initialize ();
 	}
