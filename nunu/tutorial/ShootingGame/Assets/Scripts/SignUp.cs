@@ -36,11 +36,9 @@ public class SignUp : MonoBehaviour {
 	private void ChangeButtonStyle(bool isOk){
 		if (isOk) {
 			button.enabled = true;
-			button.GetComponentInChildren<Text> ().text = "Play";
 			button.GetComponentInChildren<Text> ().color = Color.white;
 		} else {
 			button.enabled = false;
-			button.GetComponentInChildren<Text> ().text = "Input ID";
 			button.GetComponentInChildren<Text> ().color = Color.gray;
 		}
 
