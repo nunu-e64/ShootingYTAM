@@ -45,18 +45,22 @@ public class Manager : MonoBehaviour {
 			break;
 
 		case mode_tag.TITLE:
-			//タップorクリックorＸキーでゲーム開始
-			if (Input.GetKeyDown(KeyCode.X) || Input.GetMouseButtonDown(0)) {
-				GameStart();
-			} else {
-				for (int i = 0; i < Input.touchCount; i++) {
-					Touch touch = Input.GetTouch(i);
-					if (touch.phase == TouchPhase.Began) {
-						GameStart();
-						break;
-					}
-				}
-			}
+			//uGUI(Button)で管理
+			////タップorクリックorＸキーでゲーム開始
+			//if (Input.GetKeyDown(KeyCode.X) || Input.GetMouseButtonDown(0)) {
+			//	GameStart();
+			//} else {
+			//	for (int i = 0; i < Input.touchCount; i++) {
+			//		Touch touch = Input.GetTouch(i);
+			//		if (touch.phase == TouchPhase.Began) {
+			//			GameStart();
+			//			break;
+			//		}
+			//	}
+			//}
+			//
+			if (Input.GetKeyDown (KeyCode.X)) GameStart ();
+
 			if (Input.GetKeyDown (KeyCode.Delete) || Input.GetMouseButtonDown (2)) {
 				if (GameObject.Find("DeleteMessage").activeSelf) DeletePlayerPrefs();
 			}
@@ -88,7 +92,7 @@ public class Manager : MonoBehaviour {
 	}
 	*/
 
-	void GameStart() {
+	public void GameStart() {
 		gameMode = mode_tag.PLAYING;
 		title.SetActive(false);
 		titleMessage.SetActive (false);
