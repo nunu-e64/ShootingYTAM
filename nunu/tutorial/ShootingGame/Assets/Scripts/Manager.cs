@@ -4,7 +4,7 @@ using System.Collections;
 
 public class Manager : MonoBehaviour {
 
-	public GameObject player;
+	public GameObject playerPrefab;		//GameStartでPlayerを生成するためのPrefab
 	public GameObject gauge;
 	public ScoreManager scoreManager;
 
@@ -12,6 +12,8 @@ public class Manager : MonoBehaviour {
 	public GameObject gameOver;
 	public GameObject signUp;
 	public GameObject titleMessage;
+
+	private GameObject player;			//生成したPlayer
 
 	public enum mode_tag {
 		SIGNUP,
@@ -38,8 +40,7 @@ public class Manager : MonoBehaviour {
 		switch (gameMode) {
 		case mode_tag.PLAYING:
 			if (Input.GetMouseButtonDown(2) || Input.GetKeyDown(KeyCode.Escape)) {
-				FindObjectOfType<Player>().GetComponent<Spaceship>().Explosion();
-				Destroy(FindObjectOfType<Player>().gameObject);
+				if (player) player.GetComponent<Player>().OnDead();
 				GameOver();
 			}
 			break;
@@ -89,7 +90,7 @@ public class Manager : MonoBehaviour {
 		title.SetActive(false);
 		titleMessage.SetActive (false);
 		gauge.SetActive(true);
-		Instantiate(player, player.transform.position, player.transform.rotation);
+		player = Instantiate(playerPrefab, playerPrefab.transform.position, playerPrefab.transform.rotation) as GameObject;
 	}
 
 	public void GameOver() {

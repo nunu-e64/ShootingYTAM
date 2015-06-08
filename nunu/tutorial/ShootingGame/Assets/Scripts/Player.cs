@@ -8,6 +8,8 @@ public class Player : MonoBehaviour {
 
     Spaceship spaceship;
 
+	private bool alive = true;		//UNDONE: 死亡後にSEを再生しようとして警告がでるバグへの応急処置
+
 	// Use this for initialization
 	IEnumerator Start () {  //Updateに書くと他の処理に影響を及ぼす恐れがあるためコルーチンを利用
 
@@ -18,14 +20,20 @@ public class Player : MonoBehaviour {
 		FindObjectOfType<GaugeManager>().SetPlayer(spaceship);
 
         while (true){
+			if (!alive) yield break;
+
 			if (spaceship.shotable) {
 
-				//子要素を全て取得
+				//子要素を全て取得してショット
 				for (int i = 0; i < transform.childCount && i < (int)shotNum; i++) {
 					Transform shotPosition = transform.GetChild(i);
 					spaceship.Shot(shotPosition);
 				}
-				shotAudio.Play();
+
+				//ショットサウンド再生
+				if (shotNum > 0) {
+					shotAudio.Play ();
+				}
 			}
 			yield return new WaitForSeconds(spaceship.shotDelay);
         }
@@ -94,11 +102,18 @@ public class Player : MonoBehaviour {
 		}
 
 		if (layerName == "Bullet(Enemy)" || layerName == "Enemy") {
-			spaceship.Explosion();
-			Destroy(gameObject);
-
-			FindObjectOfType<Manager>().GameOver();
+			OnDead ();
 		}
 
 	}
+
+	public void OnDead () {
+		alive = false;
+		spaceship.Explosion ();
+		Destroy (gameObject);
+
+		FindObjectOfType<Manager> ().GameOver ();
+
+	}
+
 }

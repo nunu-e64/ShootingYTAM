@@ -1946,7 +1946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9545022ee985c347aa0a6a9db07e9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 193208, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
+  playerPrefab: {fileID: 193208, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
   gauge: {fileID: 880903338}
   scoreManager: {fileID: 1987335915}
   title: {fileID: 262596707}
