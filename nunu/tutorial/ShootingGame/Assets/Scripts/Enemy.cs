@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour {
     IEnumerator Start () {
 
 		spaceship = GetComponent<Spaceship> ();
+		GetComponent<Rigidbody2D> ().velocity = transform.up.normalized * -1 * spaceship.speed;
 
 		if (!spaceship.shotable) {
 			yield break;
@@ -33,17 +34,6 @@ public class Enemy : MonoBehaviour {
         }
     
     }
-
-	void Update () {
-
-		Move (transform.up.normalized * -1);
-
-	}
-
-	void Move (Vector2 direction) {
-
-		GetComponent<Rigidbody2D> ().velocity = direction * spaceship.speed;
-	}
 
 	void OnTriggerEnter2D(Collider2D c) {
 
