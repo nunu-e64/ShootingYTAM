@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
+/// <summary>
+/// ゲージの状態によって自機が弾を打てるかを切り替えるための関数群
+/// ・Animationから呼び出す
+/// </summary>
 public class GaugeManager : MonoBehaviour {
+
 	private Spaceship playerSpaceShip = null;
 
 	public void SetPlayer(Spaceship ship) {

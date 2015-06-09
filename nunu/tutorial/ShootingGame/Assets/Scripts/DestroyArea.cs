@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// 画面外に出た敵や弾の削除
+/// </summary>
 public class DestroyArea : MonoBehaviour {
 
-	void Start() {
-		////画面右上のワールド座標をビューポートから取得
-		//Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
-		//Vector2 size = max * 2;
-		//GetComponent<BoxCollider2D>().size = size;
-	}
-	void OnTriggerExit2D(Collider2D c) {
+	void OnTriggerExit2D (Collider2D c) {	//TIPS: 判定の有無はUnityのEdit->ProjectSetting->Physics2Dで設定
 		Destroy(c.gameObject);
 	}
 

@@ -184,7 +184,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 2
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 1
+  shotable: 1
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11471776
