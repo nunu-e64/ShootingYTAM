@@ -3,47 +3,46 @@ using System.Collections;
 
 /// <summary>
 /// 敵の出現管理クラス
-/// ・WaveというEnemyをいくつか含む集団単位で管理する
-/// ・Waveは事前作成してPrefab化しEmitter.waves[]に必要なだけセットしておく
-/// ・一つのWaveが終わるごとに、順次次のWaveを出現させ、すべてのWaveが出現したら再度一つ目のWaveから出現する
+/// ・管理単位･･･Cluster > Wave > Enemy
+/// ・WaveはEnemyをいくつか含み、ClusterはWaveをいくつか含む
+/// ・WaveとClusterは事前作成しPrefab化しておく
+/// ・ClusterはEmitterによって順次出現させる。WaveはClusterが管理する。
 /// </summary>
 public class Emitter : MonoBehaviour {
 
-	public GameObject[] waves;		//敵の集団=waveの配列	inspectorから事前にセット
-	private int currentWave;		//現在何番目のwaveを表示しているか
+	public Cluster[] clusters;		//敵の集団=waveの配列	inspectorから事前にセット
+
+	private Cluster currentCluster;
+	private int currentClusterIndex;		//現在何番目のwaveを表示しているか
 	private Manager manager;
 
-	// Use this for initialization
-	IEnumerator Start () {
 
-		if (waves.Length == 0) {	//Waveが存在しなければコルーチンを終了する
-			yield break;
-		}
-
+	void Start(){
 		manager = FindObjectOfType<Manager>();
+		currentClusterIndex = -1;
+
+		if (clusters.Length == 0) {
+			Destroy (gameObject);
+		}
+	}
 
 
-		//Wave順次出現ルーチン
-		while (true) {
-			while (!manager.IsPlaying()) {		//ゲームプレイ時以外は待機
-				yield return new WaitForEndOfFrame();
-			}
+	void Update () {
 
-			//新しいwaveを作成しEmmiterの子要素とする
-			GameObject wave = (GameObject)Instantiate(waves[currentWave], waves[currentWave].transform.position, Quaternion.identity);
-			wave.transform.parent = transform;
-		
-			//Waveの子要素のEmenyがすべて削除されるまで待機
-			while (wave.transform.childCount !=0) {
-				yield return new WaitForEndOfFrame();
-			}
+		if (manager.IsPlaying ()) {
 
-			Destroy(wave);
+			if (currentCluster == null) {
+				//currentClusterIndexをインクリメント
+				if (clusters.Length <= ++currentClusterIndex) {
+					currentClusterIndex = 0;
+					Debug.Log ("<color=yellow>Reset ClusterIndex : </color>" + currentClusterIndex);
+				}
 
-			//currentWaveをインクリメントして次のWaveに移行
-			if (waves.Length <= ++currentWave) {
-				currentWave = 0;
-				Debug.Log("currentWave Reset");
+				//新しいClusterを作成しEmmiterの子要素とする
+				currentCluster = Instantiate (clusters[currentClusterIndex]);
+				currentCluster.transform.parent = transform;
+				Debug.Log ("<color=yellow>Create : </color>" + currentCluster);
+
 			}
 		}
 

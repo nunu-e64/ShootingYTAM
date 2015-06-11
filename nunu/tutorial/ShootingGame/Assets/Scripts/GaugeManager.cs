@@ -10,7 +10,6 @@ public class GaugeManager : MonoBehaviour {
 	public float countDown = 0.00f;
 
 	private Spaceship playerSpaceShip = null;
-	private Animator animator;
 	private bool isShooting;
 
 	GUIText[] gaugeText;
@@ -21,8 +20,6 @@ public class GaugeManager : MonoBehaviour {
 		foreach (GUIText item in gaugeText) {
 			item.transform.position = Camera.main.WorldToViewportPoint (transform.position);
 		}
-
-		animator = GetComponent<Animator>();
 	}
 
 
