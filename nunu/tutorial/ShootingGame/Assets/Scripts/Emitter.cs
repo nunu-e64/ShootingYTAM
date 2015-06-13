@@ -14,6 +14,9 @@ public class Emitter : MonoBehaviour {
 	private Manager manager;
 
 	[SerializeField]
+	private GameObject bulletPool;
+
+	[SerializeField]
 	private Cluster[] clusters;		//敵の集団=waveの配列	inspectorから事前にセット
 
 	[SerializeField]
@@ -37,6 +40,11 @@ public class Emitter : MonoBehaviour {
 		currentCluster = null;
 		foreach (Transform child in gameObject.transform) {	//すべてのCluster,Wave,Enemyを破棄
 			Destroy (child.gameObject);
+		}
+		if (bulletPool != null) {
+			foreach (Transform child in bulletPool.transform) {	//すべてのCluster,Wave,Enemyを破棄
+				Destroy (child.gameObject);
+			}
 		}
 	}
 

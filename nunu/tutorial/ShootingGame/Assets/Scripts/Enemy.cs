@@ -24,13 +24,14 @@ public class Enemy : MonoBehaviour {
 		//弾発射ルーチン
 		while (true) {
 
+			yield return new WaitForSeconds (spaceship.shotDelay);
+
 			//子要素(砲台)を全て取得して弾を発射
 			for (int i = 0; i < transform.childCount; i++) {
 				Transform shotPosition = transform.GetChild(i);
 				spaceship.Shot(shotPosition);
 			}
 
-			yield return new WaitForSeconds(spaceship.shotDelay);
         }
     
     }

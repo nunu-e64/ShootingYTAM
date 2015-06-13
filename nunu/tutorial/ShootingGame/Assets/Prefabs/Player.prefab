@@ -128,11 +128,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 410280}
+  - 114: {fileID: 11489546}
+  - 114: {fileID: 11424426}
   - 212: {fileID: 21273294}
   - 95: {fileID: 9569426}
   - 50: {fileID: 5068786}
-  - 114: {fileID: 11489546}
-  - 114: {fileID: 11424426}
   - 61: {fileID: 6110296}
   - 82: {fileID: 8242860}
   m_Layer: 8
@@ -384,11 +384,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
-  shotDelay: .0799999982
-  bullet: {fileID: 124180, guid: ceb0688462b26af49ba4bcba4da3a290, type: 2}
   shotable: 1
+  bullet: {fileID: 124180, guid: ceb0688462b26af49ba4bcba4da3a290, type: 2}
+  shotDelay: .0799999982
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
-  animator: {fileID: 0}
 --- !u!114 &11489546
 MonoBehaviour:
   m_ObjectHideFlags: 1

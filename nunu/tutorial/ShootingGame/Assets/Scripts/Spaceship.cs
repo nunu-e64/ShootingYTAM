@@ -12,20 +12,30 @@ using System.Collections;
 /// </summary>
 public class Spaceship : MonoBehaviour {	//TODO: 継承で代替すべき
 
+	[HeaderAttribute ("ShipStatus")]
 	public float speed;				//機体の移動速度[Unity/s]
-    public float shotDelay;			//弾の発射間隔[s]
-    public GameObject bullet;
-	public bool shotable = true;
 
+	[HeaderAttribute ("BulletStatus")]
+	public bool shotable = true;	//弾を発射するか
+	public GameObject bullet;		//弾のプレハブ
+	public float shotDelay;			//弾の発射間隔[s]
+
+	[HeaderAttribute ("OtherRef")]
 	public GameObject explosion;
-	public Animator animator;
+
+	private GameObject bulletPool;
+	private Animator animator;
 
 	void Start() {
 		animator = GetComponent<Animator>();
+		if ((bulletPool = GameObject.Find ("BulletPool")) == null) {
+			Debug.LogError("Not Found GameObject\"BulletPool\"");
+		}
 	}
 
     public void Shot(Transform origin) { 
-        Instantiate(bullet, origin.position, origin.rotation);
+        GameObject newBullet = Instantiate(bullet, origin.position, origin.rotation) as GameObject;
+		if (bulletPool != null) newBullet.transform.parent = bulletPool.transform;
     }
 
 	public void Explosion() {
