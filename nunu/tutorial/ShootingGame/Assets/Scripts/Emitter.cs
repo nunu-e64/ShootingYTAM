@@ -36,16 +36,17 @@ public class Emitter : MonoBehaviour {
 
 		if (manager.IsPlaying ()) {
 
-			if (currentCluster == null) {
+			if (currentCluster == null && currentClusterIndex < clusters.Length) {
 
-				if (currentClusterIndex < clusters.Length) ++currentClusterIndex;
+				++currentClusterIndex;
 
 				//すべてのclusterの出現が完了したとき→再度最初から出現or停止
-				if (clusters.Length == currentClusterIndex) {
+				if (currentClusterIndex == clusters.Length) {
 					if (isLoop) {
 						currentClusterIndex = 0;
-						Debug.Log ("<color=yellow>Reset ClusterIndex : </color>" + currentClusterIndex);
+						Debug.Log ("<color=yellow>Reset ClusterIndex </color> :" + currentClusterIndex);
 					} else {
+						Debug.Log ("<color=yellow>Finish Emit</color> :" + currentClusterIndex);
 						return;
 					}
 				}
