@@ -70,7 +70,7 @@ public class StageManager : MonoBehaviour {
 				//新しいStageを作成しEmmiterの子要素とする
 				currentStage = Instantiate (stages[currentStageIndex]);
 				currentStage.transform.parent = transform;
-				Debug.Log ("<color=green>" + gameObject + "Create:</color>" + currentStage);
+				Debug.Log ("<color=green>CreateStage:</color>" + currentStage);
 
 			}
 		}

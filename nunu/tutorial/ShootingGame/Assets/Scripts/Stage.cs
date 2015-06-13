@@ -41,7 +41,7 @@ public class Stage : MonoBehaviour {
 			if (currentWaveIndex < waves.Length) {
 				Wave currentWave = Instantiate (waves[currentWaveIndex].wave);
 				currentWave.transform.parent = transform.parent;
-				Debug.Log ("<color=green>" + gameObject + "Create:</color>" + currentWave);
+				Debug.Log ("<color=green>CreateWave:</color>" + currentWave);
 
 			} else {
 				Destroy (gameObject);
