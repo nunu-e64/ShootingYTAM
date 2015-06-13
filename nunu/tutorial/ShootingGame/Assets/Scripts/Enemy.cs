@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour {
 
     IEnumerator Start () {
 
+		//速度は最初に設定し以降一定速度で移動
 		spaceship = GetComponent<Spaceship> ();
 		GetComponent<Rigidbody2D> ().velocity = transform.up.normalized * -1 * spaceship.speed;
 
@@ -26,12 +27,16 @@ public class Enemy : MonoBehaviour {
 
 			yield return new WaitForSeconds (spaceship.shotDelay);
 
-			//子要素(砲台)を全て取得して弾を発射
-			for (int i = 0; i < transform.childCount; i++) {
-				Transform shotPosition = transform.GetChild(i);
-				spaceship.Shot(shotPosition);
-			}
+			//画面内にあるときすべての子要素(shotPosition=砲台)から弾を発射////
+			Vector3 positionInView = Camera.main.WorldToViewportPoint (transform.position);
 
+			if (positionInView.x > 0 && positionInView.x < 1 && positionInView.y > 0 && positionInView.y < 1) {
+				foreach (Transform shotPosition in transform) {
+					//Transform shotPosition = transform.GetChild (i);
+					spaceship.Shot (shotPosition);
+				}
+			}
+			///////////////////////////////////////////////////////////////////
         }
     
     }
