@@ -1191,7 +1191,7 @@ Animator:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 880903338}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: a5a0efac66e336d47a648af46717a590, type: 2}
   m_CullingMode: 0
@@ -3018,6 +3018,10 @@ MonoBehaviour:
   bulletPool: {fileID: 1296733298}
   clusters:
   - {fileID: 11468976, guid: 40a82d7217d0f8047964c7968161e325, type: 2}
+  - {fileID: 11468976, guid: d3026116bdb209d4c922b92785db6de0, type: 2}
+  - {fileID: 11468976, guid: 248299c92f9b64e42a303ae9833eda75, type: 2}
+  - {fileID: 11468976, guid: b41a52a5a8517c04e8951f8197f3bcef, type: 2}
+  - {fileID: 11468976, guid: ab5a770138deaf845ad9c23d31d1d900, type: 2}
   isLoop: 1
 --- !u!4 &1982837109
 Transform:
