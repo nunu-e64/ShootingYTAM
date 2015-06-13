@@ -4,53 +4,49 @@ using System.Collections;
 /// <summary>
 /// Waveの出現を管理
 /// ・Emitterでインスタンス化
+/// ・ClusterとWaveについてはEmitter.cを参照
 /// </summary>
 public class Cluster : MonoBehaviour {
-
-	[System.Serializable]
-	private class WaveData {
-		public GameObject wave;
-		public float appearTime;
-	}
 	
-	[SerializeField] 
+	[System.Serializable]
+	private class WaveData {		//TIPS: classであれば[System.Serializable]を指定すればInspectorから編集できる。structでは不可。
+		public GameObject wave;		//Enemyの1群
+		public float nextAppearTime;	//このWaveが出現してから次のWaveが出現するまでの時間[s] Cluster最後のWaveの時は次のClusterに移行するまでの時間[s]
+	}
+
+	[SerializeField]	//TIPS: [SerializeField]を指定するとprivate変数をInspectorで編集できるようになる。
 	private WaveData[] waves;
 
-	private GameObject currentWave;
+	private float timer;	//waveの出現タイミングを管理するためのタイマー。wave出現ごとにリセット。	
 	private int currentWaveIndex;
 
-	
 	void Start () {
-		currentWaveIndex = 0;
+		timer = 0;
+		currentWaveIndex = -1;
 		
 		if (waves.Length == 0) {
 			Destroy (gameObject);
-			Debug.Log ("<color=green>Destroy Cluster</color>");
+			Debug.Log ("<color=red>Destroy Cluster</color> waves.Length=0");
 		}
 	}
 	
 	void Update () {
+		timer += Time.deltaTime;
 
-		if (currentWave == null) {
+		if (currentWaveIndex == -1 || timer > waves[currentWaveIndex].nextAppearTime) {
 
-			currentWave = (GameObject) Instantiate (waves[currentWaveIndex].wave, waves[currentWaveIndex].wave.transform.position, Quaternion.identity);
-			currentWave.transform.parent = transform;
-			Debug.Log ("Create:" + currentWave);
+			timer = 0;
+			++currentWaveIndex;
 
-		} else {
+			if (currentWaveIndex < waves.Length) {
+				GameObject currentWave = (GameObject) Instantiate (waves[currentWaveIndex].wave, waves[currentWaveIndex].wave.transform.position, Quaternion.identity);
+				Debug.Log ("<color=green>" + gameObject + "Create:</color>" + currentWave);
 
-			if (currentWave.transform.childCount == 0) {
-
-				Destroy (currentWave);
-
-				if (waves.Length <= ++currentWaveIndex) {
-					Destroy (gameObject);
-					Debug.Log ("<color=green>Destroy Cluster</color>");
-				}
+			} else {
+				Destroy (gameObject);
 			}
 
-		}
-
-		
+		}		
 	}
+
 }

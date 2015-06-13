@@ -40,10 +40,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - wave: {fileID: 144186, guid: 857a3a665e456b64db19510759133422, type: 2}
-    appearTime: 0
-  - wave: {fileID: 169764, guid: 4fc2ff045293098408de5dd7810f4c6a, type: 2}
-    appearTime: 0
+  - wave: {fileID: 186428, guid: 316de5bcb2b87c941b92c11b8d143a19, type: 2}
+    nextAppearTime: 5
+  - wave: {fileID: 186428, guid: 316de5bcb2b87c941b92c11b8d143a19, type: 2}
+    nextAppearTime: 5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

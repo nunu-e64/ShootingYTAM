@@ -41,7 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - wave: {fileID: 179982, guid: d7b9b8aceb6e6a946b778c569797e550, type: 2}
-    appearTime: 0
+    nextAppearTime: 5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
