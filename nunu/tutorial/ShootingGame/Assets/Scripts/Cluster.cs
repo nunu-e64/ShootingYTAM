@@ -40,6 +40,7 @@ public class Cluster : MonoBehaviour {
 
 			if (currentWaveIndex < waves.Length) {
 				Wave currentWave = Instantiate (waves[currentWaveIndex].wave);
+				currentWave.transform.parent = transform.parent;
 				Debug.Log ("<color=green>" + gameObject + "Create:</color>" + currentWave);
 
 			} else {

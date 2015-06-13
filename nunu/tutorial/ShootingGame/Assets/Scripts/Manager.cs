@@ -3,22 +3,27 @@ using UnityEngine.UI;
 using System.Collections;
 
 /// <summary>
-/// ゲーム状況(ゲームモード)の管理クラス
+/// ゲーム状況の管理クラス
 /// </summary>
 public class Manager : MonoBehaviour {
 
+	[HeaderAttribute ("Prefabs")]
 	public GameObject playerPrefab;		//GameStartでPlayerを生成するためのPrefab
-	public GameObject gauge;
-	public ScoreManager scoreManager;
 
+	[HeaderAttribute ("RefScript")]
+	public ScoreManager scoreManager;
+	public Emitter emitter;
+
+	[HeaderAttribute ("表示切替用Object")]
 	public GameObject title;			//ゲーム状況（mode）に応じて表示切替するための各種UI
 	public GameObject gameOver;			//
 	public GameObject signUp;			//
 	public GameObject titleMessage;		//
+	public GameObject gauge;			//
 
 	private GameObject player;			//生成したPlayer
 
-	public enum mode_tag {
+	private enum mode_tag {
 		SIGNUP,
 		TITLE,
 		PLAYING,
@@ -104,7 +109,9 @@ public class Manager : MonoBehaviour {
 		gameOver.SetActive(false);
 		gauge.SetActive(false);
 		signUp.SetActive (false);
-		FindObjectOfType<ScoreManager> ().Initialize ();
+
+		scoreManager.Initialize ();
+		emitter.Init ();
 	}
 
 	private void ShowSignUp () {
@@ -123,7 +130,7 @@ public class Manager : MonoBehaviour {
 
 	private void DeletePlayerPrefs () {
 		PlayerPrefs.DeleteAll ();
-		FindObjectOfType<ScoreManager> ().Initialize ();
+		scoreManager.Initialize ();
 		ShowSignUp ();
 		signUp.GetComponent<SignUp> ().Initialize ();
 	}

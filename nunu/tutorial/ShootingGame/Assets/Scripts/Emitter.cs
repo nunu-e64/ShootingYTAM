@@ -9,7 +9,10 @@ using System.Collections;
 /// ・ClusterはEmitterによって順次出現させる。WaveはClusterが管理する。
 /// </summary>
 public class Emitter : MonoBehaviour {
-	
+
+	[SerializeField]
+	private Manager manager;
+
 	[SerializeField]
 	private Cluster[] clusters;		//敵の集団=waveの配列	inspectorから事前にセット
 
@@ -18,11 +21,9 @@ public class Emitter : MonoBehaviour {
 
 	private Cluster currentCluster;
 	private int currentClusterIndex;		//現在何番目のwaveを表示しているか
-	private Manager manager;
 
 
 	void Start(){
-		manager = FindObjectOfType<Manager>();
 		currentClusterIndex = -1;
 
 		if (clusters.Length == 0) {	//clusterが未セットの場合は終了
@@ -31,6 +32,13 @@ public class Emitter : MonoBehaviour {
 		}
 	}
 
+	public void Init () {	//タイトル表示の際に呼び出す初期化処理
+		currentClusterIndex = -1;
+		currentCluster = null;
+		foreach (Transform child in gameObject.transform) {	//すべてのCluster,Wave,Enemyを破棄
+			Destroy (child.gameObject);
+		}
+	}
 
 	void Update () {
 

@@ -2209,12 +2209,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 193208, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-  gauge: {fileID: 880903338}
   scoreManager: {fileID: 1987335915}
+  emitter: {fileID: 1982837108}
   title: {fileID: 262596707}
   gameOver: {fileID: 1956822434}
   signUp: {fileID: 1432221736}
   titleMessage: {fileID: 2136669886}
+  gauge: {fileID: 880903338}
 --- !u!1 &1721062654
 GameObject:
   m_ObjectHideFlags: 0
@@ -2944,6 +2945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a4657ea793ee9b40b9fc40c3dfab4aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 1704102606}
   clusters:
   - {fileID: 11468976, guid: 40a82d7217d0f8047964c7968161e325, type: 2}
   - {fileID: 11468976, guid: d3026116bdb209d4c922b92785db6de0, type: 2}
