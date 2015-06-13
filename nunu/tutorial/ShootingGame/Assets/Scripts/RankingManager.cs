@@ -90,6 +90,6 @@ public class RankingManager : MonoBehaviour {
 
 	//タイトルに戻る	//ボタンから呼び出し
 	public void BackToTitle () {
-		Application.LoadLevel ("Stage");
+		Application.LoadLevel ("Main");
 	}
 }
