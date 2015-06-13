@@ -75,8 +75,8 @@ PlayerSettings:
     16:10: 0
     16:9: 0
     Others: 0
-  bundleIdentifier: com.YTAM.ShootingGame
-  bundleVersion: 1.0
+  bundleIdentifier: jp.YTAM.ShootingGame
+  bundleVersion: 0.1
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
