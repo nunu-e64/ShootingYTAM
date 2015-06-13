@@ -42,7 +42,6 @@ public class Manager : MonoBehaviour {
 		case mode_tag.PLAYING:
 			if (Input.GetMouseButtonDown(2) || Input.GetKeyDown(KeyCode.Escape)) {
 				if (player) player.GetComponent<Player>().OnDead();
-				GameOver();
 			}
 			break;
 
