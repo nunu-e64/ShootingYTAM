@@ -3016,13 +3016,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 1704102606}
   bulletPool: {fileID: 1296733298}
-  clusters:
+  stages:
   - {fileID: 11468976, guid: 40a82d7217d0f8047964c7968161e325, type: 2}
   - {fileID: 11468976, guid: d3026116bdb209d4c922b92785db6de0, type: 2}
   - {fileID: 11468976, guid: 248299c92f9b64e42a303ae9833eda75, type: 2}
   - {fileID: 11468976, guid: b41a52a5a8517c04e8951f8197f3bcef, type: 2}
   - {fileID: 11468976, guid: ab5a770138deaf845ad9c23d31d1d900, type: 2}
-  isLoop: 1
+  isLoop: 0
 --- !u!4 &1982837109
 Transform:
   m_ObjectHideFlags: 0

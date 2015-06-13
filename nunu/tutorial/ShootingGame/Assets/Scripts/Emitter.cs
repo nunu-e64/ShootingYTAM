@@ -3,10 +3,10 @@ using System.Collections;
 
 /// <summary>
 /// 敵の出現管理クラス
-/// ・管理単位･･･Cluster > Wave > Enemy
-/// ・WaveはEnemyをいくつか含み、ClusterはWaveをいくつか含む
-/// ・WaveとClusterは事前作成しPrefab化しておく
-/// ・ClusterはEmitterによって順次出現させる。WaveはClusterが管理する。
+/// ・管理単位･･･Stage > Wave > Enemy
+/// ・WaveはEnemyをいくつか含み、StageはWaveをいくつか含む
+/// ・WaveとStageは事前作成しPrefab化しておく
+/// ・StageはEmitterによって順次出現させる。Waveの出現はStageが管理する。
 /// </summary>
 public class Emitter : MonoBehaviour {
 
@@ -17,32 +17,32 @@ public class Emitter : MonoBehaviour {
 	private GameObject bulletPool;
 
 	[SerializeField]
-	private Cluster[] clusters;		//敵の集団=waveの配列	inspectorから事前にセット
+	private Stage[] stages;		//敵の集団=waveの配列	inspectorから事前にセット
 
 	[SerializeField]
-	private bool isLoop;	//すべてのclusterを出現させたあとリスタートするかのフラグ
+	private bool isLoop;	//すべてのStageを出現させたあとリスタートするかのフラグ
 
-	private Cluster currentCluster;
-	private int currentClusterIndex;		//現在何番目のwaveを表示しているか
+	private Stage currentStage;
+	private int currentStageIndex;		//現在何番目のwaveを表示しているか
 
 
 	void Start(){
-		currentClusterIndex = -1;
+		currentStageIndex = -1;
 
-		if (clusters.Length == 0) {	//clusterが未セットの場合は終了
+		if (stages.Length == 0) {	//stageが未セットの場合は終了
 			Destroy (gameObject);
-			Debug.Log ("<color=red>Destroy Emitter</color> clusters.Length=0");
+			Debug.Log ("<color=red>Destroy Emitter</color> stages.Length=0");
 		}
 	}
 
 	public void Init () {	//タイトル表示の際に呼び出す初期化処理
-		currentClusterIndex = -1;
-		currentCluster = null;
-		foreach (Transform child in gameObject.transform) {	//すべてのCluster,Wave,Enemyを破棄
+		currentStageIndex = -1;
+		currentStage = null;
+		foreach (Transform child in gameObject.transform) {	//すべてのStage,Wave,Enemyを破棄
 			Destroy (child.gameObject);
 		}
 		if (bulletPool != null) {
-			foreach (Transform child in bulletPool.transform) {	//すべてのCluster,Wave,Enemyを破棄
+			foreach (Transform child in bulletPool.transform) {	//すべてのStage,Wave,Enemyを破棄
 				Destroy (child.gameObject);
 			}
 		}
@@ -52,25 +52,25 @@ public class Emitter : MonoBehaviour {
 
 		if (manager.IsPlaying ()) {
 
-			if (currentCluster == null && currentClusterIndex < clusters.Length) {
+			if (currentStage == null && currentStageIndex < stages.Length) {
 
-				++currentClusterIndex;
+				++currentStageIndex;
 
-				//すべてのclusterの出現が完了したとき→再度最初から出現or停止
-				if (currentClusterIndex == clusters.Length) {
+				//すべてのStageの出現が完了したとき→再度最初から出現or停止
+				if (currentStageIndex == stages.Length) {
 					if (isLoop) {
-						currentClusterIndex = 0;
-						Debug.Log ("<color=yellow>Reset ClusterIndex </color> :" + currentClusterIndex);
+						currentStageIndex = 0;
+						Debug.Log ("<color=yellow>Reset StageIndex </color> :" + currentStageIndex);
 					} else {
-						Debug.Log ("<color=yellow>Finish Emit</color> :" + currentClusterIndex);
+						Debug.Log ("<color=yellow>Finish Emit</color> :" + currentStageIndex);
 						return;
 					}
 				}
 
-				//新しいClusterを作成しEmmiterの子要素とする
-				currentCluster = Instantiate (clusters[currentClusterIndex]);
-				currentCluster.transform.parent = transform;
-				Debug.Log ("<color=green>" + gameObject + "Create:</color>" + currentCluster);
+				//新しいStageを作成しEmmiterの子要素とする
+				currentStage = Instantiate (stages[currentStageIndex]);
+				currentStage.transform.parent = transform;
+				Debug.Log ("<color=green>" + gameObject + "Create:</color>" + currentStage);
 
 			}
 		}
