@@ -12,7 +12,7 @@ public class Manager : MonoBehaviour {
 
 	[HeaderAttribute ("RefScript")]
 	public ScoreManager scoreManager;
-	public Emitter emitter;
+	public StageManager stageManager;
 
 	[HeaderAttribute ("表示切替用Object")]
 	public GameObject title;			//ゲーム状況（mode）に応じて表示切替するための各種UI
@@ -111,7 +111,7 @@ public class Manager : MonoBehaviour {
 		signUp.SetActive (false);
 
 		scoreManager.Initialize ();
-		emitter.Init ();
+		stageManager.Init ();
 	}
 
 	private void ShowSignUp () {

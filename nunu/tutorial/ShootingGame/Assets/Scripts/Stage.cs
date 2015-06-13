@@ -3,8 +3,8 @@ using System.Collections;
 
 /// <summary>
 /// Waveの出現を管理
-/// ・Emitterでインスタンス化
-/// ・StageとWaveについてはEmitter.cを参照
+/// ・StageManagerでインスタンス化
+/// ・StageとWaveについてはStageManager.csを参照
 /// </summary>
 public class Stage : MonoBehaviour {
 	

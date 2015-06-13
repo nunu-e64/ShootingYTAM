@@ -6,9 +6,9 @@ using System.Collections;
 /// ・管理単位･･･Stage > Wave > Enemy
 /// ・WaveはEnemyをいくつか含み、StageはWaveをいくつか含む
 /// ・WaveとStageは事前作成しPrefab化しておく
-/// ・StageはEmitterによって順次出現させる。Waveの出現はStageが管理する。
+/// ・StageはStageManagerによって順次出現させる。Waveの出現はStageが管理する。
 /// </summary>
-public class Emitter : MonoBehaviour {
+public class StageManager : MonoBehaviour {
 
 	[SerializeField]
 	private Manager manager;
@@ -31,7 +31,7 @@ public class Emitter : MonoBehaviour {
 
 		if (stages.Length == 0) {	//stageが未セットの場合は終了
 			Destroy (gameObject);
-			Debug.Log ("<color=red>Destroy Emitter</color> stages.Length=0");
+			Debug.Log ("<color=red>Destroy StageManager</color> stages.Length=0");
 		}
 	}
 

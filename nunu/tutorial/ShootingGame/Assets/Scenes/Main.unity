@@ -2237,7 +2237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 193208, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
   scoreManager: {fileID: 1987335915}
-  emitter: {fileID: 1982837108}
+  stageManager: {fileID: 1982837108}
   title: {fileID: 262596707}
   gameOver: {fileID: 1956822434}
   signUp: {fileID: 1432221736}
@@ -2997,7 +2997,7 @@ GameObject:
   - 4: {fileID: 1982837109}
   - 114: {fileID: 1982837108}
   m_Layer: 0
-  m_Name: Emitter
+  m_Name: StageManager
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
