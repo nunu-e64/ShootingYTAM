@@ -53,8 +53,7 @@ public class Player : MonoBehaviour {
 			targetWorldPosition.y += touchPosGapY;
 
 		} else {	//キー入力
-			targetWorldPosition = new Vector2 (transform.position.x + spaceship.speed * Input.GetAxisRaw ("Horizontal"),
-				transform.position.y + spaceship.speed * Input.GetAxisRaw ("Vertical"));
+			targetWorldPosition = new Vector2 (transform.position.x, transform.position.y) + new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical")) * spaceship.speed * Time.deltaTime / 5; 
 		}
 
 		Move (targetWorldPosition);
@@ -70,8 +69,8 @@ public class Player : MonoBehaviour {
 	void Move(Vector2 targetPos) {
 		
 		//画面左下と右上のワールド座標をカメラのビューポート（0~1）から変換して取得
-		Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
-		Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
+		Vector2 min = (Vector2) Camera.main.ViewportToWorldPoint (new Vector2 (0, 0)) +new Vector2 (0.3f, 0.3f);
+		Vector2 max = (Vector2) Camera.main.ViewportToWorldPoint (new Vector2 (1, 1)) + new Vector2 (-0.3f, -0.3f);
 		
 		Vector2 pos = transform.position;
 		Vector2 header = (targetPos - (Vector2)transform.position);
