@@ -10,7 +10,7 @@ public class Cluster : MonoBehaviour {
 	
 	[System.Serializable]
 	private class WaveData {		//TIPS: classであれば[System.Serializable]を指定すればInspectorから編集できる。structでは不可。
-		public GameObject wave;		//Enemyの1群
+		public Wave wave;			//Enemyの1群
 		public float nextAppearTime;	//このWaveが出現してから次のWaveが出現するまでの時間[s] Cluster最後のWaveの時は次のClusterに移行するまでの時間[s]
 	}
 
@@ -39,7 +39,7 @@ public class Cluster : MonoBehaviour {
 			++currentWaveIndex;
 
 			if (currentWaveIndex < waves.Length) {
-				GameObject currentWave = (GameObject) Instantiate (waves[currentWaveIndex].wave, waves[currentWaveIndex].wave.transform.position, Quaternion.identity);
+				Wave currentWave = Instantiate (waves[currentWaveIndex].wave);
 				Debug.Log ("<color=green>" + gameObject + "Create:</color>" + currentWave);
 
 			} else {

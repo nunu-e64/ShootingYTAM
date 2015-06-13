@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - wave: {fileID: 144186, guid: 857a3a665e456b64db19510759133422, type: 2}
+  - wave: {fileID: 11491802, guid: 857a3a665e456b64db19510759133422, type: 2}
     nextAppearTime: 5
 --- !u!1001 &100100000
 Prefab:
