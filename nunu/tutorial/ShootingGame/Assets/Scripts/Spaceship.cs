@@ -1,32 +1,43 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//必須コンポーネント（この記述がある限り該当コンポーネントを削除できない）
+//TIPS: 必須コンポーネント（この記述がある限り該当コンポーネントを削除できない）
 [RequireComponent(typeof(Rigidbody2D))]
 
 
-public class Spaceship : MonoBehaviour {
+/// <summary>
+/// PlayerとEnemyが持つ機体汎用クラス	
+/// ・移動と死亡時の爆発描画
+/// ・移動速度など変数の管理
+/// </summary>
+public class Spaceship : MonoBehaviour {	//TODO: 継承で代替すべき
 
-    public float speed;
-    public float shotDelay;
-    public GameObject bullet;
-	public bool shotable = true;
+	[HeaderAttribute ("ShipStatus")]
+	public float speed;				//機体の移動速度[Unity/s]
 
+	[HeaderAttribute ("BulletStatus")]
+	public bool shotable = true;	//弾を発射するか
+	public GameObject bullet;		//弾のプレハブ
+	public float shotDelay;			//弾の発射間隔[s]
+
+	[HeaderAttribute ("OtherRef")]
 	public GameObject explosion;
 
-	public Animator animator;
+	private GameObject bulletPool;
+	private Animator animator;
 
 	void Start() {
 		animator = GetComponent<Animator>();
+		if ((bulletPool = GameObject.Find ("BulletPool")) == null) {
+			Debug.LogError("Not Found GameObject\"BulletPool\"");
+		}
 	}
 
-    //弾の発射
-    public void Shot(Transform origin)
-    {
-        Instantiate(bullet, origin.position, origin.rotation);
+    public void Shot(Transform origin) { 
+        GameObject newBullet = Instantiate(bullet, origin.position, origin.rotation) as GameObject;
+		if (bulletPool != null) newBullet.transform.parent = bulletPool.transform;
     }
 
-	//爆発の生成
 	public void Explosion() {
 		Instantiate(explosion, transform.position, transform.rotation);
 	}

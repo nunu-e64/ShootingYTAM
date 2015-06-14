@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// 弾単体クラス
+/// ・まっすぐ飛んでいく
+/// </summary>
 public class Bullet : MonoBehaviour {
-
-    public float speed = 10;
+	public float speed = 10;
 	public float lifeTime = 5;
 
 	public int power = 1;
 
-	// Use this for initialization
 	void Start () {
         GetComponent<Rigidbody2D>().velocity = transform.up.normalized * speed;
 

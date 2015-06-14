@@ -1,10 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
-public class Score : MonoBehaviour {
+/// <summary>
+/// スコア管理クラス
+/// ・ローカルハイスコアの取得と保存
+/// ・ゲーム内のスコア加算と表示
+/// </summary>
+public class ScoreManager : MonoBehaviour {
 
-	public GUIText scoreGUIText;
-	public GUIText highScoreGUIText;
+	public Text scoreText;
+	public Text highScoreText;
 	public int timeBonusPoint;
 	public float timeBonusPeriod;
 
@@ -14,12 +20,11 @@ public class Score : MonoBehaviour {
 
 	private string highScoreKey = "highScore";	//PlayerPrefsで保存するためのキー;
 
-
-	// Use this for initialization
 	IEnumerator Start () {
 		manager = FindObjectOfType<Manager>();
 		Initialize();
 
+		//タイムボーナス用ルーチン
 		if (timeBonusPoint > 0 && timeBonusPeriod > 0) {
 			while (true) {
 				if (manager.IsPlaying()) {
@@ -29,15 +34,16 @@ public class Score : MonoBehaviour {
 				yield return new WaitForSeconds(timeBonusPeriod);
 			}
 		}
-	}
-	
+	}	
 
 	public void Initialize() {
 		score = 0;
 		highScore = PlayerPrefs.GetInt(highScoreKey, 0);
 
-		scoreGUIText.text = score.ToString();
-		highScoreGUIText.text = highScore.ToString();
+		scoreText.text		= score.ToString();
+		highScoreText.text	= highScore.ToString();
+		scoreText.color		= Color.white;
+		highScoreText.color = Color.white;
 	}
 
 	public void AddPoint(int point) {
@@ -45,9 +51,11 @@ public class Score : MonoBehaviour {
 
 		if (score > highScore) {
 			highScore = score;
+			scoreText.color		= Color.red;
+			highScoreText.color = Color.red;
 		}
-		scoreGUIText.text = score.ToString();
-		highScoreGUIText.text = highScore.ToString();
+		scoreText.text = score.ToString();
+		highScoreText.text = highScore.ToString();
 	}
 
 	public void Save() {
@@ -57,5 +65,9 @@ public class Score : MonoBehaviour {
 
 	public int GetScore() {
 		return score;
+	}
+
+	public bool IsHighScore () {
+		return (score == highScore);
 	}
 }

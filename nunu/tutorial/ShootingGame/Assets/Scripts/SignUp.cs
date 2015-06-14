@@ -1,72 +1,67 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
+/// <summary>
+/// ユーザー名管理クラス
+/// ・新規登録ルーチン
+/// ・ローカルへのユーザー名保存
+/// ・ローカルからのユーザー名取得
+/// </summary>
 public class SignUp : MonoBehaviour {
 
-	public GUIStyle inputStyle;
-	public GameObject idText;
-	public GameObject signUp;
-	public GameObject button;
+	public Button button;
+	public InputField inputField;
 
 	private string userNameKey = "userName";	//PlayerPrefsで保存するためのキー;
 	private string userName = "";
-	private bool ok = false;	//登録済みか否か
 
-	void Start () {
-		Vector2 pos = Camera.main.ViewportToWorldPoint (new Vector2 (signUp.transform.position.x, signUp.transform.position.y));
-		button.transform.position = pos;
-		Initialize ();
+	public string UserName {
+		get { return userName; }
 	}
 
-	public void Initialize () {
+	//初期化…Managerから呼び出す。ローカルデータチェックとInputField,Buttonの初期化
+	public bool Initialize () {
 		userName = PlayerPrefs.GetString (userNameKey, "");		//端末から登録名を取得
-		if (userName.Length > 0) {
-			ok = true;
+		if (userName.Length > 0) {	//登録済み
+			return true;
 		} else {
-			ok = false;	//登録済みだったときはすぐにTitleに遷移
+			inputField.text = "";	//未登録
+			ChangeButtonStyle (false);
+			return false;
 		}
 	}
 
-	void OnGUI () {
-		Vector2 pos = Camera.main.ViewportToScreenPoint (new Vector2(idText.transform.position.x, 1.0f - idText.transform.position.y));
-		Rect rect1 = new Rect (pos.x + 10, pos.y - 20, 120, 40);
-		userName = GUI.TextField (rect1, userName, 8, inputStyle);
+	//変数とUIの同期	uGUI(InputField)から呼び出す
+	public void CheckInputField () {
+		userName = inputField.text;
+		ChangeButtonStyle (userName.Length > 0);
+	}
 
-		if (userName.Length == 0) {
-			signUp.GetComponent<GUIText> ().text = "Input ID";
-			signUp.GetComponent<GUIText> ().color = Color.grey;
+	//入力済みか否かでボタン表示を切り替え
+	private void ChangeButtonStyle(bool isOk){
+		if (isOk) {
+			button.enabled = true;
+			button.GetComponentInChildren<Text> ().color = Color.white;
 		} else {
-			signUp.GetComponent<GUIText> ().text = "Play";
-			signUp.GetComponent<GUIText> ().color = Color.white;
+			button.enabled = false;
+			button.GetComponentInChildren<Text> ().color = Color.gray;
 		}
+
 	}
 
-	void Update () {
+	//新規登録完了	Buttonから呼び出す
+	public void NewNameSignUp () {
+		CheckInputField ();
 
-		if (!ok && userName.Length > 0) {
-			Ray ray;
-			if (Input.GetMouseButtonDown (0)) {
-				ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			} else if (Input.touchCount > 0) {
-				ray = Camera.main.ScreenPointToRay (Input.GetTouch (0).position);
-			} else {
-				return;
-			}
+		////////////////////////////////////////////////////////////////
+		//TODO: DBにアクセスして既に存在している名前かチェックする
+		//・重複(既に存在する)→メッセージを表示してreturn;
+		//・ＯＫ(存在しない)→続行
+		////////////////////////////////////////////////////////////////
 
-			RaycastHit hit = new RaycastHit ();
-
-			if (Physics.Raycast (ray, out hit)) {
-				if (button == hit.collider.gameObject) {
-					ok = true;
-					PlayerPrefs.SetString (userNameKey, userName);
-					PlayerPrefs.Save ();
-				}
-			}
-		}
+		PlayerPrefs.SetString (userNameKey, userName);
+		PlayerPrefs.Save ();
+		FindObjectOfType<Manager> ().SignUpComplete ();
 	}
-
-	public string GetUserName () {
-		if (ok) return userName; else return "";
-	}
-
 }

@@ -128,11 +128,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 410280}
+  - 114: {fileID: 11489546}
+  - 114: {fileID: 11424426}
   - 212: {fileID: 21273294}
   - 95: {fileID: 9569426}
   - 50: {fileID: 5068786}
-  - 114: {fileID: 11489546}
-  - 114: {fileID: 11424426}
   - 61: {fileID: 6110296}
   - 82: {fileID: 8242860}
   m_Layer: 8
@@ -267,9 +267,9 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_FixedAngle: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -383,12 +383,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62aa726ad9eedec448f810872f8c1c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  shotDelay: .0799999982
-  bullet: {fileID: 124180, guid: ceb0688462b26af49ba4bcba4da3a290, type: 2}
+  speed: 40
   shotable: 1
+  bullet: {fileID: 124180, guid: ceb0688462b26af49ba4bcba4da3a290, type: 2}
+  shotDelay: .0799999982
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
-  animator: {fileID: 0}
 --- !u!114 &11489546
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -401,7 +400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotNum: 1
-  touchPosGapY: 1
+  touchPosGapY: 2
 --- !u!212 &21273294
 SpriteRenderer:
   m_ObjectHideFlags: 1

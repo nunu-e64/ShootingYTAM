@@ -1,18 +1,29 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
+/// <summary>
+/// ゲーム状況の管理クラス
+/// </summary>
 public class Manager : MonoBehaviour {
 
-	public GameObject player;
-	public GameObject gauge;
-	public GameObject score;
+	[HeaderAttribute ("Prefabs")]
+	public GameObject playerPrefab;		//GameStartでPlayerを生成するためのPrefab
 
-	public GameObject title;
-	public GameObject gameOver;
-	public GameObject signUp;
-	public GameObject titleMessage;
+	[HeaderAttribute ("RefScript")]
+	public ScoreManager scoreManager;
+	public Emitter emitter;
 
-	public enum mode_tag {
+	[HeaderAttribute ("表示切替用Object")]
+	public GameObject title;			//ゲーム状況（mode）に応じて表示切替するための各種UI
+	public GameObject gameOver;			//
+	public GameObject signUp;			//
+	public GameObject titleMessage;		//
+	public GameObject gauge;			//
+
+	private GameObject player;			//生成したPlayer
+
+	private enum mode_tag {
 		SIGNUP,
 		TITLE,
 		PLAYING,
@@ -21,53 +32,33 @@ public class Manager : MonoBehaviour {
 	private mode_tag gameMode;
 
 
-	// Use this for initialization
 	void Start () {
-		ShowSignUp();
+
+		ShowSignUp ();
+		if (signUp.GetComponent<SignUp> ().Initialize ()) {		//名前が登録済みか確認し登録済みならタイトル画面へ
+			SignUpComplete ();
+		}
 	}
 
-	
-	// Update is called once per frame
+
 	void Update() {
 
 		switch (gameMode) {
-		case mode_tag.SIGNUP:
-			string userName;
-			if ((userName = signUp.GetComponent<SignUp>().GetUserName ()).Length > 0) {
-				Debug.Log ("userName:" + userName);
-				titleMessage.transform.Find ("Name").GetComponent<GUIText> ().text = "ID : " + userName; 
-				ShowTitle ();
-			}
-			break;
-
 		case mode_tag.PLAYING:
 			if (Input.GetMouseButtonDown(2) || Input.GetKeyDown(KeyCode.Escape)) {
-				FindObjectOfType<Player>().GetComponent<Spaceship>().Explosion();
-				Destroy(FindObjectOfType<Player>().gameObject);
-				GameOver();
+				if (player) player.GetComponent<Player>().OnDead();
 			}
 			break;
 
-		case mode_tag.TITLE:
-			//タップorクリックorＸキーでゲーム開始
-			if (Input.GetKeyDown(KeyCode.X) || Input.GetMouseButtonDown(0)) {
-				GameStart();
-			} else {
-				for (int i = 0; i < Input.touchCount; i++) {
-					Touch touch = Input.GetTouch(i);
-					if (touch.phase == TouchPhase.Began) {
-						GameStart();
-						break;
-					}
-				}
-			} 
-			if (Input.GetKeyDown(KeyCode.Delete)){
+		case mode_tag.TITLE:			//TIPS: 画面タップによるゲームスタートはButtonで実装している
+			if (Input.GetKeyDown (KeyCode.X)) GameStart ();
+
+			if (Input.GetKeyDown (KeyCode.Delete) || Input.GetMouseButtonDown (2)) {
 				if (GameObject.Find("DeleteMessage").activeSelf) DeletePlayerPrefs();
 			}
 			break;
 
 		case mode_tag.GAMEOVER:
-			//タップorクリックorＸキーでタイトルに戻る
 			if (Input.GetKeyDown(KeyCode.X) || Input.GetMouseButtonDown(0)) {
 				ShowTitle();
 			} else {
@@ -83,29 +74,30 @@ public class Manager : MonoBehaviour {
 		}
 	}
 
-	/*
-	void OnGUI() { 
-		//Eventクラスを使ってクリックやタップを検知する方法
-		if (!IsPlaying() && Event.current.type == EventType.MouseDown) {
-			GameStart();
-		}
-	}
-	*/
 
-	void GameStart() {
+	public void GameStart() {
 		gameMode = mode_tag.PLAYING;
 		title.SetActive(false);
 		titleMessage.SetActive (false);
 		gauge.SetActive(true);
-		Instantiate(player, player.transform.position, player.transform.rotation);
+		player = Instantiate(playerPrefab, playerPrefab.transform.position, playerPrefab.transform.rotation) as GameObject;		//自機出現
 	}
 
 	public void GameOver() {
 		gameMode = mode_tag.GAMEOVER;
-		
-		gameOver.transform.Find("Score").GetComponent<GUIText>().text = "Score " + FindObjectOfType<Score>().GetScore().ToString();
-		FindObjectOfType<Score> ().Save ();
 
+		//スコア取得と表示とセーブ
+		int score = scoreManager.GetScore ();
+		gameOver.transform.Find("Score").GetComponent<Text>().text = "Score " + score.ToString();
+		scoreManager.Save ();
+
+		//TODO: ハイスコア更新時にはランキング送信//////////////////////////////////////////////////////////////
+		if (scoreManager.IsHighScore ()) {
+			//SendRanking(signUp.GetComponent<SignUp> ().UserName, score);
+			Debug.Log ("SendRanking:" + signUp.GetComponent<SignUp> ().UserName + "," + score);
+		}
+		//////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		gauge.SetActive(false);
 		gameOver.SetActive(true);
 	}
@@ -117,7 +109,9 @@ public class Manager : MonoBehaviour {
 		gameOver.SetActive(false);
 		gauge.SetActive(false);
 		signUp.SetActive (false);
-		FindObjectOfType<Score> ().Initialize ();
+
+		scoreManager.Initialize ();
+		emitter.Init ();
 	}
 
 	private void ShowSignUp () {
@@ -129,14 +123,32 @@ public class Manager : MonoBehaviour {
 		signUp.SetActive (true);
 	}
 
+
 	public bool IsPlaying() {
 		return (gameMode == mode_tag.PLAYING);
 	}
 
 	private void DeletePlayerPrefs () {
 		PlayerPrefs.DeleteAll ();
-		FindObjectOfType<Score> ().Initialize ();
-		signUp.GetComponent<SignUp>().Initialize ();
+		scoreManager.Initialize ();
 		ShowSignUp ();
+		signUp.GetComponent<SignUp> ().Initialize ();
+	}
+
+
+	//ランキング表示シーンに遷移
+	public void GoToRanking () {
+		Application.LoadLevel ("Ranking");
+	}
+
+	//サインアップ完了を受け取る。登録済み:Start()から呼び出し　新規登録：SignUp.NewNameSignUpから呼び出し
+	public void SignUpComplete () {
+		string userName = signUp.GetComponent<SignUp>().UserName;
+		if (userName.Length == 0) {
+			Debug.LogError("userName.Legnth = 0");	//DEBUG: チェックは他でしているが当面の予防的措置
+		}
+		
+		titleMessage.transform.Find ("Name").GetComponent<Text> ().text = "ID : " + userName; 
+		ShowTitle ();
 	}
 }

@@ -281,6 +281,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 428640}
+  - 114: {fileID: 11491802}
   m_Layer: 0
   m_Name: Wave4
   m_TagString: Untagged
@@ -982,7 +983,7 @@ Rigidbody2D:
   m_AngularDrag: .0500000007
   m_GravityScale: 1
   m_FixedAngle: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -997,7 +998,7 @@ Rigidbody2D:
   m_AngularDrag: .0500000007
   m_GravityScale: 1
   m_FixedAngle: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1012,7 +1013,7 @@ Rigidbody2D:
   m_AngularDrag: .0500000007
   m_GravityScale: 1
   m_FixedAngle: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1027,7 +1028,7 @@ Rigidbody2D:
   m_AngularDrag: .0500000007
   m_GravityScale: 1
   m_FixedAngle: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1042,7 +1043,7 @@ Rigidbody2D:
   m_AngularDrag: .0500000007
   m_GravityScale: 1
   m_FixedAngle: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1057,7 +1058,7 @@ Rigidbody2D:
   m_AngularDrag: .0500000007
   m_GravityScale: 1
   m_FixedAngle: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1072,7 +1073,7 @@ Rigidbody2D:
   m_AngularDrag: .0500000007
   m_GravityScale: 1
   m_FixedAngle: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1087,7 +1088,7 @@ Rigidbody2D:
   m_AngularDrag: .0500000007
   m_GravityScale: 1
   m_FixedAngle: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1406,6 +1407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6caf246d8bbd0c4b9a344b9ca33bad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  point: 100
   hp: 10
 --- !u!114 &11402126
 MonoBehaviour:
@@ -1418,6 +1420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6caf246d8bbd0c4b9a344b9ca33bad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  point: 100
   hp: 10
 --- !u!114 &11407474
 MonoBehaviour:
@@ -1433,7 +1436,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 2
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 1
+  shotable: 1
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11412464
@@ -1450,7 +1453,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 2
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 1
+  shotable: 1
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11434012
@@ -1464,6 +1467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6caf246d8bbd0c4b9a344b9ca33bad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  point: 100
   hp: 10
 --- !u!114 &11434256
 MonoBehaviour:
@@ -1476,6 +1480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6caf246d8bbd0c4b9a344b9ca33bad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  point: 100
   hp: 10
 --- !u!114 &11447484
 MonoBehaviour:
@@ -1491,7 +1496,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 2
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 1
+  shotable: 1
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11451108
@@ -1508,7 +1513,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 2
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 1
+  shotable: 1
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11453998
@@ -1522,6 +1527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6caf246d8bbd0c4b9a344b9ca33bad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  point: 100
   hp: 10
 --- !u!114 &11461752
 MonoBehaviour:
@@ -1537,7 +1543,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 2
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 1
+  shotable: 1
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11471416
@@ -1554,7 +1560,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 2
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 1
+  shotable: 1
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!114 &11472938
@@ -1568,6 +1574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6caf246d8bbd0c4b9a344b9ca33bad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  point: 100
   hp: 10
 --- !u!114 &11479330
 MonoBehaviour:
@@ -1583,9 +1590,20 @@ MonoBehaviour:
   speed: 2
   shotDelay: 2
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 1
+  shotable: 1
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
+--- !u!114 &11491802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d204be32b6ec0a342a6a86c981514b82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11492400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1597,6 +1615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6caf246d8bbd0c4b9a344b9ca33bad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  point: 100
   hp: 10
 --- !u!114 &11494546
 MonoBehaviour:
@@ -1609,6 +1628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6caf246d8bbd0c4b9a344b9ca33bad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  point: 100
   hp: 10
 --- !u!114 &11499898
 MonoBehaviour:
@@ -1624,7 +1644,7 @@ MonoBehaviour:
   speed: 2
   shotDelay: 2
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 1
+  shotable: 1
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   animator: {fileID: 0}
 --- !u!212 &21214462

@@ -38,11 +38,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 451730}
+  - 114: {fileID: 11471776}
+  - 114: {fileID: 11420846}
   - 212: {fileID: 21239842}
   - 95: {fileID: 9584412}
   - 50: {fileID: 5065102}
-  - 114: {fileID: 11471776}
-  - 114: {fileID: 11420846}
   - 60: {fileID: 6037110}
   m_Layer: 9
   m_Name: Enemy
@@ -85,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190662}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.23000002, y: -2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 473778}
@@ -128,7 +128,7 @@ Rigidbody2D:
   m_AngularDrag: .0500000007
   m_GravityScale: 1
   m_FixedAngle: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -182,11 +182,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  shotDelay: 2
+  shotable: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  canShot: 1
+  shotDelay: 2
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
-  animator: {fileID: 0}
 --- !u!114 &11471776
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -199,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: 100
-  hp: 1
+  hp: 4
 --- !u!212 &21239842
 SpriteRenderer:
   m_ObjectHideFlags: 1

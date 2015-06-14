@@ -4,20 +4,26 @@ using System.Collections;
 using System.Collections.Generic;
 using MiniJSON;
 
+/// <summary>
+/// ランキング表示
+/// ・jsonデータをパースしてリストに格納し、uGUIで表示
+/// </summary>
 public class RankingManager : MonoBehaviour {
 
 	public GameObject rankingContainer;
 	public RectTransform guiRankingNode;
 	private List<RankingDataNode> rankingDataList = new List<RankingDataNode>();
 
-	// Use this for initialization
 	void Start () {
-		TextAsset rankingDataText = Resources.Load ("rankingData") as TextAsset;
+		TextAsset rankingDataText = Resources.Load ("rankingData") as TextAsset;		//DEBUG: あらかじめ作っておいたソート済みjsonファイルをローカルから読み込み
 		
 		//外部データ（ソート済みjsonファイル）からランキングデータList作成
-		SetRankingData (rankingDataText.text);
+		if (!SetRankingData (rankingDataText.text)) {
+			Debug.LogWarning ("LoadError->RankingData");	//DEBUG: 読み込み失敗の時は警告を表示してreturn
+			return;
+		}
 
-		//Listを表示
+		//Listに基づいてScrollViewにインスタンスを追加して画面表示
 		foreach (RankingDataNode node in rankingDataList) {
 			var item = GameObject.Instantiate (guiRankingNode) as RectTransform;
 			item.SetParent (rankingContainer.transform, false);
@@ -28,11 +34,10 @@ public class RankingManager : MonoBehaviour {
 			texts[2].text = node.Score.ToString();
 		}
 	}
-	
 
 
-	//Jsonデータをパースしてセット///////////////////////////////////////////////
-	bool SetRankingData (string dataText) {
+	//JsonデータをパースしList作成/////////////////////////////////////////
+	public bool SetRankingData (string dataText) {
 
 		Debug.Log (dataText);	//DEBUG: wwwの内容一覧表示
 		var json = Json.Deserialize (dataText);
@@ -48,7 +53,6 @@ public class RankingManager : MonoBehaviour {
 		foreach (Dictionary<string, object> node in list) {
 			++i;
 			RankingDataNode item = new RankingDataNode (-1, "", -1);
-			Debug.Log (node["score"]);
 			item.Score = (int) (long) node["score"];
 			item.Name = node["name"] as string;
 			item.Rank = i;
@@ -56,8 +60,9 @@ public class RankingManager : MonoBehaviour {
 		}
 		return true;
 	}
-	////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////
 
+	//ランキングデータ要素クラス
 	private class RankingDataNode {
 		public RankingDataNode (int rank, string name, int score) {
 			Rank = rank;
@@ -81,5 +86,10 @@ public class RankingManager : MonoBehaviour {
 			get { return name; }
 			set { name = value; }
 		}
+	}
+
+	//タイトルに戻る	//ボタンから呼び出し
+	public void BackToTitle () {
+		Application.LoadLevel ("Stage");
 	}
 }

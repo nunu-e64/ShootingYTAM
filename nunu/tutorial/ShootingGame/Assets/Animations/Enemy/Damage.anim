@@ -18,6 +18,11 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
       - time: .0833333358
         value: 1
         inSlope: 0
@@ -32,6 +37,11 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
       - time: .0833333358
         value: 0
         inSlope: 0
@@ -46,8 +56,13 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
       - time: .0833333358
-        value: .600000024
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 10
@@ -60,6 +75,11 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
       - time: .0833333358
         value: 1
         inSlope: 0
@@ -125,6 +145,11 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
       - time: .0833333358
         value: 1
         inSlope: 0
@@ -139,6 +164,11 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
       - time: .0833333358
         value: 0
         inSlope: 0
@@ -153,8 +183,13 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
       - time: .0833333358
-        value: .600000024
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 10
@@ -167,6 +202,11 @@ AnimationClip:
   - curve:
       serializedVersion: 2
       m_Curve:
+      - time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
       - time: .0833333358
         value: 1
         inSlope: 0

@@ -1,53 +1,62 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// 自機クラス
+/// </summary>
 public class Player : MonoBehaviour {
+	
+	private Spaceship spaceship;
+	public float shotNum = 1;			//砲台セット数(砲台1個＝弾2発(15/06/09現在))	//Animatorから変更するためにintではなくfloatでないといけない
+	public float touchPosGapY = 1.0f;	//移動の際に指で機体が隠れないようにタップした位置からずらす値
 
-	public float shotNum = 1;			//Animatorから変更するためにintではなくfloatでないといけない
-	public float touchPosGapY = 1.0f;
-
-    Spaceship spaceship;
-
-	// Use this for initialization
-	IEnumerator Start () {  //Updateに書くと他の処理に影響を及ぼす恐れがあるためコルーチンを利用
-
+	private bool alive = true;			//UNDONE: 死亡後にSEを再生しようとして警告がでるバグへの応急処置
+	
+	IEnumerator Start () {		
         spaceship = GetComponent<Spaceship> ();
 		AudioSource shotAudio = GetComponent<AudioSource> ();
-		
-		//オーバーヒート時の処理のためにGaugeManagerに自分を渡しておく
+
 		FindObjectOfType<GaugeManager>().SetPlayer(spaceship);
 
+		//弾発射ループ
         while (true){
+			if (!alive) yield break;
+
 			if (spaceship.shotable) {
 
-				//子要素を全て取得
+				//子要素を全て取得して弾を発射
 				for (int i = 0; i < transform.childCount && i < (int)shotNum; i++) {
 					Transform shotPosition = transform.GetChild(i);
 					spaceship.Shot(shotPosition);
 				}
-				shotAudio.Play();
+
+				//弾発射SE再生
+				if (shotNum > 0) {
+					shotAudio.Play ();
+				}
 			}
 			yield return new WaitForSeconds(spaceship.shotDelay);
         }
 
 	}
 
-
-	// Update is called once per frame
 	void Update () {
 
+		//入力に基づいて目標座標を求め移動
 		Vector2 targetWorldPosition;
-
-		if (Input.touchCount > 0) {	//タッチ入力
+		if (Input.touchCount > 0) {		//タッチ入力
 			targetWorldPosition = Camera.main.ScreenToWorldPoint (Input.GetTouch (0).position);
 			targetWorldPosition.y += touchPosGapY;
+
 		} else if (Input.GetMouseButton(0)) {	//マウス入力
 			targetWorldPosition = Camera.main.ScreenToWorldPoint((Vector2)Input.mousePosition);
 			targetWorldPosition.y += touchPosGapY;
-		} else {
+
+		} else {	//キー入力
 			targetWorldPosition = new Vector2 (transform.position.x + spaceship.speed * Input.GetAxisRaw ("Horizontal"),
 				transform.position.y + spaceship.speed * Input.GetAxisRaw ("Vertical"));
 		}
+
 		Move (targetWorldPosition);
 
 		//スペシャルアタック（仮）
@@ -69,8 +78,8 @@ public class Player : MonoBehaviour {
 		float moveDistance = spaceship.speed * Time.deltaTime;
 
 
-		//目標座標が近ければ目標座標に自機座標を一致させ, 目標座標が遠ければSpeed分だけ移動
-		if (header.sqrMagnitude < moveDistance * moveDistance) {	//平方根計算、二乗計算は負荷が高いため避ける
+		//目標座標が近ければ目標座標に自機座標を一致させ, 目標座標が遠ければSpeed*Time.deltaTimeだけ移動
+		if (header.sqrMagnitude < moveDistance * moveDistance) {
 			pos = targetPos;
 		} else {
 			Vector2 direction = header.normalized;
@@ -94,11 +103,18 @@ public class Player : MonoBehaviour {
 		}
 
 		if (layerName == "Bullet(Enemy)" || layerName == "Enemy") {
-			spaceship.Explosion();
-			Destroy(gameObject);
-
-			FindObjectOfType<Manager>().GameOver();
+			OnDead ();
 		}
 
 	}
+
+	//死亡処理		
+	public void OnDead () {	
+		alive = false;
+		spaceship.Explosion ();
+		Destroy (gameObject);
+
+		FindObjectOfType<Manager> ().GameOver ();
+	}
+
 }
