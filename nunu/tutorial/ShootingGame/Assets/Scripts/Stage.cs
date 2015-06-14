@@ -3,15 +3,15 @@ using System.Collections;
 
 /// <summary>
 /// Waveの出現を管理
-/// ・Emitterでインスタンス化
-/// ・ClusterとWaveについてはEmitter.cを参照
+/// ・StageManagerでインスタンス化
+/// ・StageとWaveについてはStageManager.csを参照
 /// </summary>
-public class Cluster : MonoBehaviour {
+public class Stage : MonoBehaviour {
 	
 	[System.Serializable]
 	private class WaveData {		//TIPS: classであれば[System.Serializable]を指定すればInspectorから編集できる。structでは不可。
 		public Wave wave;			//Enemyの1群
-		public float nextAppearTime;	//このWaveが出現してから次のWaveが出現するまでの時間[s] Cluster最後のWaveの時は次のClusterに移行するまでの時間[s]
+		public float nextAppearTime;	//このWaveが出現してから次のWaveが出現するまでの時間[s] Stage最後のWaveの時は次のStageに移行するまでの時間[s]
 	}
 
 	[SerializeField]	//TIPS: [SerializeField]を指定するとprivate変数をInspectorで編集できるようになる。
@@ -26,7 +26,7 @@ public class Cluster : MonoBehaviour {
 		
 		if (waves.Length == 0) {
 			Destroy (gameObject);
-			Debug.Log ("<color=red>Destroy Cluster</color> waves.Length=0");
+			Debug.Log ("<color=red>Destroy Stage</color> waves.Length=0");
 		}
 	}
 	

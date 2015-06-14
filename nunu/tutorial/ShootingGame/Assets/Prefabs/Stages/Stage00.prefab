@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 434174}
   - 114: {fileID: 11468976}
   m_Layer: 0
-  m_Name: Cluster03
+  m_Name: Stage00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,9 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - wave: {fileID: 11460492, guid: 316de5bcb2b87c941b92c11b8d143a19, type: 2}
-    nextAppearTime: 5
-  - wave: {fileID: 11460492, guid: 316de5bcb2b87c941b92c11b8d143a19, type: 2}
+  - wave: {fileID: 0}
     nextAppearTime: 5
 --- !u!1001 &100100000
 Prefab:

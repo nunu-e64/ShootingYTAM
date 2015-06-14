@@ -2237,7 +2237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 193208, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
   scoreManager: {fileID: 1987335915}
-  emitter: {fileID: 1982837108}
+  stageManager: {fileID: 1982837108}
   title: {fileID: 262596707}
   gameOver: {fileID: 1956822434}
   signUp: {fileID: 1432221736}
@@ -2997,7 +2997,7 @@ GameObject:
   - 4: {fileID: 1982837109}
   - 114: {fileID: 1982837108}
   m_Layer: 0
-  m_Name: Emitter
+  m_Name: StageManager
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3016,13 +3016,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 1704102606}
   bulletPool: {fileID: 1296733298}
-  clusters:
+  stages:
   - {fileID: 11468976, guid: 40a82d7217d0f8047964c7968161e325, type: 2}
   - {fileID: 11468976, guid: d3026116bdb209d4c922b92785db6de0, type: 2}
   - {fileID: 11468976, guid: 248299c92f9b64e42a303ae9833eda75, type: 2}
   - {fileID: 11468976, guid: b41a52a5a8517c04e8951f8197f3bcef, type: 2}
   - {fileID: 11468976, guid: ab5a770138deaf845ad9c23d31d1d900, type: 2}
-  isLoop: 1
+  isLoop: 0
 --- !u!4 &1982837109
 Transform:
   m_ObjectHideFlags: 0
