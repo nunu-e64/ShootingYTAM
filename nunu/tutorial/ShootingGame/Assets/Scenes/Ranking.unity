@@ -180,8 +180,8 @@ MonoBehaviour:
   m_MovementType: 1
   m_Elasticity: .100000001
   m_Inertia: 1
-  m_DecelerationRate: .135000005
-  m_ScrollSensitivity: 1
+  m_DecelerationRate: .300000012
+  m_ScrollSensitivity: 10
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
   m_OnValueChanged:
@@ -1107,5 +1107,5 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -100, y: 0}
+  m_SizeDelta: {x: -134, y: 0}
   m_Pivot: {x: .5, y: 1}
