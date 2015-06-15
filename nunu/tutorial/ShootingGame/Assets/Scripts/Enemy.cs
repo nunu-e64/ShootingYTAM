@@ -10,33 +10,37 @@ public class Enemy : MonoBehaviour {
 	public int hp = 1;
 
     Spaceship spaceship;
+	float shotTimer;	//弾発射間隔を制御する経過時間記録変数
 
-
-    IEnumerator Start () {
+	void Start () {
 
 		//速度は最初に設定し以降一定速度で移動
 		spaceship = GetComponent<Spaceship> ();
 		GetComponent<Rigidbody2D> ().velocity = transform.up.normalized * -1 * spaceship.speed;
 
+	}
+
+	void Update(){
+
 		if (!spaceship.shotable) {
-			yield break;
+			return ;
 		}
 			
-		//弾発射ルーチン
-		while (true) {
+		shotTimer+=Time.deltaTime;
 
-			yield return new WaitForSeconds (spaceship.shotDelay);
+		if (shotTimer > spaceship.shotDelay) {
 
 			//画面内にあるときすべての子要素(shotPosition=砲台)から弾を発射////
 			Vector3 positionInView = Camera.main.WorldToViewportPoint (transform.position);
 
 			if (positionInView.x > 0 && positionInView.x < 1 && positionInView.y > 0 && positionInView.y < 1) {
 				foreach (Transform shotPosition in transform) {
-					//Transform shotPosition = transform.GetChild (i);
 					spaceship.Shot (shotPosition);
 				}
+				shotTimer = 0;
 			}
 			///////////////////////////////////////////////////////////////////
+
         }
     
     }

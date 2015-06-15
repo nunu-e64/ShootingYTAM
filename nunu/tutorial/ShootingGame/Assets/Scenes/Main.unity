@@ -3056,7 +3056,7 @@ MonoBehaviour:
   manager: {fileID: 1704102606}
   bulletPool: {fileID: 1296733298}
   stages:
-  - {fileID: 11468976, guid: 7592f5fe630a95d4899a3a6d2545b388, type: 2}
+  - {fileID: 11468976, guid: 2f76297368b6434468ce9949f571775e, type: 2}
   isLoop: 1
 --- !u!4 &1982837109
 Transform:
