@@ -23,19 +23,14 @@ public class Spaceship : MonoBehaviour {	//TODO: 継承で代替すべき
 	[HeaderAttribute ("OtherRef")]
 	public GameObject explosion;
 
-	private GameObject bulletPool;
 	private Animator animator;
 
 	void Start() {
 		animator = GetComponent<Animator>();
-		if ((bulletPool = GameObject.Find ("BulletPool")) == null) {
-			Debug.LogError("Not Found GameObject\"BulletPool\"");
-		}
 	}
 
     public void Shot(Transform origin) { 
-        GameObject newBullet = Instantiate(bullet, origin.position, origin.rotation) as GameObject;
-		if (bulletPool != null) newBullet.transform.parent = bulletPool.transform;
+        GameObject newBullet = ObjectPool.Instance.GetGameObject(bullet, origin.position, origin.rotation);
     }
 
 	public void Explosion() {

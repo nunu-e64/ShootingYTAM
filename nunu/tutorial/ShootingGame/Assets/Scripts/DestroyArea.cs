@@ -14,7 +14,13 @@ public class DestroyArea : MonoBehaviour {
 	}
 
 	void OnTriggerExit2D (Collider2D c) {	//TIPS: 判定の有無はUnityのEdit->ProjectSetting->Physics2Dで設定
-		Destroy(c.gameObject);
+
+		//弾のときはプールから解放する
+		if (c.GetComponent<Bullet>() != null) {
+			ObjectPool.Instance.ReleaseGameObject (c.gameObject);
+		} else {
+			Destroy (c.gameObject);
+		}
 	}
 
 }

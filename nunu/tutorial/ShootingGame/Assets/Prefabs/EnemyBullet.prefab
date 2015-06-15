@@ -14,7 +14,7 @@ GameObject:
   - 58: {fileID: 5847654}
   m_Layer: 11
   m_Name: EnemyBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

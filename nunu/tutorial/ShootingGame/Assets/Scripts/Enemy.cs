@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour {
 			//弾の威力に応じてHPを減らし弾を削除
 			Bullet bullet = c.transform.parent.GetComponent<Bullet>();
 			hp -= bullet.power;
-			Destroy(c.gameObject);
+			ObjectPool.Instance.ReleaseGameObject(c.gameObject);
 
 			if (hp <= 0) {	//HPがなくなればスコア加算して死亡
 				FindObjectOfType<ScoreManager>().AddPoint(point);
@@ -59,7 +59,6 @@ public class Enemy : MonoBehaviour {
 				Destroy(gameObject);
 			} else {
 				spaceship.GetAnimator().SetTrigger("Damage");
-				//Debug.Log("Damaged");		//DEBUG
 			}
 		}
 	}

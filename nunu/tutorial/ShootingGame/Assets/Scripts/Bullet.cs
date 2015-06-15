@@ -11,10 +11,19 @@ public class Bullet : MonoBehaviour {
 
 	public int power = 1;
 
-	void Start () {
-        GetComponent<Rigidbody2D>().velocity = transform.up.normalized * speed;
+	private float livingTimer;
 
-		Destroy(gameObject, lifeTime);
+	void OnEnable () {
+		livingTimer = 0;
+        GetComponent<Rigidbody2D>().velocity = transform.up.normalized * speed;
+	}
+
+	void Update(){
+		livingTimer += Time.deltaTime;
+
+		if (livingTimer >= lifeTime) {
+			ObjectPool.Instance.ReleaseGameObject (gameObject);
+		}
 	}
 	
 }

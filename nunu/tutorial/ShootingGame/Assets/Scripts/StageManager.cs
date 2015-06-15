@@ -41,11 +41,8 @@ public class StageManager : MonoBehaviour {
 		foreach (Transform child in gameObject.transform) {	//すべてのStage,Wave,Enemyを破棄
 			Destroy (child.gameObject);
 		}
-		if (bulletPool != null) {
-			foreach (Transform child in bulletPool.transform) {	//すべてのStage,Wave,Enemyを破棄
-				Destroy (child.gameObject);
-			}
-		}
+
+		ObjectPool.Instance.ReleaseAllGameObject ();	//プール内のすべてのオブジェクトを解放（実際は非アクティブに切り替え）
 	}
 
 	void Update () {

@@ -98,7 +98,7 @@ public class Player : MonoBehaviour {
 		string layerName = LayerMask.LayerToName(c.gameObject.layer);
 
 		if (layerName == "Bullet(Enemy)") {
-			Destroy(c.gameObject);
+			ObjectPool.Instance.ReleaseGameObject(c.gameObject);
 		}
 
 		if (layerName == "Bullet(Enemy)" || layerName == "Enemy") {
