@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 /// <summary>
@@ -7,19 +8,22 @@ using System.Collections;
 /// </summary>
 public class GaugeManager : MonoBehaviour {
 
-	public float countDown = 0.00f;
+	[SerializeField]
+	private Text gaugeText;
+
+	public float countDown = 0.00f;		//ゲージのカウントダウン表示。Animationで値変化
 
 	private Spaceship playerSpaceShip = null;
 	private bool isShooting;
 
-	GUIText[] gaugeText;
 
 	void Start () {	
-		//GUITextの位置をゲージに合わせる
-		gaugeText = GetComponentsInChildren<GUIText> ();
-		foreach (GUIText item in gaugeText) {
-			item.transform.position = Camera.main.WorldToViewportPoint (transform.position);
-		}
+
+		//Textの位置をゲージに合わせる
+		Debug.Log (transform.position);
+		Debug.Log (Camera.main.WorldToViewportPoint (transform.position));
+		gaugeText.transform.position = (Vector2) Camera.main.WorldToScreenPoint (transform.position);
+
 	}
 
 
@@ -27,9 +31,13 @@ public class GaugeManager : MonoBehaviour {
 		
 		if (!isShooting) {
 			string tmpText = countDown.ToString ("00.00");
-			gaugeText[0].text = tmpText;
+			gaugeText.text = tmpText;
 		}
 
+	}
+
+	void OnDisable () {
+		gaugeText.gameObject.SetActive(false);
 	}
 
 	public void SetPlayer(Spaceship ship) {
@@ -39,11 +47,13 @@ public class GaugeManager : MonoBehaviour {
 	public void StartShooting () {
 		isShooting = true;
 		StartPlayerShot ();
+		gaugeText.gameObject.SetActive (false);
 	}
 
 	public void StartCharging () {
 		isShooting = false;
 		StopPlayerShot ();
+		gaugeText.gameObject.SetActive (true);
 	}
 
 	private void StartPlayerShot() {
