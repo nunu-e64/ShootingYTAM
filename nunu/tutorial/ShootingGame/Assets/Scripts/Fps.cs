@@ -5,7 +5,7 @@ using System.Collections;
 public class Fps : MonoBehaviour {
 
 	float counter = 0;
-	const int FPS_CALC_INTERVAL = 60;
+	const float FPS_CALC_INTERVAL = 1.0f;
 
 	float fps;
 	float timer = 0;
@@ -17,8 +17,8 @@ public class Fps : MonoBehaviour {
 		++counter;
 		timer += Time.deltaTime;
 
-		if (counter >= FPS_CALC_INTERVAL) {
-			fps = FPS_CALC_INTERVAL/timer;
+		if (timer >= FPS_CALC_INTERVAL) {
+			fps = counter/timer;
 			GetComponent<Text> ().text = fps.ToString ("00.00");
 			timer = 0;
 			counter = 0;
