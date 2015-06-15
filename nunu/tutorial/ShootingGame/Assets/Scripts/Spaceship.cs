@@ -30,7 +30,7 @@ public class Spaceship : MonoBehaviour {	//TODO: 継承で代替すべき
 	}
 
     public void Shot(Transform origin) { 
-        GameObject newBullet = ObjectPool.Instance.GetGameObject(bullet, origin.position, origin.rotation);
+        ObjectPool.Instance.GetGameObject(bullet, origin.position, origin.rotation);
     }
 
 	public void Explosion() {

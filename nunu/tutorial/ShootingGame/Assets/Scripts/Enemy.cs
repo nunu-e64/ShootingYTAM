@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour {
 			//弾の威力に応じてHPを減らし弾を削除
 			Bullet bullet = c.transform.parent.GetComponent<Bullet>();
 			hp -= bullet.power;
-			ObjectPool.Instance.ReleaseGameObject(c.gameObject);
+			c.gameObject.SetActive(false);
 
 			if (hp <= 0) {	//HPがなくなればスコア加算して死亡
 				FindObjectOfType<ScoreManager>().AddPoint(point);

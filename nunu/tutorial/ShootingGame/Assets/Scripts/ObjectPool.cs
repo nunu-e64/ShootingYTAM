@@ -26,56 +26,54 @@ public class ObjectPool : MonoBehaviour {
 	///////////////////////////////////////////////////////
 
 
-	//GameObjectのDictionaly。プレハブのインスタンスIDをkeyとする
-	private Dictionary<int, List<GameObject>> pooledGameObjects = new Dictionary<int, List<GameObject>> ();
+	private Dictionary<int, GameObject> pooledObjects = new Dictionary<int, GameObject> ();		//プールしているオブジェクト。Key:インスタンスID、Value:GameObject
+	private Dictionary<int, Stack<int>> unActiveObjects = new Dictionary<int, Stack<int>> ();	//非アクティブ＝未使用のオブジェクト。Key:レイヤー(オブジェクトの種類)、Value:インスタンスIDのStack
 
 
-	// ゲームオブジェクトをpooledGameObjectsから取得する。必要であれば新たに生成する
+	//未使用のゲームオブジェクトをpooledGameObjectsから取得する。必要であれば新たに生成する
 	public GameObject GetGameObject (GameObject prefab, Vector2 position, Quaternion rotation) {
 		
-		int key = prefab.GetInstanceID ();
+		int key = prefab.layer;
 
-		// Dictionaryにkeyが存在しなければ作成する
-		if (pooledGameObjects.ContainsKey (key) == false) {
-			pooledGameObjects.Add (key, new List<GameObject> ());
+		//keyが存在しなければ作成する
+		if (unActiveObjects.ContainsKey (key) == false) {
+			unActiveObjects.Add (key, new Stack<int> ());
 		}
 
-		List<GameObject> gameObjects = pooledGameObjects[key];
-		GameObject go = null;
-
-		for (int i = 0; i < gameObjects.Count; i++) {
-
-			go = gameObjects[i];
-
-			// 現在非アクティブなオブジェクトがリストにあればそれを位置設定して利用。なければ新規作成
-			if (go.activeInHierarchy == false) {
-				go.transform.position = position;
-				go.transform.rotation = rotation;
-				go.SetActive (true);
-				return go;
+		//未使用オブジェクトがあればそれを使う
+		if (unActiveObjects[key].Count > 0) {
+			GameObject go = pooledObjects[unActiveObjects[key].Pop()];
+			go.transform.position = position;
+			go.transform.rotation = rotation;
+			go.SetActive (true);
+			foreach (Transform child in go.transform) {		//PlayerBulletは子もアクティブにしなくてはいけない
+				child.gameObject.SetActive (true);				
 			}
+			return go;
 		}
 
-		//未使用オブジェクトが存在しなかったので新規作成
-		go = (GameObject) Instantiate (prefab, position, rotation);
-		go.transform.parent = transform;
-		gameObjects.Add (go);
+		//未使用オブジェクトが存在しなかったので新規作成してDictionalyに追加
+		GameObject newGo = (GameObject) Instantiate (prefab, position, rotation);
+		newGo.transform.parent = transform;
+		pooledObjects.Add(newGo.GetInstanceID(), newGo);
 
-		return go;
+		return newGo;
 	}
 
 	// ゲームオブジェクトを非アクティブにする。こうすることで再利用可能状態にする
 	public void ReleaseGameObject (GameObject go) {
 		go.SetActive (false);
+
+		if (unActiveObjects.ContainsKey (go.layer)) {
+			unActiveObjects[go.layer].Push (go.GetInstanceID ());
+		}
 	}
 
 	//一括非アクティブ化
 	public void ReleaseAllGameObject () {
 
-		foreach (List<GameObject> list in pooledGameObjects.Values) {
-			foreach (GameObject go in list) {
-				go.SetActive (false);
-			}
+		foreach (GameObject go in pooledObjects.Values) {
+			ReleaseGameObject (go);
 		}
 
 	}
