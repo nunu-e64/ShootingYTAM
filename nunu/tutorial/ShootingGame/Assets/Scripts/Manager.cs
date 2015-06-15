@@ -7,10 +7,13 @@ using System.Collections;
 /// </summary>
 public class Manager : MonoBehaviour {
 
+	[HeaderAttribute ("DebugSwitch")]
+	public bool isDebug = false;		//デバッグ表示切替用スイッチ
+
 	[HeaderAttribute ("Prefabs")]
 	public GameObject playerPrefab;		//GameStartでPlayerを生成するためのPrefab
 
-	[HeaderAttribute ("RefScript")]
+	[HeaderAttribute ("Managers")]
 	public ScoreManager scoreManager;
 	public StageManager stageManager;
 
@@ -34,6 +37,10 @@ public class Manager : MonoBehaviour {
 
 	void Start () {
 
+		foreach (GameObject item in GameObject.FindGameObjectsWithTag ("debug")) {
+			item.SetActive (isDebug);
+		}
+	
 		ShowSignUp ();
 		if (signUp.GetComponent<SignUp> ().Initialize ()) {		//名前が登録済みか確認し登録済みならタイトル画面へ
 			SignUpComplete ();
@@ -53,8 +60,8 @@ public class Manager : MonoBehaviour {
 		case mode_tag.TITLE:			//TIPS: 画面タップによるゲームスタートはButtonで実装している
 			if (Input.GetKeyDown (KeyCode.X)) GameStart ();
 
-			if (Input.GetKeyDown (KeyCode.Delete) || Input.GetMouseButtonDown (2)) {
-				if (GameObject.Find("DeleteMessage").activeSelf) DeletePlayerPrefs();
+			if (isDebug && (Input.GetKeyDown (KeyCode.Delete) || Input.GetMouseButtonDown (2))) {
+				DeletePlayerPrefs();
 			}
 			break;
 

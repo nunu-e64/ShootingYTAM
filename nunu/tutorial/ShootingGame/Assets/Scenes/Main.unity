@@ -1482,59 +1482,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyEnabled: 1
---- !u!1 &1080832791
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1080832792}
-  - 132: {fileID: 1080832793}
-  m_Layer: 0
-  m_Name: Press X
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1080832792
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1080832791}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .5, y: 2.44000006, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2136669887}
-  m_RootOrder: 1
---- !u!132 &1080832793
-GUIText:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1080832791}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Text: 'Press X
-
-'
-  m_Anchor: 1
-  m_Alignment: 0
-  m_PixelOffset: {x: 0, y: 0}
-  m_LineSpacing: 1
-  m_TabSize: 4
-  m_Font: {fileID: 12800000, guid: 5cf0eb48b4e374640bcc157a5f4a7284, type: 3}
-  m_Material: {fileID: 0}
-  m_FontSize: 26
-  m_FontStyle: 0
-  m_Color:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_PixelCorrect: 1
-  m_RichText: 1
 --- !u!1 &1195319292
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,7 +1494,7 @@ GameObject:
   - 114: {fileID: 1195319294}
   m_Layer: 5
   m_Name: DeleteMessage
-  m_TagString: Untagged
+  m_TagString: debug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1594,7 +1541,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press DeleteKey to Delete AllLocalSaveData.
+  m_Text: Click MiddleButton or Tap three to Delete LocalSaveData.
 --- !u!222 &1195319295
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2158,7 +2105,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2136669887}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: .5}
   m_AnchorMax: {x: 1, y: .5}
   m_AnchoredPosition: {x: 0, y: -168}
@@ -2235,6 +2182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9545022ee985c347aa0a6a9db07e9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDebug: 1
   playerPrefab: {fileID: 193208, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
   scoreManager: {fileID: 1987335915}
   stageManager: {fileID: 1982837108}
@@ -2272,7 +2220,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2136669887}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -2386,7 +2334,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2136669887}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 235}
@@ -2695,10 +2643,10 @@ RectTransform:
   m_Children:
   - {fileID: 796568135}
   m_Father: {fileID: 2136669887}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_AnchorMin: {x: .5, y: 0}
   m_AnchorMax: {x: .5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 15}
+  m_AnchoredPosition: {x: 0, y: 30}
   m_SizeDelta: {x: 403, y: 134}
   m_Pivot: {x: .5, y: 0}
 --- !u!114 &1805132645
@@ -3334,7 +3282,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1195319293}
-  - {fileID: 1080832792}
   - {fileID: 1702722712}
   - {fileID: 1721062655}
   - {fileID: 1738644944}
