@@ -1192,7 +1192,7 @@ Animator:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 880903338}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: a5a0efac66e336d47a648af46717a590, type: 2}
   m_CullingMode: 0
@@ -2261,7 +2261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9545022ee985c347aa0a6a9db07e9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebug: 0
+  isDebug: 1
   playerPrefab: {fileID: 193208, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
   scoreManager: {fileID: 1987335915}
   stageManager: {fileID: 1982837108}
@@ -3044,7 +3044,7 @@ MonoBehaviour:
   manager: {fileID: 1704102606}
   bulletPool: {fileID: 1296733298}
   stages:
-  - {fileID: 11468976, guid: 2f76297368b6434468ce9949f571775e, type: 2}
+  - {fileID: 11468976, guid: 7592f5fe630a95d4899a3a6d2545b388, type: 2}
   isLoop: 1
 --- !u!4 &1982837109
 Transform:
