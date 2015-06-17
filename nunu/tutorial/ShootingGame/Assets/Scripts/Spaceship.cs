@@ -15,19 +15,9 @@ public class Spaceship : MonoBehaviour {
 	[HeaderAttribute ("ShipStatus")]
 	public float speed;				//機体の移動速度[Unity/s]
 
-	[HeaderAttribute ("BulletStatus")]
-	public bool shotable = true;	//弾を発射するか
-	public GameObject bullet;		//弾のプレハブ
-	public float shotDelay;			//弾の発射間隔[s]
-
 	[HeaderAttribute ("OtherRef")]
 	public GameObject explosion;
-
 	
-    public void Shot(Transform origin) { 
-        ObjectPool.Instance.GetGameObject(bullet, origin.position, origin.rotation);
-    }
-
 	public void Explosion() {
 		Instantiate(explosion, transform.position, transform.rotation);
 	}

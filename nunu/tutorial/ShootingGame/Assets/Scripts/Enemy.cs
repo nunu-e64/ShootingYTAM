@@ -13,6 +13,11 @@ public class Enemy : Spaceship {
 	private float shotTimer;	//弾発射間隔を制御する経過時間記録変数
 	private Animator animator;
 
+	[HeaderAttribute ("BulletStatus")]
+	public bool shotable = true;	//弾を発射するか
+	public GameObject bullet;		//弾のプレハブ
+	public float shotDelay;			//弾の発射間隔[s]
+
 	void Start () {
 
 		//速度は最初に設定し以降一定速度で移動
@@ -36,8 +41,8 @@ public class Enemy : Spaceship {
 			Vector3 positionInView = Camera.main.WorldToViewportPoint (transform.position);
 
 			if (positionInView.x > 0 && positionInView.x < 1 && positionInView.y > 0 && positionInView.y < 1) {
-				foreach (Transform shotPosition in transform) {
-					Shot (shotPosition);
+				foreach (Transform shotPosition in transform) { 
+					ObjectPool.Instance.GetGameObject(bullet, shotPosition.position, shotPosition.rotation);
 				}
 				shotTimer = 0;
 			}
@@ -46,7 +51,7 @@ public class Enemy : Spaceship {
         }
     
     }
-
+	
 	void OnTriggerEnter2D(Collider2D c) {
 
 		//レイヤーに応じて処理を分岐

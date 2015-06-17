@@ -11,10 +11,14 @@ public class GaugeManager : MonoBehaviour {
 	[SerializeField]
 	private Text gaugeText;
 
-	public float countDown = 0.00f;		//ゲージのカウントダウン表示。Animationで値変化
+	public float count = 0.00f;		//ゲージのカウントダウン表示。Animationで値変化
 
 	private Player player = null;
 	private bool isShooting;
+
+	private Animator animator;
+	private Animation  animation;
+ 
 
 
 	void Start () {	
@@ -22,13 +26,15 @@ public class GaugeManager : MonoBehaviour {
 		//Textの位置をゲージに合わせる
 		gaugeText.transform.position = (Vector2) Camera.main.WorldToScreenPoint (transform.position);
 
+		animator = GetComponent<Animator>();
+
 	}
 
 
 	void Update () {
 		
 		if (!isShooting) {
-			string tmpText = countDown.ToString ("00.00");
+			string tmpText = count.ToString ("00.0") + "%";
 			gaugeText.text = tmpText;
 		}
 
@@ -42,25 +48,25 @@ public class GaugeManager : MonoBehaviour {
 		player = _player;
 	}
 
-	public void StartShooting () {
-		isShooting = true;
-		StartPlayerShot ();
-		gaugeText.gameObject.SetActive (false);
-		player.InvokeSpecialAttack ();
-	}
+	public void BeginCharge () {
 
-	public void StartCharging () {
+		GetComponent<Animator> ().SetTrigger ("charge");
+
 		isShooting = false;
-		StopPlayerShot ();
+		player.shotable = false;
 		gaugeText.gameObject.SetActive (true);
 	}
 
-	private void StartPlayerShot() {
+	public int EndCharge () {
+
+		GetComponent<Animator> ().SetTrigger ("release");
+		
+		isShooting = true;
 		player.shotable = true;
-		Debug.Log("StartPlayerShot");
+		gaugeText.gameObject.SetActive (false);
+
+		return (int)count;
 	}
-	private void StopPlayerShot() {
-		player.shotable = false;
-		Debug.Log ("StopPlayerShot");
-	}
+
+
 }
