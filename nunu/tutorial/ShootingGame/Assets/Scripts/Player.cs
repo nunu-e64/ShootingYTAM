@@ -4,30 +4,28 @@ using System.Collections;
 /// <summary>
 /// 自機クラス
 /// </summary>
-public class Player : MonoBehaviour {
+public class Player : Spaceship {
 	
-	private Spaceship spaceship;
 	public float shotNum = 1;			//砲台セット数(砲台1個＝弾2発(15/06/09現在))	//Animatorから変更するためにintではなくfloatでないといけない
 	public float touchPosGapY = 1.0f;	//移動の際に指で機体が隠れないようにタップした位置からずらす値
 
 	private bool alive = true;			//UNDONE: 死亡後にSEを再生しようとして警告がでるバグへの応急処置
 	
 	IEnumerator Start () {		
-        spaceship = GetComponent<Spaceship> ();
 		AudioSource shotAudio = GetComponent<AudioSource> ();
 
-		FindObjectOfType<GaugeManager>().SetPlayer(spaceship);
+		FindObjectOfType<GaugeManager>().SetPlayer(this);
 
 		//弾発射ループ
         while (true){
 			if (!alive) yield break;
 
-			if (spaceship.shotable) {
+			if (shotable) {
 
 				//子要素を全て取得して弾を発射
 				for (int i = 0; i < transform.childCount && i < (int)shotNum; i++) {
 					Transform shotPosition = transform.GetChild(i);
-					spaceship.Shot(shotPosition);
+					Shot(shotPosition);
 				}
 
 				//弾発射SE再生
@@ -35,7 +33,7 @@ public class Player : MonoBehaviour {
 					shotAudio.Play ();
 				}
 			}
-			yield return new WaitForSeconds(spaceship.shotDelay);
+			yield return new WaitForSeconds(shotDelay);
         }
 
 	}
@@ -53,7 +51,7 @@ public class Player : MonoBehaviour {
 			targetWorldPosition.y += touchPosGapY;
 
 		} else {	//キー入力
-			targetWorldPosition = new Vector2 (transform.position.x, transform.position.y) + new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical")) * spaceship.speed * Time.deltaTime / 5; 
+			targetWorldPosition = new Vector2 (transform.position.x, transform.position.y) + new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical")) * speed * Time.deltaTime / 5; 
 		}
 
 		Move (targetWorldPosition);
@@ -74,7 +72,7 @@ public class Player : MonoBehaviour {
 		
 		Vector2 pos = transform.position;
 		Vector2 header = (targetPos - (Vector2)transform.position);
-		float moveDistance = spaceship.speed * Time.deltaTime;
+		float moveDistance = speed * Time.deltaTime;
 
 
 		//目標座標が近ければ目標座標に自機座標を一致させ, 目標座標が遠ければSpeed*Time.deltaTimeだけ移動
@@ -110,7 +108,7 @@ public class Player : MonoBehaviour {
 	//死亡処理		
 	public void OnDead () {	
 		alive = false;
-		spaceship.Explosion ();
+		Explosion ();
 		Destroy (gameObject);
 
 		FindObjectOfType<Manager> ().GameOver ();

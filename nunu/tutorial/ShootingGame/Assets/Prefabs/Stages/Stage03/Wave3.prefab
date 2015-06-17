@@ -87,7 +87,6 @@ GameObject:
   - 95: {fileID: 9568264}
   - 50: {fileID: 5064190}
   - 114: {fileID: 11489954}
-  - 114: {fileID: 11493546}
   - 60: {fileID: 6008048}
   m_Layer: 9
   m_Name: Enemy 3
@@ -123,7 +122,6 @@ GameObject:
   - 95: {fileID: 9548394}
   - 50: {fileID: 5083572}
   - 114: {fileID: 11410060}
-  - 114: {fileID: 11432898}
   - 60: {fileID: 6098014}
   m_Layer: 9
   m_Name: Enemy 2
@@ -159,7 +157,6 @@ GameObject:
   - 95: {fileID: 9543860}
   - 50: {fileID: 5031708}
   - 114: {fileID: 11469336}
-  - 114: {fileID: 11450352}
   - 60: {fileID: 6037110}
   m_Layer: 9
   m_Name: Enemy 4
@@ -210,7 +207,6 @@ GameObject:
   - 95: {fileID: 9501090}
   - 50: {fileID: 5025392}
   - 114: {fileID: 11464420}
-  - 114: {fileID: 11495194}
   - 60: {fileID: 6034722}
   m_Layer: 9
   m_Name: Enemy 1
@@ -231,7 +227,6 @@ GameObject:
   - 95: {fileID: 9539404}
   - 50: {fileID: 5027602}
   - 114: {fileID: 11483156}
-  - 114: {fileID: 11497660}
   - 60: {fileID: 6049242}
   m_Layer: 9
   m_Name: Enemy 5
@@ -894,40 +889,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6caf246d8bbd0c4b9a344b9ca33bad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
+  shotable: 1
+  bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
+  shotDelay: 2
+  explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   point: 100
   hp: 10
---- !u!114 &11432898
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 138944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62aa726ad9eedec448f810872f8c1c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  shotable: 1
-  bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  shotDelay: 2
-  explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
---- !u!114 &11450352
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62aa726ad9eedec448f810872f8c1c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  shotable: 1
-  bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  shotDelay: 2
-  explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
 --- !u!114 &11460492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -950,6 +918,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6caf246d8bbd0c4b9a344b9ca33bad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
+  shotable: 1
+  bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
+  shotDelay: 2
+  explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   point: 100
   hp: 10
 --- !u!114 &11469336
@@ -963,6 +936,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6caf246d8bbd0c4b9a344b9ca33bad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
+  shotable: 1
+  bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
+  shotDelay: 2
+  explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   point: 100
   hp: 10
 --- !u!114 &11483156
@@ -976,6 +954,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6caf246d8bbd0c4b9a344b9ca33bad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
+  shotable: 1
+  bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
+  shotDelay: 2
+  explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   point: 100
   hp: 10
 --- !u!114 &11489954
@@ -989,56 +972,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6caf246d8bbd0c4b9a344b9ca33bad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
+  shotable: 1
+  bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
+  shotDelay: 2
+  explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   point: 100
   hp: 10
---- !u!114 &11493546
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62aa726ad9eedec448f810872f8c1c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  shotable: 1
-  bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  shotDelay: 2
-  explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
---- !u!114 &11495194
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 153872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62aa726ad9eedec448f810872f8c1c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  shotable: 1
-  bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  shotDelay: 2
-  explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
---- !u!114 &11497660
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 156432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62aa726ad9eedec448f810872f8c1c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  shotable: 1
-  bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
-  shotDelay: 2
-  explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
 --- !u!212 &21214590
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -129,7 +129,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 410280}
   - 114: {fileID: 11489546}
-  - 114: {fileID: 11424426}
   - 212: {fileID: 21273294}
   - 95: {fileID: 9569426}
   - 50: {fileID: 5068786}
@@ -372,22 +371,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11424426
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 193208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62aa726ad9eedec448f810872f8c1c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 40
-  shotable: 1
-  bullet: {fileID: 124180, guid: ceb0688462b26af49ba4bcba4da3a290, type: 2}
-  shotDelay: .0799999982
-  explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
 --- !u!114 &11489546
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -399,6 +382,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d94e92c2e4095246aa377469670b8cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 40
+  shotable: 1
+  bullet: {fileID: 124180, guid: ceb0688462b26af49ba4bcba4da3a290, type: 2}
+  shotDelay: .100000001
+  explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   shotNum: 1
   touchPosGapY: 2
 --- !u!212 &21273294

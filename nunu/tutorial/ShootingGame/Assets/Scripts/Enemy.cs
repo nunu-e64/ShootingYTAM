@@ -4,38 +4,39 @@ using System.Collections;
 /// <summary>
 /// 敵単体クラス
 /// </summary>
-public class Enemy : MonoBehaviour {
+public class Enemy : Spaceship {
 
 	public int point = 100;		//倒した時に手に入るスコア
 	public int hp = 1;
 
-    Spaceship spaceship;
-	float shotTimer;	//弾発射間隔を制御する経過時間記録変数
+	private float shotTimer;	//弾発射間隔を制御する経過時間記録変数
+	private Animator animator;
 
 	void Start () {
 
 		//速度は最初に設定し以降一定速度で移動
-		spaceship = GetComponent<Spaceship> ();
-		GetComponent<Rigidbody2D> ().velocity = transform.up.normalized * -1 * spaceship.speed;
+		GetComponent<Rigidbody2D> ().velocity = transform.up.normalized * -1 * speed;
 
+		animator = GetComponent<Animator> ();
+	
 	}
 
 	void Update(){
 
-		if (!spaceship.shotable) {
+		if (!shotable) {
 			return ;
 		}
 			
 		shotTimer+=Time.deltaTime;
 
-		if (shotTimer > spaceship.shotDelay) {
+		if (shotTimer > shotDelay) {
 
 			//画面内にあるときすべての子要素(shotPosition=砲台)から弾を発射////
 			Vector3 positionInView = Camera.main.WorldToViewportPoint (transform.position);
 
 			if (positionInView.x > 0 && positionInView.x < 1 && positionInView.y > 0 && positionInView.y < 1) {
 				foreach (Transform shotPosition in transform) {
-					spaceship.Shot (shotPosition);
+					Shot (shotPosition);
 				}
 				shotTimer = 0;
 			}
@@ -59,10 +60,10 @@ public class Enemy : MonoBehaviour {
 
 			if (hp <= 0) {	//HPがなくなればスコア加算して死亡
 				FindObjectOfType<ScoreManager>().AddPoint(point);
-				spaceship.Explosion();
+				Explosion();
 				Destroy(gameObject);
 			} else {
-				spaceship.GetAnimator().SetTrigger("Damage");
+				animator.SetTrigger("Damage");
 			}
 		}
 	}

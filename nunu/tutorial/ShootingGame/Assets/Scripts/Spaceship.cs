@@ -6,11 +6,11 @@ using System.Collections;
 
 
 /// <summary>
-/// PlayerとEnemyが持つ機体汎用クラス	
+/// PlayerとEnemyが継承する機体汎用クラス	
 /// ・移動と死亡時の爆発描画
 /// ・移動速度など変数の管理
 /// </summary>
-public class Spaceship : MonoBehaviour {	//TODO: 継承で代替すべき
+public class Spaceship : MonoBehaviour {
 
 	[HeaderAttribute ("ShipStatus")]
 	public float speed;				//機体の移動速度[Unity/s]
@@ -23,22 +23,13 @@ public class Spaceship : MonoBehaviour {	//TODO: 継承で代替すべき
 	[HeaderAttribute ("OtherRef")]
 	public GameObject explosion;
 
-	private Animator animator;
-
-	void Start() {
-		animator = GetComponent<Animator>();
-	}
-
+	
     public void Shot(Transform origin) { 
         ObjectPool.Instance.GetGameObject(bullet, origin.position, origin.rotation);
     }
 
 	public void Explosion() {
 		Instantiate(explosion, transform.position, transform.rotation);
-	}
-
-	public Animator GetAnimator(){
-		return animator;
 	}
 
 }

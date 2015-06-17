@@ -13,15 +13,13 @@ public class GaugeManager : MonoBehaviour {
 
 	public float countDown = 0.00f;		//ゲージのカウントダウン表示。Animationで値変化
 
-	private Spaceship playerSpaceShip = null;
+	private Player player = null;
 	private bool isShooting;
 
 
 	void Start () {	
 
 		//Textの位置をゲージに合わせる
-		Debug.Log (transform.position);
-		Debug.Log (Camera.main.WorldToViewportPoint (transform.position));
 		gaugeText.transform.position = (Vector2) Camera.main.WorldToScreenPoint (transform.position);
 
 	}
@@ -37,11 +35,11 @@ public class GaugeManager : MonoBehaviour {
 	}
 
 	void OnDisable () {
-		gaugeText.gameObject.SetActive(false);
+		if (!gaugeText.IsDestroyed()) gaugeText.gameObject.SetActive(false);
 	}
 
-	public void SetPlayer(Spaceship ship) {
-		playerSpaceShip = ship;
+	public void SetPlayer(Player _player) {
+		player = _player;
 	}
 
 	public void StartShooting () {
@@ -57,11 +55,11 @@ public class GaugeManager : MonoBehaviour {
 	}
 
 	private void StartPlayerShot() {
-		if (playerSpaceShip) playerSpaceShip.shotable = true; else Debug.LogError(playerSpaceShip);
+		player.shotable = true;
 		Debug.Log("StartPlayerShot");
 	}
 	private void StopPlayerShot() {
-		if (playerSpaceShip) playerSpaceShip.shotable = false; else Debug.LogError(playerSpaceShip);
+		player.shotable = false;
 		Debug.Log ("StopPlayerShot");
 	}
 }
