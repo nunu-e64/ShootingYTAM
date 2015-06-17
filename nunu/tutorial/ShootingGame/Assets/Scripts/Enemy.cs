@@ -6,6 +6,7 @@ using System.Collections;
 /// </summary>
 public class Enemy : Spaceship {
 
+	[HeaderAttribute ("EnemyStatus")]
 	public int point = 100;		//倒した時に手に入るスコア
 	public int hp = 1;
 
