@@ -26,10 +26,11 @@ class UsersController extends AppController {
 				'limit' => '',
 				)
 			);
-			echo json_encode($data);
-
+			//最近ユーザ登録されたユーザのIDを返す
+			echo $this->User->getLastInsertID();
 		}else{
-			print_r("not save success///");
+			//ユーザ名が重複している場合
+			echo "false";
 		}
 	}
 	//ユーザ消去(ID)
