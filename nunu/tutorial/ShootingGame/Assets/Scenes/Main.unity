@@ -2449,48 +2449,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: .0799999982
---- !u!1001 &1811224554
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 410280, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 410280, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 410280, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 410280, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 410280, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 410280, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 410280, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 410280, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_RootOrder
-      value: 10
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1928775789
 GameObject:
   m_ObjectHideFlags: 0
@@ -2703,7 +2661,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1387623252}
   highScoreText: {fileID: 1325665366}
-  timeBonusPoint: 1
+  timeBonusPoint: 0
   timeBonusPeriod: .100000001
 --- !u!1 &2047530342
 GameObject:

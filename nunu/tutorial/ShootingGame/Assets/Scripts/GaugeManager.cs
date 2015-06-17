@@ -44,23 +44,14 @@ public class GaugeManager : MonoBehaviour {
 
 	public void StartShooting () {
 		isShooting = true;
-		StartPlayerShot ();
+		player.shotable = true;
 		gaugeText.gameObject.SetActive (false);
 		player.InvokeSpecialAttack ();
 	}
 
 	public void StartCharging () {
 		isShooting = false;
-		StopPlayerShot ();
-		gaugeText.gameObject.SetActive (true);
-	}
-
-	private void StartPlayerShot() {
-		player.shotable = true;
-		Debug.Log("StartPlayerShot");
-	}
-	private void StopPlayerShot() {
 		player.shotable = false;
-		Debug.Log ("StopPlayerShot");
+		gaugeText.gameObject.SetActive (true); 
 	}
 }
