@@ -9,11 +9,12 @@ public class Player : Spaceship {
 	public float shotNum = 1;			//砲台セット数(砲台1個＝弾2発(15/06/09現在))	//Animatorから変更するためにintではなくfloatでないといけない
 	public float touchPosGapY = 1.0f;	//移動の際に指で機体が隠れないようにタップした位置からずらす値
 
+	private Animator animator;
 	
 	IEnumerator Start () {		
 		AudioSource shotAudio = GetComponent<AudioSource> ();
-
 		FindObjectOfType<GaugeManager>().SetPlayer(this);
+		animator = GetComponent<Animator>();
 
 		//弾発射ループ
         while (true){
@@ -57,7 +58,7 @@ public class Player : Spaceship {
 
 		//スペシャルアタック（仮）
 		if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Space)) {
-			GetComponent<Animator>().SetTrigger("Special");
+			InvokeSpecialAttack ();
 		}
 	}
 
@@ -112,4 +113,8 @@ public class Player : Spaceship {
 		FindObjectOfType<Manager> ().GameOver ();
 	}
 
+	//特殊攻撃
+	public void InvokeSpecialAttack(){
+		animator.SetTrigger("Special");
+	}
 }

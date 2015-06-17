@@ -46,6 +46,7 @@ public class GaugeManager : MonoBehaviour {
 		isShooting = true;
 		StartPlayerShot ();
 		gaugeText.gameObject.SetActive (false);
+		player.InvokeSpecialAttack ();
 	}
 
 	public void StartCharging () {
