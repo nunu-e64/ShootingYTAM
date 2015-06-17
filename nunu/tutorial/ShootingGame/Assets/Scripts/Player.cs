@@ -9,7 +9,6 @@ public class Player : Spaceship {
 	public float shotNum = 1;			//砲台セット数(砲台1個＝弾2発(15/06/09現在))	//Animatorから変更するためにintではなくfloatでないといけない
 	public float touchPosGapY = 1.0f;	//移動の際に指で機体が隠れないようにタップした位置からずらす値
 
-	private bool alive = true;			//UNDONE: 死亡後にSEを再生しようとして警告がでるバグへの応急処置
 	
 	IEnumerator Start () {		
 		AudioSource shotAudio = GetComponent<AudioSource> ();
@@ -18,7 +17,6 @@ public class Player : Spaceship {
 
 		//弾発射ループ
         while (true){
-			if (!alive) yield break;
 
 			if (shotable) {
 
@@ -30,7 +28,8 @@ public class Player : Spaceship {
 
 				//弾発射SE再生
 				if (shotNum > 0) {
-					shotAudio.Play ();
+					if (shotAudio.isActiveAndEnabled) shotAudio.Play ();
+					else Debug.LogWarning ("OK");
 				}
 			}
 			yield return new WaitForSeconds(shotDelay);
@@ -107,7 +106,6 @@ public class Player : Spaceship {
 
 	//死亡処理		
 	public void OnDead () {	
-		alive = false;
 		Explosion ();
 		Destroy (gameObject);
 
