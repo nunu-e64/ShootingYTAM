@@ -52,9 +52,6 @@ public class Manager : MonoBehaviour {
 
 		switch (gameMode) {
 		case mode_tag.PLAYING:
-			if (Input.GetMouseButtonDown(2) || Input.GetKeyDown(KeyCode.Escape)) {
-				if (player) player.GetComponent<Player>().OnDead();
-			}
 			break;
 
 		case mode_tag.TITLE:			//TIPS: 画面タップによるゲームスタートはButtonで実装している

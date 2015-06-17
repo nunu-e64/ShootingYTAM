@@ -13,10 +13,13 @@ public class Player : Spaceship {
 	public bool IsAppearance;
 
 	private Animator animator;
+	private GaugeManager gaugeManager;
+	private bool isCharging;
 	
 	IEnumerator Start () {		
 		AudioSource shotAudio = GetComponent<AudioSource> ();
-		FindObjectOfType<GaugeManager>().SetPlayer(this);
+		gaugeManager = FindObjectOfType<GaugeManager> ();
+		gaugeManager.SetPlayer (this);
 		animator = GetComponent<Animator>();
 
 		//弾発射ループ
@@ -45,7 +48,28 @@ public class Player : Spaceship {
 
 		if (!IsAppearance) {
 
-			//入力に基づいて目標座標を求め移動
+			//チャージ開始と解除//////////////////////////////////////////////////////
+			if ((Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Z)) && !isCharging) {
+				gaugeManager.BeginCharge ();
+				isCharging = true;
+				Debug.Log("Charge");
+			}
+			if ((Input.GetMouseButtonUp (0) || Input.GetKeyUp (KeyCode.Z)) && isCharging) {
+				int count = gaugeManager.EndCharge ();
+				isCharging = false;
+				Debug.Log("Release");
+
+
+			}
+			//////////////////////////////////////////////////////////////////////////
+
+			//DEBUG: 自殺/////////////////////////////////////////////////////////////
+			if (Input.GetMouseButtonDown (2) || Input.GetKeyDown (KeyCode.Escape)) {
+				OnDead ();
+			}
+			//////////////////////////////////////////////////////////////////////////
+
+			//入力に基づいて目標座標を求め移動////////////////////////////////////////
 			Vector2 targetWorldPosition;
 			if (Input.touchCount > 0) {		//タッチ入力
 				targetWorldPosition = Camera.main.ScreenToWorldPoint (Input.GetTouch (0).position);
@@ -60,11 +84,8 @@ public class Player : Spaceship {
 			}
 
 			Move (targetWorldPosition);
+			//////////////////////////////////////////////////////////////////////////
 
-			//スペシャルアタック（仮）
-			if (Input.GetMouseButtonDown (1) || Input.GetKeyDown (KeyCode.Space)) {
-				InvokeSpecialAttack ();
-			}
 
 		} else {
 			transform.position += new Vector3 (0, 0.05f, 0);

@@ -5,7 +5,7 @@ public class GaugeManagerShooting : StateMachineBehaviour {
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter (Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		animator.GetComponent<GaugeManager> ().StartShooting ();
+		//animator.GetComponent<GaugeManager> ().StartShooting ();
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

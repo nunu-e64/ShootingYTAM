@@ -186,6 +186,48 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
+--- !u!1001 &358067622
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 480994, guid: 9b530fc4b20e1bb4c81f7cb6aa8acd6a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1.17033362
+      objectReference: {fileID: 0}
+    - target: {fileID: 480994, guid: 9b530fc4b20e1bb4c81f7cb6aa8acd6a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.566327929
+      objectReference: {fileID: 0}
+    - target: {fileID: 480994, guid: 9b530fc4b20e1bb4c81f7cb6aa8acd6a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 480994, guid: 9b530fc4b20e1bb4c81f7cb6aa8acd6a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 480994, guid: 9b530fc4b20e1bb4c81f7cb6aa8acd6a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 480994, guid: 9b530fc4b20e1bb4c81f7cb6aa8acd6a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 480994, guid: 9b530fc4b20e1bb4c81f7cb6aa8acd6a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 480994, guid: 9b530fc4b20e1bb4c81f7cb6aa8acd6a, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 9b530fc4b20e1bb4c81f7cb6aa8acd6a, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &428386684
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,7 +948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gaugeText: {fileID: 82982929}
-  countDown: 0
+  count: 0
 --- !u!95 &880903341
 Animator:
   serializedVersion: 3
@@ -2598,8 +2640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 1704102606}
   bulletPool: {fileID: 1296733298}
-  stages:
-  - {fileID: 11468976, guid: 2f76297368b6434468ce9949f571775e, type: 2}
+  stages: []
   isLoop: 1
 --- !u!4 &1982837109
 Transform:
@@ -2754,8 +2795,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2090217760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -.200000003}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -.5, y: 0, z: -.200000003}
+  m_LocalScale: {x: 0, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 899618576}
   m_RootOrder: 0
