@@ -32,7 +32,7 @@ class UsersController extends AppController {
 			print_r("not save success///");
 		}
 	}
-		//ユーザ消去(ID)
+	//ユーザ消去(ID)
 	//:Unity側にidをコアデータとして渡す。
 	public function userDelete(){
 		$this->autoRender = false;
