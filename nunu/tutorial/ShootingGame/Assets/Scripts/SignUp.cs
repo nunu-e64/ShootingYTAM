@@ -14,15 +14,21 @@ public class SignUp : MonoBehaviour {
 	public InputField inputField;
 
 	private string userNameKey = "userName";	//PlayerPrefsで保存するためのキー;
-	private string userName = "";
+	private string userIdKey = "userId";
+	public string userName = "";
+	public string userId = "";
 
 	public string UserName {
 		get { return userName; }
+	}
+	public string UserId {
+		get { return userId; }
 	}
 
 	//初期化…Managerから呼び出す。ローカルデータチェックとInputField,Buttonの初期化
 	public bool Initialize () {
 		userName = PlayerPrefs.GetString (userNameKey, "");		//端末から登録名を取得
+		userId = PlayerPrefs.GetString (userIdKey, "");
 		if (userName.Length > 0) {	//登録済み
 			return true;
 		} else {
@@ -59,9 +65,28 @@ public class SignUp : MonoBehaviour {
 		//・重複(既に存在する)→メッセージを表示してreturn;
 		//・ＯＫ(存在しない)→続行
 		////////////////////////////////////////////////////////////////
-
-		PlayerPrefs.SetString (userNameKey, userName);
-		PlayerPrefs.Save ();
-		FindObjectOfType<Manager> ().SignUpComplete ();
+		StartCoroutine (UserRegister ());
 	}
+
+	IEnumerator UserRegister(){
+		string url = "http://localhost/cakephp/ranking/Users/userAdd?name=" + userName;
+		WWW www = new WWW (url);
+
+		yield return www;
+		//名前が重複している場合ユーザ登録できない
+		if (www.text == "false") {
+			//名前が重複しておりIDが与えられない。
+			Debug.Log ("名前が重複してます。");
+			UnityEditor.EditorUtility.DisplayDialog ("alert", "既に登録された名前です。", "ok!");
+
+		} else {
+			Debug.Log ("登録成功");
+			userId = www.text as string;
+			Debug.Log ("取得したID:" + userId);
+			PlayerPrefs.SetString (userNameKey, userName);
+			PlayerPrefs.SetString (userIdKey, userId);
+			PlayerPrefs.Save ();
+			FindObjectOfType<Manager> ().SignUpComplete ();
+		}
+    }
 }
