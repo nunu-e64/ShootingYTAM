@@ -15,12 +15,27 @@ public class RankingManager : MonoBehaviour {
 	private List<RankingDataNode> rankingDataList = new List<RankingDataNode>();
 
 	void Start () {
-		TextAsset rankingDataText = Resources.Load ("rankingData") as TextAsset;		//DEBUG: あらかじめ作っておいたソート済みjsonファイルをローカルから読み込み
-		
+//		TextAsset rankingDataText = Resources.Load ("rankingData") as TextAsset;		//DEBUG: あらかじめ作っておいたソート済みjsonファイルをローカルから読み込み
+		StartCoroutine (DownLoad ());
+	}
+
+	IEnumerator DownLoad(){
+		string url = "http://localhost/cakephp/ranking/Scores/ranking";
+		WWW www = new WWW (url);
+
+		yield return www;
+
+		if(www.error != null){
+			Debug.Log (www.error);
+			yield break;
+		}else{
+			Debug.Log (www.text);
+		}
+
 		//外部データ（ソート済みjsonファイル）からランキングデータList作成
-		if (!SetRankingData (rankingDataText.text)) {
+		if (!SetRankingData (www.text)) {
 			Debug.LogWarning ("LoadError->RankingData");	//DEBUG: 読み込み失敗の時は警告を表示してreturn
-			return;
+			yield break;
 		}
 
 		//Listに基づいてScrollViewにインスタンスを追加して画面表示
@@ -34,6 +49,38 @@ public class RankingManager : MonoBehaviour {
 			texts[2].text = node.Score.ToString();
 		}
 	}
+
+	/*
+	[
+		{
+			Score: {
+				score: "200",
+				user_id: "33"
+			},
+			User: {
+				name: "yotsu"
+			}
+		},
+		{
+			Score: {
+				score: "150",
+				user_id: "33"
+			},
+			User: {
+				name: "yotsu"
+			}
+		},
+		{
+			Score: {
+				score: "100",
+				user_id: "33"
+			},
+			User: {
+				name: "yotsu"
+			}
+		}
+	]
+	*/
 
 
 	//JsonデータをパースしList作成/////////////////////////////////////////
@@ -49,12 +96,22 @@ public class RankingManager : MonoBehaviour {
 			return false;
 		}
 
+		var dic = new Dictionary<string, object>();
 		int i = 0;
-		foreach (Dictionary<string, object> node in list) {
+		foreach (object node in list) {
+			if (node is Dictionary<string, object>) {
+				dic = node as Dictionary<string, object>;
+			} else {
+				return false;
+			}
 			++i;
+
+			var scoreDic = dic["Score"] as Dictionary<string, object>;
+			var userDic = dic["User"] as Dictionary<string, object>;
+
 			RankingDataNode item = new RankingDataNode (-1, "", -1);
-			item.Score = (int) (long) node["score"];
-			item.Name = node["name"] as string;
+			item.Score = int.Parse(scoreDic["score"] as string);
+			item.Name = userDic["name"] as string;
 			item.Rank = i;
 			rankingDataList.Add (item);
 		}
