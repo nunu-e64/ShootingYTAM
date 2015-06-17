@@ -9,19 +9,27 @@ public class Player : Spaceship {
 	public float shotNum = 1;			//砲台セット数(砲台1個＝弾2発(15/06/09現在))	//Animatorから変更するためにintではなくfloatでないといけない
 	public float touchPosGapY = 1.0f;	//移動の際に指で機体が隠れないようにタップした位置からずらす値
 
+
+	[HeaderAttribute ("BulletStatus")]
+	public GameObject[] bullets;		//弾のプレハブ
+	public bool shotable;
+
 	[System.NonSerialized]
 	public bool IsAppearance;
 
+	private AudioSource shotAudio;
 	private Animator animator;
 	private GaugeManager gaugeManager;
 	private bool isCharging;
-	
-	IEnumerator Start () {		
-		AudioSource shotAudio = GetComponent<AudioSource> ();
+
+
+	void Start () {
+		shotAudio = GetComponent<AudioSource> ();
 		gaugeManager = FindObjectOfType<GaugeManager> ();
 		gaugeManager.SetPlayer (this);
 		animator = GetComponent<Animator>();
 
+		/*
 		//弾発射ループ
         while (true){
 
@@ -41,7 +49,7 @@ public class Player : Spaceship {
 			}
 			yield return new WaitForSeconds(shotDelay);
         }
-
+		*/
 	}
 
 	void Update () {
@@ -59,6 +67,18 @@ public class Player : Spaceship {
 				isCharging = false;
 				Debug.Log("Release");
 
+				if (count < 10) {
+				} else if (count < 40) {
+					Shot (bullets[0]);
+				} else if (count < 70) {
+					Shot (bullets[1]);
+				} else if (count < 100) {
+					Shot (bullets[2]);
+				} else if (count == 100) {
+					Shot (bullets[3]);
+				} else {
+
+				}
 
 			}
 			//////////////////////////////////////////////////////////////////////////
@@ -117,6 +137,21 @@ public class Player : Spaceship {
 		pos.y = Mathf.Clamp(pos.y, min.y, max.y);
 
 		transform.position = pos;
+	}
+
+	
+	void Shot(GameObject bullet){
+		//子要素を全て取得して弾を発射
+		for (int i = 0; i < transform.childCount && i < (int)shotNum; i++) {
+			Transform shotPosition = transform.GetChild(i);
+			GameObject go = Instantiate (bullet, shotPosition.position, shotPosition.rotation) as GameObject;
+		}
+
+		//弾発射SE再生
+		if (shotNum > 0) {
+			if (shotAudio.isActiveAndEnabled) shotAudio.Play ();
+			else Debug.LogWarning ("AudioErrorHasAvoided: OK");
+		}
 	}
 
 	//被弾判定

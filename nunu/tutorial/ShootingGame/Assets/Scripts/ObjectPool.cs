@@ -66,6 +66,8 @@ public class ObjectPool : MonoBehaviour {
 
 		if (unActiveObjects.ContainsKey (go.layer)) {
 			unActiveObjects[go.layer].Push (go.GetInstanceID ());
+		} else {
+			Destroy (go);
 		}
 	}
 

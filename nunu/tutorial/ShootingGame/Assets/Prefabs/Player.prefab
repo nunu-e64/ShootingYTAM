@@ -384,12 +384,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
-  shotable: 0
-  bullet: {fileID: 124180, guid: ceb0688462b26af49ba4bcba4da3a290, type: 2}
-  shotDelay: .100000001
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   shotNum: 1
   touchPosGapY: 2
+  bullets:
+  - {fileID: 124180, guid: ceb0688462b26af49ba4bcba4da3a290, type: 2}
+  - {fileID: 153090, guid: 3fedf536c1ff94a4d94fe1b36f011f87, type: 2}
+  - {fileID: 133612, guid: 20e91adc1b176c44c936fb913a168f46, type: 2}
+  - {fileID: 169298, guid: 9b530fc4b20e1bb4c81f7cb6aa8acd6a, type: 2}
+  shotable: 1
 --- !u!212 &21273294
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -424,13 +427,53 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: bullet.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: bullets.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: shotable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: bullet.Array.data[0]
+      value: 
+      objectReference: {fileID: 124180, guid: ceb0688462b26af49ba4bcba4da3a290, type: 2}
+    - target: {fileID: 0}
+      propertyPath: bullet.Array.data[1]
+      value: 
+      objectReference: {fileID: 153090, guid: 3fedf536c1ff94a4d94fe1b36f011f87, type: 2}
+    - target: {fileID: 0}
+      propertyPath: bullet.Array.data[2]
+      value: 
+      objectReference: {fileID: 133612, guid: 20e91adc1b176c44c936fb913a168f46, type: 2}
+    - target: {fileID: 0}
+      propertyPath: bullet.Array.data[3]
+      value: 
+      objectReference: {fileID: 169298, guid: 9b530fc4b20e1bb4c81f7cb6aa8acd6a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: bullets.Array.data[2]
+      value: 
+      objectReference: {fileID: 133612, guid: 20e91adc1b176c44c936fb913a168f46, type: 2}
+    - target: {fileID: 0}
+      propertyPath: bullets.Array.data[3]
+      value: 
+      objectReference: {fileID: 169298, guid: 9b530fc4b20e1bb4c81f7cb6aa8acd6a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: bullets.Array.data[1]
+      value: 
+      objectReference: {fileID: 153090, guid: 3fedf536c1ff94a4d94fe1b36f011f87, type: 2}
+    - target: {fileID: 0}
+      propertyPath: bullets.Array.data[0]
+      value: 
+      objectReference: {fileID: 124180, guid: ceb0688462b26af49ba4bcba4da3a290, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 193208}
