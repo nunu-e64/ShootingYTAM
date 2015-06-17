@@ -22,9 +22,9 @@ class ScoresController extends AppController{
 		$this->Score->save($record);
 		print_r("success!!!");
 		if($this->Score->save($record)){
-			print_r("save success!!!");
+			echo "true";
 		}else{
-			print_r("not save success///");
+			echo "false";
 		}
 	}
 	//全ユーザのスコアを元に全体ランキング
