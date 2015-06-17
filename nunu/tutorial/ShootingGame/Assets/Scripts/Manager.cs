@@ -99,8 +99,9 @@ public class Manager : MonoBehaviour {
 		scoreManager.Save ();
 
 		//TODO: ハイスコア更新時にはランキング送信//////////////////////////////////////////////////////////////
-		if (scoreManager.IsHighScore ()) {
+		if (true) {
 			//SendRanking(signUp.GetComponent<SignUp> ().UserName, score);
+			StartCoroutine (SendUserScore (score));
 			Debug.Log ("SendRanking:" + signUp.GetComponent<SignUp> ().UserName + "," + score);
 		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,7 +109,22 @@ public class Manager : MonoBehaviour {
 		gauge.SetActive(false);
 		gameOver.SetActive(true);
 	}
+	IEnumerator SendUserScore(int score){
+		string userId = signUp.GetComponent<SignUp>().UserId;
+		Debug.Log ("userId:"+ userId);
+		Debug.Log ("score:"+ score);
+		string url = "http://localhost/cakephp/ranking/Scores/scoreAdd?user_id="+ userId + "&score="+score.ToString();
+		WWW www = new WWW (url);
 
+		yield return www;
+
+		if(www.text == "false"){
+			Debug.Log ("スコアの追加失敗");
+			yield break;
+		}else{
+			Debug.Log ("スコアの追加成");
+		}
+	}
 	private void ShowTitle() {
 		gameMode = mode_tag.TITLE;
 		title.SetActive (true);
