@@ -82,12 +82,14 @@ public class Manager : MonoBehaviour {
 	}
 
 
-	public void GameStart() {
+	public void GameStart () {
 		gameMode = mode_tag.PLAYING;
-		title.SetActive(false);
+		title.SetActive (false);
 		titleMessage.SetActive (false);
-		gauge.SetActive(true);
-		player = Instantiate(playerPrefab, playerPrefab.transform.position, playerPrefab.transform.rotation) as GameObject;		//自機出現
+		gauge.SetActive (true);
+		player = Instantiate (playerPrefab) as GameObject;		//自機出現
+		Vector3 pos = Camera.main.ViewportToWorldPoint (new Vector2 (0.5f, 0));
+		player.transform.position = new Vector3 (pos.x, pos.y, 0);
 	}
 
 	public void GameOver() {

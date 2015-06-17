@@ -9,6 +9,9 @@ public class Player : Spaceship {
 	public float shotNum = 1;			//砲台セット数(砲台1個＝弾2発(15/06/09現在))	//Animatorから変更するためにintではなくfloatでないといけない
 	public float touchPosGapY = 1.0f;	//移動の際に指で機体が隠れないようにタップした位置からずらす値
 
+	[System.NonSerialized]
+	public bool IsAppearance;
+
 	private Animator animator;
 	
 	IEnumerator Start () {		
@@ -19,7 +22,7 @@ public class Player : Spaceship {
 		//弾発射ループ
         while (true){
 
-			if (shotable) {
+			if (shotable && !IsAppearance) {
 
 				//子要素を全て取得して弾を発射
 				for (int i = 0; i < transform.childCount && i < (int)shotNum; i++) {
@@ -40,25 +43,31 @@ public class Player : Spaceship {
 
 	void Update () {
 
-		//入力に基づいて目標座標を求め移動
-		Vector2 targetWorldPosition;
-		if (Input.touchCount > 0) {		//タッチ入力
-			targetWorldPosition = Camera.main.ScreenToWorldPoint (Input.GetTouch (0).position);
-			targetWorldPosition.y += touchPosGapY;
+		if (!IsAppearance) {
 
-		} else if (Input.GetMouseButton(0)) {	//マウス入力
-			targetWorldPosition = Camera.main.ScreenToWorldPoint((Vector2)Input.mousePosition);
-			targetWorldPosition.y += touchPosGapY;
+			//入力に基づいて目標座標を求め移動
+			Vector2 targetWorldPosition;
+			if (Input.touchCount > 0) {		//タッチ入力
+				targetWorldPosition = Camera.main.ScreenToWorldPoint (Input.GetTouch (0).position);
+				targetWorldPosition.y += touchPosGapY;
 
-		} else {	//キー入力
-			targetWorldPosition = new Vector2 (transform.position.x, transform.position.y) + new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical")) * speed * Time.deltaTime / 5; 
-		}
+			} else if (Input.GetMouseButton (0)) {	//マウス入力
+				targetWorldPosition = Camera.main.ScreenToWorldPoint ((Vector2) Input.mousePosition);
+				targetWorldPosition.y += touchPosGapY;
 
-		Move (targetWorldPosition);
+			} else {	//キー入力
+				targetWorldPosition = new Vector2 (transform.position.x, transform.position.y) + new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical")) * speed * Time.deltaTime / 5;
+			}
 
-		//スペシャルアタック（仮）
-		if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Space)) {
-			InvokeSpecialAttack ();
+			Move (targetWorldPosition);
+
+			//スペシャルアタック（仮）
+			if (Input.GetMouseButtonDown (1) || Input.GetKeyDown (KeyCode.Space)) {
+				InvokeSpecialAttack ();
+			}
+
+		} else {
+			transform.position += new Vector3 (0, 0.05f, 0);
 		}
 	}
 
