@@ -37,12 +37,6 @@ public class Player : Spaceship {
 		gaugeManager.SetPlayer (this);
 		animator = GetComponent<Animator>();
 
-
-		if (Input.GetMouseButton (0)) {	//マウス入力
-			gaugeManager.BeginCharge ();
-			isCharging = true;
-			Debug.Log ("Press");
-		}
 		chargeEffect.Stop ();
 
 		/*
@@ -71,7 +65,7 @@ public class Player : Spaceship {
 	void Update () {
 
 		//チャージ開始と解除//////////////////////////////////////////////////////
-		if ((Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Z)) && !isCharging) {
+		if ((Input.GetMouseButton (0) || Input.GetKey (KeyCode.Z)) && !isCharging) {
 			gaugeManager.BeginCharge ();
 			isCharging = true;
 			chargeEffect.Play ();

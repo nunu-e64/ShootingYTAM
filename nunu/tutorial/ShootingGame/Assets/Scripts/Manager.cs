@@ -104,8 +104,8 @@ public class Manager : MonoBehaviour {
 			Debug.Log ("SendRanking:" + signUp.GetComponent<SignUp> ().UserName + "," + score);
 		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		gauge.SetActive(false);
+
+		gauge.SetActive (false);
 		gameOver.SetActive(true);
 	}
 	IEnumerator SendUserScore(int score){
@@ -129,7 +129,7 @@ public class Manager : MonoBehaviour {
 		title.SetActive (true);
 		titleMessage.SetActive (true);
 		gameOver.SetActive(false);
-		gauge.SetActive(false);
+		gauge.SetActive (false);
 		signUp.SetActive (false);
 
 		scoreManager.Initialize ();

@@ -8,6 +8,8 @@ using System.Collections;
 /// </summary>
 public class GaugeManager : MonoBehaviour {
 
+	public GameObject EnergyGauge;
+
 	[SerializeField]
 	private Text gaugeText;
 
@@ -28,20 +30,31 @@ public class GaugeManager : MonoBehaviour {
 
 		animator = GetComponent<Animator>();
 
+		count = 0.0f;
+
 	}
 
 
 	void Update () {
 		
-		if (!isShooting) {
+		if (true) {
 			string tmpText = count.ToString ("00.0") + "%";
 			gaugeText.text = tmpText;
 		}
 
 	}
 
+	void OnEnable () {
+		gaugeText.gameObject.SetActive (true);
+	}
+
 	void OnDisable () {
-		if (!gaugeText.IsDestroyed()) gaugeText.gameObject.SetActive(false);
+		if (!gaugeText.IsDestroyed ()) {
+			gaugeText.gameObject.SetActive (false);
+			EnergyGauge.transform.position = new Vector3 (-0.5f, EnergyGauge.transform.position.y, EnergyGauge.transform.position.z);
+			EnergyGauge.transform.localScale = new Vector3 (0.0f, EnergyGauge.transform.localScale.y, EnergyGauge.transform.localScale.z);
+			count = 0.0f;
+		}
 	}
 
 	public void SetPlayer(Player _player) {
@@ -63,7 +76,7 @@ public class GaugeManager : MonoBehaviour {
 		
 		isShooting = true;
 		player.shotable = true;
-		gaugeText.gameObject.SetActive (false);
+		//gaugeText.gameObject.SetActive (false);
 
 		return (int)count;
 	}

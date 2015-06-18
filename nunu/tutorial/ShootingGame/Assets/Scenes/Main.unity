@@ -905,6 +905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f703cbcb090627a4194593a6870464a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnergyGauge: {fileID: 2090217760}
   gaugeText: {fileID: 82982929}
   count: 0
 --- !u!95 &880903341

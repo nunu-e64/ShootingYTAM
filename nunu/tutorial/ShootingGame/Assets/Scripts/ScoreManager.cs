@@ -51,8 +51,8 @@ public class ScoreManager : MonoBehaviour {
 
 		if (score > highScore) {
 			highScore = score;
-			//scoreText.color		= Color.red;
-			//highScoreText.color = Color.red;
+			scoreText.color = Color.red;
+			highScoreText.color = Color.red;
 		}
 		scoreText.text = score.ToString();
 		highScoreText.text = highScore.ToString();
