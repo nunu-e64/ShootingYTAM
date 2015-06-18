@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// 自機クラス
 /// </summary>
 public class Player : Spaceship {
-	
+
+	public ParticleSystem chargeEffect;		//チャージ中のエフェクト
+	public ParticleSystem failShotEffect;	//チャージ不足の時のエフェクト
+
+	[HeaderAttribute ("PlayerStatus")]
 	public float shotNum = 1;			//砲台セット数(砲台1個＝弾2発(15/06/09現在))	//Animatorから変更するためにintではなくfloatでないといけない
 	public float touchPosGapY = 1.0f;	//移動の際に指で機体が隠れないようにタップした位置からずらす値
 
@@ -38,7 +43,9 @@ public class Player : Spaceship {
 			isCharging = true;
 			Debug.Log ("Press");
 		}
-	/*
+		chargeEffect.Stop ();
+
+		/*
 		//弾発射ループ
         while (true){
 
@@ -63,35 +70,52 @@ public class Player : Spaceship {
 
 	void Update () {
 
+		//チャージ開始と解除//////////////////////////////////////////////////////
+		if ((Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Z)) && !isCharging) {
+			gaugeManager.BeginCharge ();
+			isCharging = true;
+			chargeEffect.Play ();
+
+		//} else if ((Input.GetMouseButton (0) || Input.GetKey (KeyCode.Z)) && isCharging) {
+		//	int count  = gaugeManager.GetCount();
+		//	if (count < 10) {
+		//	} else if (count < 40) {
+		//		chargeEffect.startColor
+		//	} else if (count < 70) {
+		//		Shot (bullets[1]);
+		//	} else if (count < 100) {
+		//		Shot (bullets[2]);
+		//	} else if (count == 100) {
+		//		Shot (bullets[3]);
+		//	} else {
+		
+		}else if ((Input.GetMouseButtonUp (0) || Input.GetKeyUp (KeyCode.Z)) && isCharging) {
+			int count = gaugeManager.EndCharge ();
+			isCharging = false;
+			chargeEffect.Stop ();
+			chargeEffect.Clear();
+
+			if (count < 10) {
+				GameObject go = (GameObject) Instantiate (failShotEffect.gameObject, transform.position, transform.rotation);
+				go.transform.parent = transform;
+			} else if (count < 40) {
+				Shot (bullets[0]);
+			} else if (count < 70) {
+				Shot (bullets[1]);
+			} else if (count < 100) {
+				Shot (bullets[2]);
+			} else if (count == 100) {
+				Shot (bullets[3]);
+			} else {
+
+			}
+
+		}
+		//////////////////////////////////////////////////////////////////////////
+
+
 		if (!IsAppearance) {
-
-			//チャージ開始と解除//////////////////////////////////////////////////////
-			if ((Input.GetMouseButtonDown (0) || Input.GetKeyDown (KeyCode.Z)) && !isCharging) {
-				gaugeManager.BeginCharge ();
-				isCharging = true;
-				Debug.Log("Charge");
-			}
-			if ((Input.GetMouseButtonUp (0) || Input.GetKeyUp (KeyCode.Z)) && isCharging) {
-				int count = gaugeManager.EndCharge ();
-				isCharging = false;
-				Debug.Log("Release");
-
-				if (count < 10) {
-				} else if (count < 40) {
-					Shot (bullets[0]);
-				} else if (count < 70) {
-					Shot (bullets[1]);
-				} else if (count < 100) {
-					Shot (bullets[2]);
-				} else if (count == 100) {
-					Shot (bullets[3]);
-				} else {
-
-				}
-
-			}
-			//////////////////////////////////////////////////////////////////////////
-
+	
 			//DEBUG: 自殺/////////////////////////////////////////////////////////////
 			if (Input.GetMouseButtonDown (2) || Input.GetKeyDown (KeyCode.Escape)) {
 				OnDead ();

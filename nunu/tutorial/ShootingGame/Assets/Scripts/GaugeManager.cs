@@ -68,5 +68,9 @@ public class GaugeManager : MonoBehaviour {
 		return (int)count;
 	}
 
+	public int GetCount () {
+		return (int) count;
+	}
+
 
 }
