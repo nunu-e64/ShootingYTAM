@@ -863,6 +863,52 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 796568134}
+--- !u!1001 &827371020
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 434174, guid: bf6200a9bea7f46cead7b3a211f937bd, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434174, guid: bf6200a9bea7f46cead7b3a211f937bd, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 7.21000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 434174, guid: bf6200a9bea7f46cead7b3a211f937bd, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434174, guid: bf6200a9bea7f46cead7b3a211f937bd, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434174, guid: bf6200a9bea7f46cead7b3a211f937bd, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434174, guid: bf6200a9bea7f46cead7b3a211f937bd, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434174, guid: bf6200a9bea7f46cead7b3a211f937bd, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 434174, guid: bf6200a9bea7f46cead7b3a211f937bd, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 122334, guid: bf6200a9bea7f46cead7b3a211f937bd, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: bf6200a9bea7f46cead7b3a211f937bd, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &880903338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1571,6 +1617,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 1776330876}
   inputField: {fileID: 1341234995}
+  userName: 
+  userId: 
 --- !u!1 &1677005968
 GameObject:
   m_ObjectHideFlags: 0
