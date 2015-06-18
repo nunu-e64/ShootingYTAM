@@ -189,7 +189,7 @@ public class Player : Spaceship {
 		//子要素を全て取得して弾を発射
 		for (int i = 0; i < transform.childCount && i < (int)shotNum; i++) {
 			Transform shotPosition = transform.GetChild(i);
-			GameObject go = Instantiate (bullet, shotPosition.position, shotPosition.rotation) as GameObject;
+			Instantiate (bullet, shotPosition.position, shotPosition.rotation);
 		}
 
 		//弾発射SE再生
