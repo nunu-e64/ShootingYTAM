@@ -106,11 +106,8 @@ public class Player : Spaceship {
 
 			Vector2 targetWorldPosition;
 			Vector2 direction = new Vector2();
-			if (Input.touchCount > 0) {		//タッチ入力
-				targetWorldPosition = Camera.main.ScreenToWorldPoint (Input.GetTouch (0).position);
-				targetWorldPosition.y += touchPosGapY;
 
-			} else if (Input.GetMouseButton (0)) {	//マウス入力
+			if (Input.GetMouseButton (0)) {	//マウス入力
 				currentTouchPosition = (Vector2) Camera.main.ScreenToWorldPoint ((Vector2) Input.mousePosition);
 				direction =  currentTouchPosition - oldTouchPosition;
 				targetWorldPosition = (Vector2) oldPosition + direction;
@@ -124,7 +121,7 @@ public class Player : Spaceship {
 
 
 		} else {
-			transform.position += new Vector3 (0, 0.05f, 0);
+			transform.position += new Vector3 (0, 0.07f, 0);
 		}
 	}
 
