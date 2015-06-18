@@ -12,6 +12,7 @@ public class SignUp : MonoBehaviour {
 
 	public Button button;
 	public InputField inputField;
+	public Text message;
 
 	private string userNameKey = "userName";	//PlayerPrefsで保存するためのキー;
 	private string userIdKey = "userId";
@@ -34,6 +35,8 @@ public class SignUp : MonoBehaviour {
 		} else {
 			inputField.text = "";	//未登録
 			ChangeButtonStyle (false);
+			message.text = "Input Your Handle Name.\n半角英数8文字以内であなたの名前を入力してください。";
+			message.color = Color.white;
 			return false;
 		}
 	}
@@ -73,11 +76,21 @@ public class SignUp : MonoBehaviour {
 		WWW www = new WWW (url);
 
 		yield return www;
+
+		if (false && www.error != null) {
+			Debug.LogWarning ("WWWERROR: " + www.error);
+			yield break;
+		} else if (!www.isDone) {
+			Debug.LogWarning ("WWWERROR: " + "UNDONE");
+			yield break;
+
 		//名前が重複している場合ユーザ登録できない
-		if (www.text == "false") {
+		}else if (www.text == "false") {
 			//名前が重複しておりIDが与えられない。
-			Debug.Log ("名前が重複してます。");
-			UnityEditor.EditorUtility.DisplayDialog ("alert", "既に登録された名前です。", "ok!");
+			Debug.Log ("Already Existed Name.");
+			message.text = "Already Exist ID.\nこのIDは既に利用されています。\n他のIDを入力してください。";
+			message.color = Color.red;
+			yield break;
 
 		} else {
 			Debug.Log ("登録成功");

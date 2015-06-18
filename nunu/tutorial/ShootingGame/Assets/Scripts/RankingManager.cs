@@ -25,10 +25,13 @@ public class RankingManager : MonoBehaviour {
 
 		yield return www;
 
-		if(www.error != null){
-			Debug.Log (www.error);
+		if (www.error != null) {
+			Debug.LogWarning ("WWWERROR: " + www.error);
 			yield break;
-		}else{
+		} else if (!www.isDone) {
+			Debug.LogWarning ("WWWERROR: " + "UNDONE");
+			yield break;
+		} else {
 			Debug.Log (www.text);
 		}
 
