@@ -22,6 +22,9 @@ public class Player : Spaceship {
 	private GaugeManager gaugeManager;
 	private bool isCharging;
 
+	private Vector2 oldTouchPosition;
+	private Vector2 currentTouchPosition;
+	private Vector2 oldPosition;
 
 	void Start () {
 		shotAudio = GetComponent<AudioSource> ();
@@ -29,7 +32,13 @@ public class Player : Spaceship {
 		gaugeManager.SetPlayer (this);
 		animator = GetComponent<Animator>();
 
-		/*
+
+		if (Input.GetMouseButton (0)) {	//マウス入力
+			oldTouchPosition = Camera.main.ScreenToWorldPoint ((Vector2) Input.mousePosition);
+			gaugeManager.BeginCharge ();
+			isCharging = true;
+		}
+	/*
 		//弾発射ループ
         while (true){
 
@@ -61,6 +70,8 @@ public class Player : Spaceship {
 				gaugeManager.BeginCharge ();
 				isCharging = true;
 				Debug.Log("Charge");
+				oldTouchPosition = Camera.main.ScreenToWorldPoint ((Vector2) Input.mousePosition);
+				oldPosition = (Vector2) transform.position;
 			}
 			if ((Input.GetMouseButtonUp (0) || Input.GetKeyUp (KeyCode.Z)) && isCharging) {
 				int count = gaugeManager.EndCharge ();
@@ -91,13 +102,16 @@ public class Player : Spaceship {
 
 			//入力に基づいて目標座標を求め移動////////////////////////////////////////
 			Vector2 targetWorldPosition;
+			Vector2 direction = new Vector2();
 			if (Input.touchCount > 0) {		//タッチ入力
 				targetWorldPosition = Camera.main.ScreenToWorldPoint (Input.GetTouch (0).position);
 				targetWorldPosition.y += touchPosGapY;
 
 			} else if (Input.GetMouseButton (0)) {	//マウス入力
-				targetWorldPosition = Camera.main.ScreenToWorldPoint ((Vector2) Input.mousePosition);
-				targetWorldPosition.y += touchPosGapY;
+				currentTouchPosition = (Vector2) Camera.main.ScreenToWorldPoint ((Vector2) Input.mousePosition);
+				direction =  currentTouchPosition - oldTouchPosition;
+				Debug.Log (direction);
+				targetWorldPosition = (Vector2) oldPosition + direction;
 
 			} else {	//キー入力
 				targetWorldPosition = new Vector2 (transform.position.x, transform.position.y) + new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical")) * speed * Time.deltaTime / 5;
@@ -133,7 +147,7 @@ public class Player : Spaceship {
 			pos += direction * moveDistance;
 		}
 
-		pos.x = Mathf.Clamp(pos.x, min.x, max.x);
+		pos.x = Mathf.Clamp(pos.x, min.x, max.x);	//要画面端調整
 		pos.y = Mathf.Clamp(pos.y, min.y, max.y);
 
 		transform.position = pos;
