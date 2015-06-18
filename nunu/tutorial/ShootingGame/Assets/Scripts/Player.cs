@@ -34,9 +34,9 @@ public class Player : Spaceship {
 
 
 		if (Input.GetMouseButton (0)) {	//マウス入力
-			oldTouchPosition = Camera.main.ScreenToWorldPoint ((Vector2) Input.mousePosition);
 			gaugeManager.BeginCharge ();
 			isCharging = true;
+			Debug.Log ("Press");
 		}
 	/*
 		//弾発射ループ
@@ -70,8 +70,6 @@ public class Player : Spaceship {
 				gaugeManager.BeginCharge ();
 				isCharging = true;
 				Debug.Log("Charge");
-				oldTouchPosition = Camera.main.ScreenToWorldPoint ((Vector2) Input.mousePosition);
-				oldPosition = (Vector2) transform.position;
 			}
 			if ((Input.GetMouseButtonUp (0) || Input.GetKeyUp (KeyCode.Z)) && isCharging) {
 				int count = gaugeManager.EndCharge ();
@@ -101,6 +99,11 @@ public class Player : Spaceship {
 			//////////////////////////////////////////////////////////////////////////
 
 			//入力に基づいて目標座標を求め移動////////////////////////////////////////
+			if (Input.GetMouseButtonDown (0)) {
+				oldTouchPosition = Camera.main.ScreenToWorldPoint ((Vector2) Input.mousePosition);
+				oldPosition = (Vector2) transform.position;
+			}
+
 			Vector2 targetWorldPosition;
 			Vector2 direction = new Vector2();
 			if (Input.touchCount > 0) {		//タッチ入力
@@ -110,7 +113,6 @@ public class Player : Spaceship {
 			} else if (Input.GetMouseButton (0)) {	//マウス入力
 				currentTouchPosition = (Vector2) Camera.main.ScreenToWorldPoint ((Vector2) Input.mousePosition);
 				direction =  currentTouchPosition - oldTouchPosition;
-				Debug.Log (direction);
 				targetWorldPosition = (Vector2) oldPosition + direction;
 
 			} else {	//キー入力
@@ -174,6 +176,21 @@ public class Player : Spaceship {
 			if (shotAudio.isActiveAndEnabled) shotAudio.Play ();
 			else Debug.LogWarning ("AudioErrorHasAvoided: OK");
 		}
+	}
+
+	//自機登場演出終了処理
+	public void FinishAppearance () {
+
+		if (Input.GetMouseButton (0)) {	//マウス入力)
+			gaugeManager.BeginCharge ();
+			isCharging = true;
+		}
+
+		if (Input.GetMouseButton (0)) {	//マウス入力
+			oldTouchPosition = Camera.main.ScreenToWorldPoint ((Vector2) Input.mousePosition);
+			oldPosition = transform.position;
+		}
+
 	}
 
 	//被弾判定
