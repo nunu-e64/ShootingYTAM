@@ -77,7 +77,7 @@ public class SignUp : MonoBehaviour {
 		if (www.text == "false") {
 			//名前が重複しておりIDが与えられない。
 			Debug.Log ("名前が重複してます。");
-			UnityEditor.EditorUtility.DisplayDialog ("alert", "既に登録された名前です。", "ok!");
+//			UnityEditor.EditorUtility.DisplayDialog ("alert", "既に登録された名前です。", "ok!");
 
 		} else {
 			Debug.Log ("登録成功");
