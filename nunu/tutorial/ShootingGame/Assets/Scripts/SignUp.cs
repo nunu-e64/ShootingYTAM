@@ -15,8 +15,8 @@ public class SignUp : MonoBehaviour {
 
 	private string userNameKey = "userName";	//PlayerPrefsで保存するためのキー;
 	private string userIdKey = "userId";
-	public string userName = "";
-	public string userId = "";
+	private string userName = "";
+	private string userId = "";
 
 	public string UserName {
 		get { return userName; }
