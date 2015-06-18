@@ -147,10 +147,18 @@ public class Player : Spaceship {
 			pos += direction * moveDistance;
 		}
 
-		pos.x = Mathf.Clamp(pos.x, min.x, max.x);	//要画面端調整
-		pos.y = Mathf.Clamp(pos.y, min.y, max.y);
+		Vector2 fixedPos = new Vector2(Mathf.Clamp(pos.x, min.x, max.x), Mathf.Clamp(pos.y, min.y, max.y));
+		if (fixedPos.x != pos.x) {
+			oldTouchPosition.x = currentTouchPosition.x;
+			oldPosition.x = fixedPos.x;
+		}
+		if (fixedPos.y != pos.y) {
+			oldTouchPosition.y = currentTouchPosition.y;
+			oldPosition.y = fixedPos.y;
+		}
 
-		transform.position = pos;
+
+		transform.position = fixedPos;
 	}
 
 	
