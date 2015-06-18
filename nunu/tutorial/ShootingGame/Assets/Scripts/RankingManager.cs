@@ -50,39 +50,6 @@ public class RankingManager : MonoBehaviour {
 		}
 	}
 
-	/*
-	[
-		{
-			Score: {
-				score: "200",
-				user_id: "33"
-			},
-			User: {
-				name: "yotsu"
-			}
-		},
-		{
-			Score: {
-				score: "150",
-				user_id: "33"
-			},
-			User: {
-				name: "yotsu"
-			}
-		},
-		{
-			Score: {
-				score: "100",
-				user_id: "33"
-			},
-			User: {
-				name: "yotsu"
-			}
-		}
-	]
-	*/
-
-
 	//JsonデータをパースしList作成/////////////////////////////////////////
 	public bool SetRankingData (string dataText) {
 

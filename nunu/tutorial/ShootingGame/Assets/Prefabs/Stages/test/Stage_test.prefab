@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &122334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 434174}
+  - 114: {fileID: 11468976}
+  m_Layer: 0
+  m_Name: Stage_test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &434174
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122334}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 7.21000004, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11468976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3bcd85e04ef4e446b7ace4cb77eca21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - wave: {fileID: 11460492, guid: 6922654e13c9d4cb79409cfcd8521a19, type: 2}
+    nextAppearTime: 15
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: waves.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[1].wave
+      value: 
+      objectReference: {fileID: 11465778, guid: 68c07d884b6f1cc4d8f54daabfe683b1,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[1].nextAppearTime
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[2].wave
+      value: 
+      objectReference: {fileID: 11423794, guid: f118b7475bdc0fb41b19837e66e7ce7c,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[2].nextAppearTime
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[3].wave
+      value: 
+      objectReference: {fileID: 11465778, guid: 68c07d884b6f1cc4d8f54daabfe683b1,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[3].nextAppearTime
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[4].wave
+      value: 
+      objectReference: {fileID: 11473098, guid: 6b17521d1f6a758469b179622c39082c,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[4].nextAppearTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[0].wave
+      value: 
+      objectReference: {fileID: 11460492, guid: 6922654e13c9d4cb79409cfcd8521a19,
+        type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 122334}
+  m_IsPrefabParent: 1
