@@ -59,10 +59,15 @@ public class Enemy : Spaceship {
 
 		if (layerName == "Bullet(Player)") {
 
-			//弾の威力に応じてHPを減らし弾を削除
+			//弾の威力に応じてHPを減らす。弾の威力はEnemyにHP分だけ減じる
 			Bullet bullet = c.transform.parent.GetComponent<Bullet>();
+			int oldHp = hp;
 			hp -= bullet.power;
-			c.gameObject.SetActive(false);
+			bullet.power -= oldHp;
+
+			if (bullet.power <= 0) {
+				c.gameObject.SetActive (false);
+			}
 
 			if (hp <= 0) {	//HPがなくなればスコア加算して死亡
 				FindObjectOfType<ScoreManager>().AddPoint(point);

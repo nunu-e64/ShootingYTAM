@@ -98,9 +98,9 @@ public class Player : Spaceship {
 			if (count < 10) {
 				GameObject go = (GameObject) Instantiate (failShotEffect.gameObject, transform.position, transform.rotation);
 				go.transform.parent = transform;
-			} else if (count < 40) {
+			} else if (count < 20) {
 				Shot (bullets[0]);
-			} else if (count < 70) {
+			} else if (count < 50) {
 				Shot (bullets[1]);
 			} else if (count < 100) {
 				Shot (bullets[2]);
