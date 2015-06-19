@@ -12,6 +12,10 @@ public class RankingManager : MonoBehaviour {
 
 	public GameObject rankingContainer;
 	public RectTransform guiRankingNode;
+
+	public Text message1;
+	public Text message2;
+
 	private List<RankingDataNode> rankingDataList = new List<RankingDataNode>();
 
 	void Start () {
@@ -19,25 +23,50 @@ public class RankingManager : MonoBehaviour {
 		StartCoroutine (DownLoad ());
 	}
 
-	IEnumerator DownLoad(){
 		string url = "http://localhost/cakephp/ranking/Scores/ranking";
+	IEnumerator DownLoad () {
+		message1.gameObject.SetActive (true);
+		message2.gameObject.SetActive (true);
+		message1.text = "   Connecting To Server...";
+		message2.text = "   サーバー接続中...";
+		message1.color = new Color (180f / 255, 170f / 255, 0f / 255);
+		message2.color = new Color (180f / 255, 170f / 255, 0f / 255);
+
 		WWW www = new WWW (url);
 
 		yield return www;
 
 		if (www.error != null) {
 			Debug.LogWarning ("WWWERROR: " + www.error);
+			message1.text = www.error;
+			message2.text = "通信エラー";
+			message1.color = new Color (230f / 255, 70f / 255, 70f / 255);
+			message2.color = new Color (230f / 255, 70f / 255, 70f / 255);
 			yield break;
+
 		} else if (!www.isDone) {
 			Debug.LogWarning ("WWWERROR: " + "UNDONE");
+			message1.text = "Connection Error";
+			message2.text = "通信エラー";
+			message1.color = new Color (230f / 255, 70f / 255, 70f / 255);
+			message2.color = new Color (230f / 255, 70f / 255, 70f / 255);
 			yield break;
+
 		} else {
+			message1.gameObject.SetActive (false);
+			message2.gameObject.SetActive (false);
 			Debug.Log (www.text);
 		}
 
 		//外部データ（ソート済みjsonファイル）からランキングデータList作成
 		if (!SetRankingData (www.text)) {
-			Debug.LogWarning ("LoadError->RankingData");	//DEBUG: 読み込み失敗の時は警告を表示してreturn
+			Debug.LogWarning ("LoadError->RankingData");
+			message1.text = "Casting Data Error";
+			message2.text = "システムエラー";
+			message1.color = new Color (230f / 255, 70f / 255, 70f / 255);
+			message2.color = new Color (230f / 255, 70f / 255, 70f / 255);
+			message1.gameObject.SetActive (true);
+			message2.gameObject.SetActive (true);
 			yield break;
 		}
 

@@ -37,6 +37,10 @@ public class Manager : MonoBehaviour {
 
 	void Start () {
 
+		foreach (Transform child in transform) {
+			child.gameObject.SetActive (true);
+		}
+
 		foreach (GameObject item in GameObject.FindGameObjectsWithTag ("debug")) {
 			item.SetActive (isDebug);
 		}

@@ -76,7 +76,7 @@ public class SignUp : MonoBehaviour {
 
 	IEnumerator UserRegister(){
 		string url = "http://localhost/cakephp/ranking/Users/userAdd?name=" + userName;
-		message1.text = "   Connecting Server...";
+		message1.text = "   Connecting To Server...";
 		message2.text = "   サーバー接続中...";
 		message1.color = new Color (180f / 255, 170f / 255, 0f / 255);
 		message2.color = new Color (180f / 255, 170f / 255, 0f / 255);
@@ -85,11 +85,20 @@ public class SignUp : MonoBehaviour {
 
 		yield return www;
 
-		if (false && www.error != null) {
+		if (www.error != null && !GameObject.FindObjectOfType<Manager> ().isDebug) {
 			Debug.LogWarning ("WWWERROR: " + www.error);
+			message1.text = www.error;
+			message2.text = "通信エラー";
+			message1.color = new Color (230f / 255, 70f / 255, 70f / 255);
+			message2.color = new Color (230f / 255, 70f / 255, 70f / 255);
 			yield break;
-		} else if (!www.isDone) {
+
+		} else if (!www.isDone && !GameObject.FindObjectOfType<Manager> ().isDebug) {
 			Debug.LogWarning ("WWWERROR: " + "UNDONE");
+			message1.text = "Connection Error";
+			message2.text = "通信エラー";
+			message1.color = new Color (230f / 255, 70f / 255, 70f / 255);
+			message2.color = new Color (230f / 255, 70f / 255, 70f / 255);
 			yield break;
 
 		//名前が重複している場合ユーザ登録できない
@@ -113,3 +122,4 @@ public class SignUp : MonoBehaviour {
 		}
     }
 }
+
