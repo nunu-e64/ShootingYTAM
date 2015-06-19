@@ -12,7 +12,8 @@ public class SignUp : MonoBehaviour {
 
 	public Button button;
 	public InputField inputField;
-	public Text message;
+	public Text message1;
+	public Text message2;
 
 	private string userNameKey = "userName";	//PlayerPrefsで保存するためのキー;
 	private string userIdKey = "userId";
@@ -35,8 +36,10 @@ public class SignUp : MonoBehaviour {
 		} else {
 			inputField.text = "";	//未登録
 			ChangeButtonStyle (false);
-			message.text = "Input Your Handle Name.\n半角英数8文字以内であなたの名前を入力してください。";
-			message.color = Color.white;
+			message1.text = "Input Your Handle Name.";
+			message2.text = "半角英数8文字以内で\nあなたの名前を入力してください";
+			message1.color = new Color (170f / 255, 170f / 255, 170f / 255);
+			message2.color = new Color (170f / 255, 170f / 255, 170f / 255);
 			return false;
 		}
 	}
@@ -73,6 +76,11 @@ public class SignUp : MonoBehaviour {
 
 	IEnumerator UserRegister(){
 		string url = "http://localhost/cakephp/ranking/Users/userAdd?name=" + userName;
+		message1.text = "   Connecting Server...";
+		message2.text = "   サーバー接続中...";
+		message1.color = new Color (180f / 255, 170f / 255, 0f / 255);
+		message2.color = new Color (180f / 255, 170f / 255, 0f / 255);
+		
 		WWW www = new WWW (url);
 
 		yield return www;
@@ -88,8 +96,10 @@ public class SignUp : MonoBehaviour {
 		}else if (www.text == "false") {
 			//名前が重複しておりIDが与えられない。
 			Debug.Log ("Already Existed Name.");
-			message.text = "Already Exist ID.\nこのIDは既に利用されています。\n他のIDを入力してください。";
-			message.color = Color.red;
+			message1.text = "Already Exist ID.";
+			message2.text = "この名前は既に利用されています。\n他の名前を入力してください";
+			message1.color = new Color (230f/255, 70f/255, 70f/255);
+			message2.color = new Color (230f/255, 70f/255, 70f/255);
 			yield break;
 
 		} else {
