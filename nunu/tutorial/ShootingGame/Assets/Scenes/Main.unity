@@ -809,7 +809,7 @@ GameObject:
   - 222: {fileID: 751815359}
   - 114: {fileID: 751815358}
   m_Layer: 5
-  m_Name: Message1
+  m_Name: Message
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1231,7 +1231,7 @@ GameObject:
   - 114: {fileID: 1195319294}
   m_Layer: 5
   m_Name: DeleteMessage
-  m_TagString: debug
+  m_TagString: Debug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1265,7 +1265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 30
@@ -1631,7 +1631,6 @@ RectTransform:
   - {fileID: 579776114}
   - {fileID: 1776330879}
   - {fileID: 751815357}
-  - {fileID: 1672866274}
   m_Father: {fileID: 428386688}
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
@@ -1652,8 +1651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 1776330876}
   inputField: {fileID: 1341234995}
-  message1: {fileID: 751815358}
-  message2: {fileID: 1672866275}
+  message: {fileID: 751815358}
 --- !u!1 &1439816174
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,7 +1664,7 @@ GameObject:
   - 114: {fileID: 1439816176}
   m_Layer: 5
   m_Name: DebugMode
-  m_TagString: debug
+  m_TagString: Debug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1700,7 +1698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: 5cf0eb48b4e374640bcc157a5f4a7284, type: 3}
     m_FontSize: 80
@@ -1720,72 +1718,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1439816174}
---- !u!1 &1672866273
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 224: {fileID: 1672866274}
-  - 222: {fileID: 1672866276}
-  - 114: {fileID: 1672866275}
-  m_Layer: 5
-  m_Name: Message2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1672866274
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1672866273}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1432221737}
-  m_RootOrder: 3
-  m_AnchorMin: {x: .5, y: 0}
-  m_AnchorMax: {x: .5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 232}
-  m_SizeDelta: {x: 800, y: 100}
-  m_Pivot: {x: .5, y: .5}
---- !u!114 &1672866275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1672866273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: .67552793, g: .705882311, b: .155709311, a: 1}
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 35
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 1
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "   \u30B5\u30FC\u30D0\u30FC\u63A5\u7D9A..."
---- !u!222 &1672866276
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1672866273}
 --- !u!1 &1677005968
 GameObject:
   m_ObjectHideFlags: 0
@@ -2035,7 +1967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9545022ee985c347aa0a6a9db07e9ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebug: 0
+  isDebug: 1
   playerPrefab: {fileID: 193208, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
   scoreManager: {fileID: 1987335915}
   stageManager: {fileID: 1982837108}

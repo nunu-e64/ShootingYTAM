@@ -37,12 +37,8 @@ public class Manager : MonoBehaviour {
 
 	void Start () {
 
-		foreach (Transform child in transform) {
-			child.gameObject.SetActive (true);
-		}
-
-		foreach (GameObject item in GameObject.FindGameObjectsWithTag ("debug")) {
-			item.SetActive (isDebug);
+		foreach (GameObject item in GameObject.FindGameObjectsWithTag ("Debug")) {
+			if (!isDebug) Debug.LogError ("Object Tagged 'Debug' is acitve.:" + item);
 		}
 	
 		ShowSignUp ();

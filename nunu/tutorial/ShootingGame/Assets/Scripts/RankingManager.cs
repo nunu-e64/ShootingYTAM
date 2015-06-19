@@ -13,60 +13,49 @@ public class RankingManager : MonoBehaviour {
 	public GameObject rankingContainer;
 	public RectTransform guiRankingNode;
 
-	public Text message1;
-	public Text message2;
+	public Text message;
 
 	private List<RankingDataNode> rankingDataList = new List<RankingDataNode>();
 
 	void Start () {
 //		TextAsset rankingDataText = Resources.Load ("rankingData") as TextAsset;		//DEBUG: あらかじめ作っておいたソート済みjsonファイルをローカルから読み込み
+		message.gameObject.SetActive (false);
 		StartCoroutine (DownLoad ());
 	}
 
 		string url = "http://localhost/cakephp/ranking/Scores/ranking";
 	IEnumerator DownLoad () {
-		message1.gameObject.SetActive (true);
-		message2.gameObject.SetActive (true);
-		message1.text = "   Connecting To Server...";
-		message2.text = "   サーバー接続中...";
-		message1.color = new Color (180f / 255, 170f / 255, 0f / 255);
-		message2.color = new Color (180f / 255, 170f / 255, 0f / 255);
+		//message.gameObject.SetActive (true);
+		//message.text = "   サーバー接続中...";
+		//message.color = new Color (180f / 255, 170f / 255, 0f / 255);
 
 		WWW www = new WWW (url);
 
 		yield return www;
 
+		message.gameObject.SetActive (true);
+		message.color = new Color (230f / 255, 70f / 255, 70f / 255);
+
 		if (www.error != null) {
 			Debug.LogWarning ("WWWERROR: " + www.error);
-			message1.text = www.error;
-			message2.text = "通信エラー";
-			message1.color = new Color (230f / 255, 70f / 255, 70f / 255);
-			message2.color = new Color (230f / 255, 70f / 255, 70f / 255);
+			message.text = "通信エラー\n" + www.error;
 			yield break;
 
 		} else if (!www.isDone) {
 			Debug.LogWarning ("WWWERROR: " + "UNDONE");
-			message1.text = "Connection Error";
-			message2.text = "通信エラー";
-			message1.color = new Color (230f / 255, 70f / 255, 70f / 255);
-			message2.color = new Color (230f / 255, 70f / 255, 70f / 255);
+			message.text = "通信エラー";
 			yield break;
 
 		} else {
-			message1.gameObject.SetActive (false);
-			message2.gameObject.SetActive (false);
+			message.gameObject.SetActive (false);
 			Debug.Log (www.text);
 		}
 
 		//外部データ（ソート済みjsonファイル）からランキングデータList作成
 		if (!SetRankingData (www.text)) {
 			Debug.LogWarning ("LoadError->RankingData");
-			message1.text = "Casting Data Error";
-			message2.text = "システムエラー";
-			message1.color = new Color (230f / 255, 70f / 255, 70f / 255);
-			message2.color = new Color (230f / 255, 70f / 255, 70f / 255);
-			message1.gameObject.SetActive (true);
-			message2.gameObject.SetActive (true);
+			message.text = "システムエラー";
+			message.gameObject.SetActive (true);
 			yield break;
 		}
 

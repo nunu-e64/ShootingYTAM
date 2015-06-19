@@ -12,8 +12,7 @@ public class SignUp : MonoBehaviour {
 
 	public Button button;
 	public InputField inputField;
-	public Text message1;
-	public Text message2;
+	public Text message;
 
 	private string userNameKey = "userName";	//PlayerPrefsで保存するためのキー;
 	private string userIdKey = "userId";
@@ -36,10 +35,8 @@ public class SignUp : MonoBehaviour {
 		} else {
 			inputField.text = "";	//未登録
 			ChangeButtonStyle (false);
-			message1.text = "Input Your Handle Name.";
-			message2.text = "半角英数8文字以内で\nあなたの名前を入力してください";
-			message1.color = new Color (170f / 255, 170f / 255, 170f / 255);
-			message2.color = new Color (170f / 255, 170f / 255, 170f / 255);
+			message.text = "半角英数8文字以内で\nあなたの名前を入力してください";
+			message.color = new Color (170f / 255, 170f / 255, 170f / 255);
 			return false;
 		}
 	}
@@ -76,39 +73,33 @@ public class SignUp : MonoBehaviour {
 
 	IEnumerator UserRegister(){
 		string url = "http://localhost/cakephp/ranking/Users/userAdd?name=" + userName;
-		message1.text = "   Connecting To Server...";
-		message2.text = "   サーバー接続中...";
-		message1.color = new Color (180f / 255, 170f / 255, 0f / 255);
-		message2.color = new Color (180f / 255, 170f / 255, 0f / 255);
+		message.text = "   サーバー接続中...";
+		message.color = new Color (180f / 255, 170f / 255, 0f / 255);
 		
 		WWW www = new WWW (url);
 
 		yield return www;
 
+		Debug.Log (www.text);
+
 		if (www.error != null && !GameObject.FindObjectOfType<Manager> ().isDebug) {
 			Debug.LogWarning ("WWWERROR: " + www.error);
-			message1.text = www.error;
-			message2.text = "通信エラー";
-			message1.color = new Color (230f / 255, 70f / 255, 70f / 255);
-			message2.color = new Color (230f / 255, 70f / 255, 70f / 255);
+			message.text = "通信エラー\n" + www.error;
+			message.color = new Color (230f / 255, 70f / 255, 70f / 255);
 			yield break;
 
 		} else if (!www.isDone && !GameObject.FindObjectOfType<Manager> ().isDebug) {
 			Debug.LogWarning ("WWWERROR: " + "UNDONE");
-			message1.text = "Connection Error";
-			message2.text = "通信エラー";
-			message1.color = new Color (230f / 255, 70f / 255, 70f / 255);
-			message2.color = new Color (230f / 255, 70f / 255, 70f / 255);
+			message.text = "通信エラー";
+			message.color = new Color (230f / 255, 70f / 255, 70f / 255);
 			yield break;
 
 		//名前が重複している場合ユーザ登録できない
-		}else if (www.text == "false") {
+		} else if (www.text == "false" && !GameObject.FindObjectOfType<Manager> ().isDebug) {
 			//名前が重複しておりIDが与えられない。
 			Debug.Log ("Already Existed Name.");
-			message1.text = "Already Exist ID.";
-			message2.text = "この名前は既に利用されています。\n他の名前を入力してください";
-			message1.color = new Color (230f/255, 70f/255, 70f/255);
-			message2.color = new Color (230f/255, 70f/255, 70f/255);
+			message.text = "この名前は既に利用されています。\n他の名前を入力してください";
+			message.color = new Color (230f/255, 70f/255, 70f/255);
 			yield break;
 
 		} else {

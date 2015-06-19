@@ -19,8 +19,6 @@ public class GaugeManager : MonoBehaviour {
 	private bool isShooting;
 
 	private Animator animator;
-	private Animation  animation;
- 
 
 
 	void Start () {	
