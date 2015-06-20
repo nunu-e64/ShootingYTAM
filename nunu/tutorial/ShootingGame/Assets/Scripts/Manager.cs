@@ -37,8 +37,8 @@ public class Manager : MonoBehaviour {
 
 	void Start () {
 
-		foreach (GameObject item in GameObject.FindGameObjectsWithTag ("debug")) {
-			item.SetActive (isDebug);
+		foreach (GameObject item in GameObject.FindGameObjectsWithTag ("Debug")) {
+			if (!isDebug) Debug.LogError ("Object Tagged 'Debug' is acitve.:" + item);
 		}
 	
 		ShowSignUp ();
@@ -101,7 +101,7 @@ public class Manager : MonoBehaviour {
 		if (true) {
 			//SendRanking(signUp.GetComponent<SignUp> ().UserName, score);
 			StartCoroutine (SendUserScore (score));
-			Debug.Log ("SendRanking:" + signUp.GetComponent<SignUp> ().UserName + "," + score);
+			Debug.Log ("RequestSendingScoreToRanking:" + signUp.GetComponent<SignUp> ().UserName + "," + score);
 		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -117,11 +117,17 @@ public class Manager : MonoBehaviour {
 
 		yield return www;
 
-		if(www.text == "false"){
-			Debug.Log ("スコアの追加失敗");
+		if (www.error != null) {
+			Debug.LogWarning ("WWWERROR: " + www.error);
+			yield break;
+		} else if (!www.isDone) {
+			Debug.LogWarning ("WWWERROR: " + "UNDONE");
+			yield break;
+		} else  if (www.text == "false") {
+			Debug.LogWarning ("WWWERROR: Failed");
 			yield break;
 		}else{
-			Debug.Log ("スコアの追加成");
+			Debug.Log ("Success");
 		}
 	}
 	private void ShowTitle() {
