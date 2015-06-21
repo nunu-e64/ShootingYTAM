@@ -10,20 +10,23 @@ using System.Collections;
 /// </summary>
 public class StageManager : MonoBehaviour {
 
-	[SerializeField]
+	[SerializeField, Space(15)]
 	private Manager manager;
 
 	[SerializeField]
 	private GameObject bulletPool;
 
+	[SerializeField, Space (15)]
+	private bool isLoop;	//すべてのStageを出現させたあとリスタートするかのフラグ
+	private float speedRate = 1.0f;			//段々難化させるためにステージがループするごとに敵の速度を上げる.その際のスピードの倍率 
+	public float speedRateUpPace = 0.2f;		//SpeedRateの上昇量
+
 	[SerializeField]
 	private Stage[] stages;		//敵の集団=waveの配列	inspectorから事前にセット
 
-	[SerializeField]
-	private bool isLoop;	//すべてのStageを出現させたあとリスタートするかのフラグ
-
 	private Stage currentStage;
-	private int currentStageIndex;		//現在何番目のwaveを表示しているか
+	private int currentStageIndex;			//現在何番目のwaveを表示しているか
+
 
 
 	void Start(){
@@ -43,6 +46,8 @@ public class StageManager : MonoBehaviour {
 		}
 
 		ObjectPool.Instance.ReleaseAllGameObject ();	//プール内のすべてのオブジェクトを解放（実際は非アクティブに切り替え）
+
+		speedRate = 1.0f;
 	}
 
 	void Update () {
@@ -57,7 +62,8 @@ public class StageManager : MonoBehaviour {
 				if (currentStageIndex == stages.Length) {
 					if (isLoop) {
 						currentStageIndex = 0;
-						Debug.Log ("<color=yellow>Reset StageIndex </color> :" + currentStageIndex);
+						speedRate += speedRateUpPace;
+						Debug.Log ("<color=yellow>Reset StageIndex </color> :" + currentStageIndex + "\nspeedRate : " + speedRate);
 					} else {
 						Debug.Log ("<color=yellow>Finish Emit</color> :" + currentStageIndex);
 						return;
@@ -67,6 +73,7 @@ public class StageManager : MonoBehaviour {
 				//新しいStageを作成しEmmiterの子要素とする
 				currentStage = Instantiate (stages[currentStageIndex]);
 				currentStage.transform.parent = transform;
+				currentStage.SetEnemySpeedRate (speedRate);
 				Debug.Log ("<color=green>CreateStage:</color>" + currentStage);
 
 			}

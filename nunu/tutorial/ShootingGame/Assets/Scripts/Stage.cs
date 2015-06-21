@@ -20,6 +20,8 @@ public class Stage : MonoBehaviour {
 	private float timer;	//waveの出現タイミングを管理するためのタイマー。wave出現ごとにリセット。	
 	private int currentWaveIndex;
 
+	private float speedRate = 1.0f;	//敵の速度を次第に上げるための倍率。StageManagerから設定。
+
 	void Start () {
 		timer = 0;
 		currentWaveIndex = -1;
@@ -33,7 +35,7 @@ public class Stage : MonoBehaviour {
 	void Update () {
 		timer += Time.deltaTime;
 
-		if (currentWaveIndex == -1 || timer > waves[currentWaveIndex].nextAppearTime) {
+		if (currentWaveIndex == -1 || timer > waves[currentWaveIndex].nextAppearTime / speedRate) {
 
 			timer = 0;
 			++currentWaveIndex;
@@ -41,6 +43,10 @@ public class Stage : MonoBehaviour {
 			if (currentWaveIndex < waves.Length) {
 				Wave currentWave = Instantiate (waves[currentWaveIndex].wave);
 				currentWave.transform.parent = transform.parent;
+
+				foreach (Enemy enemy in currentWave.GetComponentsInChildren<Enemy>()){
+					enemy.SetSpeedRate (speedRate); 
+				}
 				Debug.Log ("<color=green>CreateWave:</color>" + currentWave);
 
 			} else {
@@ -50,4 +56,7 @@ public class Stage : MonoBehaviour {
 		}		
 	}
 
+	public void SetEnemySpeedRate (float rate) {
+		speedRate = rate;
+	}
 }
