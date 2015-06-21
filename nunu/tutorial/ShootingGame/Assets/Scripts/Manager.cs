@@ -90,9 +90,7 @@ public class Manager : MonoBehaviour {
 	}
 
 	public IEnumerator GameOver() {
-		Debug.Log ("開始");
-		yield return new WaitForSeconds (2.0f);
-		Debug.Log ("Back");
+		yield return new WaitForSeconds (3.0f);
 
 		gameMode = mode_tag.GAMEOVER;
 

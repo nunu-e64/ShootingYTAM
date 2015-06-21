@@ -244,8 +244,8 @@ public class Player : Spaceship {
 
 	//死亡演出
 	public void Explosion () {
-		for (int i = 0; i < 5; i++) {
-			GameObject go = Instantiate (explosion, new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f),transform.position.y + Random.Range(-0.32f, 0.28f)), transform.rotation) as GameObject;
+		for (int i = 0; i < 6; i++) {
+			GameObject go = Instantiate (explosion, new Vector3(transform.position.x + Random.Range(-0.5f, 0.5f),transform.position.y + Random.Range(-0.52f, 0.48f)), transform.rotation) as GameObject;
 			go.GetComponent<Explosion> ().SetTimer (i * 0.2f);
 		}
 	}

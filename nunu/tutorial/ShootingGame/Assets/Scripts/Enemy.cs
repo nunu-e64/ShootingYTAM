@@ -46,7 +46,6 @@ public class Enemy : Spaceship {
 				foreach (Transform shotPosition in transform) {
 					GameObject go = ObjectPool.Instance.GetGameObject (bullet, shotPosition.position, shotPosition.rotation);
 					go.GetComponent<Rigidbody2D> ().velocity *= speedRate;
-					Debug.Log ("BulletSpeed:" + go.GetComponent<Rigidbody2D> ().velocity.magnitude);
 				}
 				shotTimer = 0;
 			}
@@ -91,6 +90,6 @@ public class Enemy : Spaceship {
 	public void SetSpeedRate (float rate) {		//インスタンス化直後で呼び出すためStartより先に処理される
 		speedRate = rate;
 		speed *= rate;
-		Debug.Log ("EnemySpeedRate:" + speedRate + ":" + gameObject);
+		//Debug.Log ("EnemySpeedRate:" + speedRate + ":" + gameObject);
 	}
 }
