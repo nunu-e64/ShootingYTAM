@@ -89,7 +89,11 @@ public class Manager : MonoBehaviour {
 		player.transform.position = new Vector3 (pos.x, pos.y, 0);
 	}
 
-	public void GameOver() {
+	public IEnumerator GameOver() {
+		Debug.Log ("開始");
+		yield return new WaitForSeconds (2.0f);
+		Debug.Log ("Back");
+
 		gameMode = mode_tag.GAMEOVER;
 
 		//スコア取得と表示とセーブ

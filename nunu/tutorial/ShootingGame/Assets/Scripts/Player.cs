@@ -11,13 +11,17 @@ public class Player : Spaceship {
 	public ParticleSystem failShotEffect;	//チャージ不足の時のエフェクト
 
 	[HeaderAttribute ("PlayerStatus")]
+	public bool invincibleModeForTest = false;
+	public bool shotable;
 	public float shotNum = 1;			//砲台セット数(砲台1個＝弾2発(15/06/09現在))	//Animatorから変更するためにintではなくfloatでないといけない
 	public float touchPosGapY = 1.0f;	//移動の際に指で機体が隠れないようにタップした位置からずらす値
 
 
 	[HeaderAttribute ("BulletStatus")]
 	public GameObject[] bullets;		//弾のプレハブ
-	public bool shotable;
+	[TooltipAttribute ("ChargeBorders=0%~100%")]
+	public int[] chargeBorders;			//弾のプレハブ
+
 
 	[System.NonSerialized]
 	public bool IsAppearance;
@@ -89,19 +93,16 @@ public class Player : Spaceship {
 			chargeEffect.Stop ();
 			chargeEffect.Clear();
 
-			if (count < 10) {
+			if (count < chargeBorders[0]) {
 				GameObject go = (GameObject) Instantiate (failShotEffect.gameObject, transform.position, transform.rotation);
 				go.transform.parent = transform;
-			} else if (count < 20) {
-				Shot (bullets[0]);
-			} else if (count < 50) {
-				Shot (bullets[1]);
-			} else if (count < 100) {
-				Shot (bullets[2]);
-			} else if (count == 100) {
-				Shot (bullets[3]);
 			} else {
-
+				for (int i = chargeBorders.Length - 1; i >= 0; i--) {
+					if (count >= chargeBorders[i]) {
+						Shot (bullets[i]);
+						break;
+					}
+				}
 			}
 
 		}
@@ -219,7 +220,11 @@ public class Player : Spaceship {
 		}
 
 		if (layerName == "Bullet(Enemy)" || layerName == "Enemy") {
-			OnDead ();
+			if (!invincibleModeForTest) {
+				OnDead ();
+			} else {
+				Explosion ();
+			}
 		}
 
 	}
@@ -229,11 +234,19 @@ public class Player : Spaceship {
 		Explosion ();
 		Destroy (gameObject);
 
-		FindObjectOfType<Manager> ().GameOver ();
+		FindObjectOfType<Manager> ().StartCoroutine(FindObjectOfType<Manager> ().GameOver ());
 	}
 
 	//特殊攻撃
 	public void InvokeSpecialAttack(){
 		animator.SetTrigger("Special");
+	}
+
+	//死亡演出
+	public void Explosion () {
+		for (int i = 0; i < 5; i++) {
+			GameObject go = Instantiate (explosion, new Vector3(transform.position.x + Random.Range(-0.3f, 0.3f),transform.position.y + Random.Range(-0.32f, 0.28f)), transform.rotation) as GameObject;
+			go.GetComponent<Explosion> ().SetTimer (i * 0.2f);
+		}
 	}
 }
