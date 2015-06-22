@@ -7,7 +7,6 @@ using System.Collections.Generic;
 /// </summary>
 public class Player : Spaceship {
 
-	public ParticleSystem chargeEffect;		//チャージ中のエフェクト
 	public ParticleSystem failShotEffect;	//チャージ不足の時のエフェクト
 
 	[HeaderAttribute ("PlayerStatus")]
@@ -16,12 +15,16 @@ public class Player : Spaceship {
 	public float shotNum = 1;			//砲台セット数(砲台1個＝弾2発(15/06/09現在))	//Animatorから変更するためにintではなくfloatでないといけない
 	public float touchPosGapY = 1.0f;	//移動の際に指で機体が隠れないようにタップした位置からずらす値
 
+	[System.Serializable]
+	private class BulletData {
+		public GameObject bullet;				//弾のプレハブ
+		[TooltipAttribute ("ChargeBorders=0%~100%")]
+		public int chargeBorder;				//弾が出るチャージ量
+		public ParticleSystem chargeEffect;		//チャージ中のエフェクト
+	}
 
-	[HeaderAttribute ("BulletStatus")]
-	public GameObject[] bullets;		//弾のプレハブ
-	[TooltipAttribute ("ChargeBorders=0%~100%")]
-	public int[] chargeBorders;			//弾のプレハブ
-
+	[SerializeField, HeaderAttribute ("BulletStatus")]
+	private BulletData[] bullets;		//弾のプレハブ
 
 	[System.NonSerialized]
 	public bool IsAppearance;
@@ -30,6 +33,7 @@ public class Player : Spaceship {
 	private Animator animator;
 	private GaugeManager gaugeManager;
 	private bool isCharging;
+	private int currentChargeIndex = -1;
 
 	private Vector2 oldTouchPosition;
 	private Vector2 currentTouchPosition;
@@ -41,7 +45,11 @@ public class Player : Spaceship {
 		gaugeManager.SetPlayer (this);
 		animator = GetComponent<Animator>();
 
-		chargeEffect.Stop ();
+		foreach (BulletData bullet in bullets){
+			bullet.chargeEffect.Stop ();
+			//Clear
+		}
+
 
 		/*
 		//弾発射ループ
@@ -68,11 +76,35 @@ public class Player : Spaceship {
 
 	void Update () {
 
+		//チャージ段階によってエフェクトを切り替える//////////////////////////////
+		if (isCharging) {
+			int count = gaugeManager.GetCount();
+			int newIndex = -1;
+
+			for (int i = 0; i < bullets.Length; i++) {
+				if (count >= bullets[i].chargeBorder) {
+					newIndex = i;
+				}
+			}
+
+			if (currentChargeIndex != newIndex) {
+				if (currentChargeIndex >= 0) bullets[currentChargeIndex].chargeEffect.Stop ();
+				if (newIndex >= 0) bullets[newIndex].chargeEffect.Play ();
+				currentChargeIndex  = newIndex;
+			}
+
+			Debug.Log (count + ":" + newIndex + ":" + currentChargeIndex);
+		}
+		
+
+		//////////////////////////////////////////////////////////////////////////
+
 		//チャージ開始と解除//////////////////////////////////////////////////////
 		if ((Input.GetMouseButton (0) || Input.GetKey (KeyCode.Z)) && !isCharging) {
 			gaugeManager.BeginCharge ();
 			isCharging = true;
-			chargeEffect.Play ();
+			currentChargeIndex = -1;
+
 
 		//} else if ((Input.GetMouseButton (0) || Input.GetKey (KeyCode.Z)) && isCharging) {
 		//	int count  = gaugeManager.GetCount();
@@ -90,21 +122,17 @@ public class Player : Spaceship {
 		}else if ((Input.GetMouseButtonUp (0) || Input.GetKeyUp (KeyCode.Z)) && isCharging) {
 			int count = gaugeManager.EndCharge ();
 			isCharging = false;
-			chargeEffect.Stop ();
-			chargeEffect.Clear();
-
-			if (count < chargeBorders[0]) {
+			
+			if (currentChargeIndex == -1) {
 				GameObject go = (GameObject) Instantiate (failShotEffect.gameObject, transform.position, transform.rotation);
 				go.transform.parent = transform;
 			} else {
-				for (int i = chargeBorders.Length - 1; i >= 0; i--) {
-					if (count >= chargeBorders[i]) {
-						Shot (bullets[i]);
-						break;
-					}
-				}
+				bullets[currentChargeIndex].chargeEffect.Stop ();
+				bullets[currentChargeIndex].chargeEffect.Clear ();
+				Shot (bullets[currentChargeIndex].bullet);
 			}
 
+			currentChargeIndex = -1;
 		}
 		//////////////////////////////////////////////////////////////////////////
 
