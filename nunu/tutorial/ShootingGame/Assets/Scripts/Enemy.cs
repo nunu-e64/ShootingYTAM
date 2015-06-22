@@ -26,7 +26,8 @@ public class Enemy : Spaceship {
 		GetComponent<Rigidbody2D> ().velocity = transform.up.normalized * -1 * speed;
 
 		animator = GetComponent<Animator> ();
-	
+
+		shotTimer = shotDelay;		//画面内に登場した瞬間に打ち始めるように初期値設定
 	}
 
 	void Update(){

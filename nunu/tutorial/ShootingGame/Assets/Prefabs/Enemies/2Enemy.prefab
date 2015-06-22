@@ -157,7 +157,7 @@ MonoBehaviour:
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   point: 150
   hp: 20
-  shotable: 1
+  canShot: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
   shotDelay: 1.5
 --- !u!212 &21203650
@@ -204,6 +204,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: shotDelay
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: canShot
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
