@@ -40,8 +40,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - wave: {fileID: 11423794, guid: c228d309b2c4e254282238c89524c6e7, type: 2}
-    nextAppearTime: 10
+  - wave: {fileID: 11427592, guid: 81c84d5beb9c9a74c8f02eaadc64be47, type: 2}
+    nextAppearTime: 20
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -91,12 +91,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: waves.Array.data[0].nextAppearTime
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: waves.Array.data[0].wave
       value: 
-      objectReference: {fileID: 11423794, guid: c228d309b2c4e254282238c89524c6e7,
+      objectReference: {fileID: 11427592, guid: 81c84d5beb9c9a74c8f02eaadc64be47,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

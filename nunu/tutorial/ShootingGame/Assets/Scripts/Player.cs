@@ -11,7 +11,7 @@ public class Player : Spaceship {
 
 	[HeaderAttribute ("PlayerStatus")]
 	public bool invincibleModeForTest = false;
-	public bool shotable;
+	public bool canShot;
 	public float shotNum = 1;			//砲台セット数(砲台1個＝弾2発(15/06/09現在))	//Animatorから変更するためにintではなくfloatでないといけない
 	public float touchPosGapY = 1.0f;	//移動の際に指で機体が隠れないようにタップした位置からずらす値
 
@@ -55,7 +55,7 @@ public class Player : Spaceship {
 		//弾発射ループ
         while (true){
 
-			if (shotable && !IsAppearance) {
+			if (canShot && !IsAppearance) {
 
 				//子要素を全て取得して弾を発射
 				for (int i = 0; i < transform.childCount && i < (int)shotNum; i++) {
@@ -118,7 +118,7 @@ public class Player : Spaceship {
 		//	} else {
 		
 		}else if ((Input.GetMouseButtonUp (0) || Input.GetKeyUp (KeyCode.Z)) && isCharging) {
-			int count = gaugeManager.EndCharge ();
+			gaugeManager.EndCharge ();
 			isCharging = false;
 			
 			if (currentChargeIndex == -1) {
@@ -269,7 +269,7 @@ public class Player : Spaceship {
 	}
 
 	//死亡演出
-	public void Explosion () {
+	public override void Explosion () {
 		for (int i = 0; i < 6; i++) {
 			GameObject go = Instantiate (explosion, new Vector3(transform.position.x + Random.Range(-0.5f, 0.5f),transform.position.y + Random.Range(-0.52f, 0.48f)), transform.rotation) as GameObject;
 			go.GetComponent<Explosion> ().SetTimer (i * 0.2f);

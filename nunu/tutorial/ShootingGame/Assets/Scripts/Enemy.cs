@@ -14,7 +14,7 @@ public class Enemy : Spaceship {
 	private Animator animator;
 
 	[HeaderAttribute ("BulletStatus")]
-	public bool shotable = true;	//弾を発射するか
+	public bool canShot = true;	//弾を発射するか
 	public GameObject bullet;		//弾のプレハブ
 	public float shotDelay;			//弾の発射間隔[s]
 
@@ -31,7 +31,7 @@ public class Enemy : Spaceship {
 
 	void Update(){
 
-		if (!shotable) {
+		if (!canShot) {
 			return ;
 		}
 			

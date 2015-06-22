@@ -47,7 +47,7 @@ public class Stage : MonoBehaviour {
 				foreach (Enemy enemy in currentWave.GetComponentsInChildren<Enemy>()){
 					enemy.SetSpeedRate (speedRate); 
 				}
-				Debug.Log ("<color=green>CreateWave:</color>" + currentWave);
+				Debug.Log ("<color=cyan>CreateWave:</color>" + currentWave);
 
 			} else {
 				Destroy (gameObject);
