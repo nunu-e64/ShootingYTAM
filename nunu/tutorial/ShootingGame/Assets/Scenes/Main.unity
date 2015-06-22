@@ -5006,7 +5006,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1911100087
 Transform:
   m_ObjectHideFlags: 0
@@ -5526,45 +5526,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 436336, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: .100000001
+    - target: {fileID: 19988670, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
+      propertyPath: m_LengthScale
+      value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 440524, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: .100000001
+    - target: {fileID: 19813616, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: .5
       objectReference: {fileID: 0}
-    - target: {fileID: 471374, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: .100000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 459892, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: .100000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 404488, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: .100000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 436336, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -2.9000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 440524, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -1.35000002
-      objectReference: {fileID: 0}
-    - target: {fileID: 471374, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: .100000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 459892, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 1.70000005
-      objectReference: {fileID: 0}
-    - target: {fileID: 404488, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 3.04999995
+    - target: {fileID: 19813616, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f29ef7eb8e7206e40a5ff60ca5a9f5c7, type: 2}
