@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: 72969919ce3d5f84eae0b47bf6361556
-timeCreated: 1434936467
+guid: b8b9e9d183c0d724da559f722e8ee89f
+timeCreated: 1434936480
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: EnemyShip1_0
-    21300002: EnemyShip1_1
-    21300004: EnemyShip1_2
-    21300006: EnemyShip1_3
-    21300008: EnemyShip1_4
-    21300010: EnemyShip1_5
-    21300012: EnemyShip1_6
-    21300014: EnemyShip1_7
+    21300000: EnemyShip2_0
+    21300002: EnemyShip2_1
+    21300004: EnemyShip2_2
+    21300006: EnemyShip2_3
+    21300008: EnemyShip2_4
+    21300010: EnemyShip2_5
+    21300012: EnemyShip2_6
+    21300014: EnemyShip2_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -57,7 +57,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: EnemyShip1_0
+    - name: EnemyShip2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -67,7 +67,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyShip1_1
+    - name: EnemyShip2_1
       rect:
         serializedVersion: 2
         x: 48
@@ -77,7 +77,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyShip1_2
+    - name: EnemyShip2_2
       rect:
         serializedVersion: 2
         x: 96
@@ -87,7 +87,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyShip1_3
+    - name: EnemyShip2_3
       rect:
         serializedVersion: 2
         x: 144
@@ -97,7 +97,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyShip1_4
+    - name: EnemyShip2_4
       rect:
         serializedVersion: 2
         x: 0
@@ -107,7 +107,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyShip1_5
+    - name: EnemyShip2_5
       rect:
         serializedVersion: 2
         x: 48
@@ -117,7 +117,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyShip1_6
+    - name: EnemyShip2_6
       rect:
         serializedVersion: 2
         x: 96
@@ -127,7 +127,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: EnemyShip1_7
+    - name: EnemyShip2_7
       rect:
         serializedVersion: 2
         x: 144

@@ -160,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   lifeTime: 1
-  power: 3
+  power: 5
 --- !u!212 &21218884
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -234,7 +234,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: power
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite

@@ -92,8 +92,6 @@ public class Player : Spaceship {
 				if (newIndex >= 0) bullets[newIndex].chargeEffect.Play ();
 				currentChargeIndex  = newIndex;
 			}
-
-			Debug.Log (count + ":" + newIndex + ":" + currentChargeIndex);
 		}
 		
 
