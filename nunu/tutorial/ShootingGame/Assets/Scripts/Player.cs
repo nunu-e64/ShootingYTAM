@@ -257,7 +257,8 @@ public class Player : Spaceship {
 	}
 
 	//死亡処理		
-	public void OnDead () {	
+	public void OnDead () {
+		if (isCharging) gaugeManager.EndCharge ();
 		Explosion ();
 		Destroy (gameObject);
 
