@@ -36,7 +36,7 @@ public class Stage : MonoBehaviour {
 		timer += Time.deltaTime;
 
 		while (true) {
-			if (currentWaveIndex == -1 || timer > waves[currentWaveIndex].nextAppearTime / speedRate) {
+			if (currentWaveIndex == -1 || timer >= waves[currentWaveIndex].nextAppearTime / speedRate) {
 
 				timer = 0;
 				++currentWaveIndex;

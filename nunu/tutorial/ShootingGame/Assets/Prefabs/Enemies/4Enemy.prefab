@@ -184,8 +184,8 @@ MonoBehaviour:
   speed: 1.60000002
   explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
   point: 250
-  hp: 40
-  shotable: 1
+  hp: 20
+  canShot: 1
   bullet: {fileID: 142022, guid: 0d957ae121e66674fb9f0f41d0387e7d, type: 2}
   shotDelay: 1.70000005
 --- !u!212 &21296644
@@ -240,6 +240,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalRotation.w
       value: .130526006
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: hp
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
