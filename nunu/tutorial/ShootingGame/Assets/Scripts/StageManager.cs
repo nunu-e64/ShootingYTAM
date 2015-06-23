@@ -10,27 +10,25 @@ using System.Collections;
 /// </summary>
 public class StageManager : MonoBehaviour {
 
-	[SerializeField, Space(15)]
-	private Manager manager;
+	[Space(15)]
+	public Manager manager;
 
-	[SerializeField]
-	private GameObject bulletPool;
-
-	[SerializeField, Space (15)]
-	private bool isLoop;	//すべてのStageを出現させたあとリスタートするかのフラグ
-	private float speedRate = 1.0f;			//段々難化させるためにステージがループするごとに敵の速度を上げる.その際のスピードの倍率 
+	[Space (15)]
+	public float breakTimeBetweenStages = 2.0f;
+	public bool isLoop;	//すべてのStageを出現させたあとリスタートするかのフラグ
 	public float speedRateUpPace = 0.2f;		//SpeedRateの上昇量
 
-	[SerializeField]
-	private Stage[] stages;		//敵の集団=waveの配列	inspectorから事前にセット
+	public Stage[] stages;		//敵の集団=waveの配列	inspectorから事前にセット
 
 	private Stage currentStage;
 	private int currentStageIndex;			//現在何番目のwaveを表示しているか
 
-
+	private float speedRate = 1.0f;			//段々難化させるためにステージがループするごとに敵の速度を上げる.その際のスピードの倍率 
+	private float stageChangeTimer;
 
 	void Start(){
 		currentStageIndex = -1;
+		stageChangeTimer = 0;
 
 		if (stages.Length == 0) {	//stageが未セットの場合は終了
 			Destroy (gameObject);
@@ -53,28 +51,33 @@ public class StageManager : MonoBehaviour {
 	void Update () {
 
 		if (manager.IsPlaying ()) {
-
+			
 			if (currentStage == null && currentStageIndex < stages.Length) {
 
-				++currentStageIndex;
+				stageChangeTimer += Time.deltaTime;
 
-				//すべてのStageの出現が完了したとき→再度最初から出現or停止
-				if (currentStageIndex == stages.Length) {
-					if (isLoop) {
-						currentStageIndex = 0;
-						speedRate += speedRateUpPace;
-						Debug.Log ("<color=yellow>Reset StageIndex </color> :" + currentStageIndex + "\nspeedRate : " + speedRate);
-					} else {
-						Debug.Log ("<color=yellow>Finish Emit</color> :" + currentStageIndex);
-						return;
+				if (stageChangeTimer >= breakTimeBetweenStages) {
+					stageChangeTimer = 0;
+					++currentStageIndex;
+
+					//すべてのStageの出現が完了したとき→再度最初から出現or停止
+					if (currentStageIndex == stages.Length) {
+						if (isLoop) {
+							currentStageIndex = 0;
+							speedRate += speedRateUpPace;
+							Debug.Log ("<color=yellow>Reset StageIndex </color> :" + currentStageIndex + "\nspeedRate : " + speedRate);
+						} else {
+							Debug.Log ("<color=yellow>Finish Emit</color> :" + currentStageIndex);
+							return;
+						}
 					}
-				}
 
-				//新しいStageを作成しEmmiterの子要素とする
-				currentStage = Instantiate (stages[currentStageIndex]);
-				currentStage.transform.parent = transform;
-				currentStage.SetEnemySpeedRate (speedRate);
-				Debug.Log ("<color=green>CreateStage:</color>" + currentStage);
+					//新しいStageを作成しEmmiterの子要素とする
+					currentStage = Instantiate (stages[currentStageIndex]);
+					currentStage.transform.parent = transform;
+					currentStage.SetEnemySpeedRate (speedRate);
+					Debug.Log ("<color=green>CreateStage:</color>" + currentStage);
+				}
 
 			}
 		}

@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: .400000006
-  explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
+  explosion: {fileID: 149158, guid: 78cee5f7c98d37441a2ea12730e6bdf2, type: 2}
   point: 1200
   hp: 240
   canShot: 1
@@ -337,6 +337,10 @@ Prefab:
       propertyPath: hp
       value: 240
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 149158, guid: 78cee5f7c98d37441a2ea12730e6bdf2, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 138624}

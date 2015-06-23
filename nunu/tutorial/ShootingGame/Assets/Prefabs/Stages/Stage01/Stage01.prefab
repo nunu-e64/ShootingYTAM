@@ -65,8 +65,8 @@ MonoBehaviour:
   - wave: {fileID: 11483332, guid: e40f177cdff77c043b6a437d3248482f, type: 2}
     nextAppearTime: 5
   - wave: {fileID: 11459462, guid: 9deb5386252d8b84492295abeab34009, type: 2}
-    nextAppearTime: 6
-  - wave: {fileID: 11444398, guid: 6eacba6d9bfee0442ad8b0f564c6efa5, type: 2}
+    nextAppearTime: 8
+  - wave: {fileID: 11430932, guid: daa60c1c5d011b740a6193283a5dfc97, type: 2}
     nextAppearTime: 0
   - wave: {fileID: 0}
     nextAppearTime: 4
@@ -159,7 +159,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: waves.Array.data[13].wave
       value: 
-      objectReference: {fileID: 11444398, guid: 6eacba6d9bfee0442ad8b0f564c6efa5,
+      objectReference: {fileID: 11430932, guid: daa60c1c5d011b740a6193283a5dfc97,
         type: 2}
     - target: {fileID: 0}
       propertyPath: waves.Array.data[14].wave
@@ -171,7 +171,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: waves.Array.data[12].nextAppearTime
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: waves.Array.data[11].nextAppearTime

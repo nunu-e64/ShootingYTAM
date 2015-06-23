@@ -124,7 +124,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 406944, guid: 246d1a95606717a4299bd7ccaf05bd3a, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 138624, guid: 246d1a95606717a4299bd7ccaf05bd3a, type: 2}
       propertyPath: m_IsActive
@@ -461,8 +461,8 @@ Transform:
   - {fileID: 82912025}
   - {fileID: 946863907}
   - {fileID: 848680361}
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_Father: {fileID: 1045787852}
+  m_RootOrder: 0
 --- !u!1 &262596707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,7 +1059,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 446192, guid: 6eacba6d9bfee0442ad8b0f564c6efa5, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 182402, guid: 6eacba6d9bfee0442ad8b0f564c6efa5, type: 2}
       propertyPath: m_IsActive
@@ -1335,7 +1335,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 9.90
+  m_Text: 00.0
 --- !u!114 &652456891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2382,7 +2382,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 257068793}
   m_Father: {fileID: 0}
   m_RootOrder: 6
 --- !u!114 &1045787853
@@ -2740,7 +2741,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 433510, guid: e3a2c9020fe86e14181672a7b45c4751, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 433510, guid: e3a2c9020fe86e14181672a7b45c4751, type: 2}
       propertyPath: m_LocalScale.x
@@ -5163,7 +5164,7 @@ Transform:
   - {fileID: 1903719824}
   - {fileID: 163408536}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 13
 --- !u!1 &1928775789
 GameObject:
   m_ObjectHideFlags: 0
@@ -5354,10 +5355,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 1704102606}
-  bulletPool: {fileID: 1296733298}
-  isLoop: 0
+  breakTimeBetweenStages: 2
+  isLoop: 1
   speedRateUpPace: .200000003
   stages:
+  - {fileID: 11468976, guid: 8d467e23851eef747ba8e2a467edd594, type: 2}
   - {fileID: 11488976, guid: aee59d548813a814ab984cc2d56b266a, type: 2}
 --- !u!4 &1982837109
 Transform:

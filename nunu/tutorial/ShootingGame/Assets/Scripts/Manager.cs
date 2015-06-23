@@ -53,7 +53,7 @@ public class Manager : MonoBehaviour {
 		switch (gameMode) {
 		case mode_tag.PLAYING:
 			if (isDebug && Input.GetMouseButtonDown (1)) {
-				Time.timeScale = 3.0f;
+				Time.timeScale = 5.0f;
 			} else if(isDebug && Input.GetMouseButtonUp (1)){
 				Time.timeScale = 1.0f;
 			}

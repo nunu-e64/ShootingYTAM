@@ -19,6 +19,7 @@ public class Stage : MonoBehaviour {
 
 	private float timer;	//waveの出現タイミングを管理するためのタイマー。wave出現ごとにリセット。	
 	private int currentWaveIndex;
+	private bool endEmmit = false;	//すべてのwaveの出現完了
 
 	private float speedRate = 1.0f;	//敵の速度を次第に上げるための倍率。StageManagerから設定。
 
@@ -35,29 +36,39 @@ public class Stage : MonoBehaviour {
 	void Update () {
 		timer += Time.deltaTime;
 
-		while (true) {
-			if (currentWaveIndex == -1 || timer >= waves[currentWaveIndex].nextAppearTime / speedRate) {
+		if (currentWaveIndex < waves.Length) {
 
-				timer = 0;
-				++currentWaveIndex;
+			while (true) {
+				if (currentWaveIndex == -1 || timer >= waves[currentWaveIndex].nextAppearTime / speedRate) {
 
-				if (currentWaveIndex < waves.Length && waves[currentWaveIndex].wave != null) {
-					Wave currentWave = Instantiate (waves[currentWaveIndex].wave);
-					currentWave.transform.parent = transform.parent;
+					timer = 0;
+					++currentWaveIndex;
 
-					foreach (Enemy enemy in currentWave.GetComponentsInChildren<Enemy> ()) {
-						enemy.SetSpeedRate (speedRate);
+					if (currentWaveIndex < waves.Length && waves[currentWaveIndex].wave != null) {
+						Wave currentWave = Instantiate (waves[currentWaveIndex].wave);
+						currentWave.transform.parent = transform;
+
+						foreach (Enemy enemy in currentWave.GetComponentsInChildren<Enemy> ()) {
+							enemy.SetSpeedRate (speedRate);
+						}
+						Debug.Log ("<color=cyan>CreateWave:</color>" + currentWave);
+
+					} else {
+						break;
 					}
-					Debug.Log ("<color=cyan>CreateWave:</color>" + currentWave);
 
 				} else {
-					Destroy (gameObject);
 					break;
 				}
-
-			} else {
-				break;
 			}
+	
+		} else {
+
+			//子要素＝WaveがなくなったときにはStage自身も破棄
+			if (transform.childCount == 0) {
+				Destroy (gameObject);
+			}
+	
 		}
 	}
 
