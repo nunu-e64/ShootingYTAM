@@ -19,7 +19,8 @@ public class Spaceship : MonoBehaviour {
 	public GameObject explosion;
 	
 	public virtual void Explosion() {
-		Instantiate(explosion, transform.position, transform.rotation);
+		GameObject go = Instantiate(explosion, transform.position, transform.rotation) as GameObject;
+		go.transform.localScale = transform.localScale;
 	}
 		
 }

@@ -49,6 +49,9 @@ TagManager:
   - name: Player
     uniqueID: 3394710305
     locked: 0
+  - name: Explosion
+    uniqueID: 175658309
+    locked: 0
   - name: UI
     uniqueID: 1045457795
     locked: 0

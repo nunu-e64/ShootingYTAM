@@ -52,6 +52,11 @@ public class Manager : MonoBehaviour {
 
 		switch (gameMode) {
 		case mode_tag.PLAYING:
+			if (isDebug && Input.GetMouseButtonDown (1)) {
+				Time.timeScale = 3.0f;
+			} else if(isDebug && Input.GetMouseButtonUp (1)){
+				Time.timeScale = 1.0f;
+			}
 			break;
 
 		case mode_tag.TITLE:			//TIPS: 画面タップによるゲームスタートはButtonで実装している
@@ -84,9 +89,13 @@ public class Manager : MonoBehaviour {
 		title.SetActive (false);
 		titleMessage.SetActive (false);
 		gauge.SetActive (true);
+
 		player = Instantiate (playerPrefab) as GameObject;		//自機出現
 		Vector3 pos = Camera.main.ViewportToWorldPoint (new Vector2 (0.5f, 0));
 		player.transform.position = new Vector3 (pos.x, pos.y, 0);
+		player.GetComponent<Player> ().invincibleModeForTest = isDebug;
+
+		GameObject.FindObjectOfType<TimeCounter> ().SetEnable (true);
 	}
 
 	public IEnumerator GameOver() {
@@ -109,6 +118,9 @@ public class Manager : MonoBehaviour {
 
 		gauge.SetActive (false);
 		gameOver.SetActive(true);
+
+
+		GameObject.FindObjectOfType<TimeCounter> ().SetEnable (false);
 	}
 	IEnumerator SendUserScore(int score){
 		string userId = signUp.GetComponent<SignUp>().UserId;

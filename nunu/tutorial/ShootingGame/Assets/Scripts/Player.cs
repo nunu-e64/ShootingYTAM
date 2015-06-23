@@ -10,7 +10,6 @@ public class Player : Spaceship {
 	public ParticleSystem failShotEffect;	//チャージ不足の時のエフェクト
 
 	[HeaderAttribute ("PlayerStatus")]
-	public bool invincibleModeForTest = false;
 	public bool canShot;
 	public float shotNum = 1;			//砲台セット数(砲台1個＝弾2発(15/06/09現在))	//Animatorから変更するためにintではなくfloatでないといけない
 	public float touchPosGapY = 1.0f;	//移動の際に指で機体が隠れないようにタップした位置からずらす値
@@ -28,6 +27,8 @@ public class Player : Spaceship {
 
 	[System.NonSerialized]
 	public bool IsAppearance;
+	[System.NonSerialized]
+	public bool invincibleModeForTest = false;
 
 	private AudioSource shotAudio;
 	private Animator animator;

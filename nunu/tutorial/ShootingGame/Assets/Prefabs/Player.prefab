@@ -534,9 +534,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
-  explosion: {fileID: 149158, guid: 148a3b753506130499f0462c0a414067, type: 2}
+  explosion: {fileID: 116562, guid: 1fb49f0ef39de4046beb2014ae4d416b, type: 2}
   failShotEffect: {fileID: 19826436, guid: 979d921cb103067408938225678fa940, type: 2}
-  invincibleModeForTest: 1
   canShot: 0
   shotNum: 1
   touchPosGapY: 2
@@ -6211,6 +6210,10 @@ Prefab:
       propertyPath: InitialModule.startSize.scalar
       value: .300000012
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 116562, guid: 1fb49f0ef39de4046beb2014ae4d416b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 193208}

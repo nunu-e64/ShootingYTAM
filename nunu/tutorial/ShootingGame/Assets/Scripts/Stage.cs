@@ -35,25 +35,30 @@ public class Stage : MonoBehaviour {
 	void Update () {
 		timer += Time.deltaTime;
 
-		if (currentWaveIndex == -1 || timer > waves[currentWaveIndex].nextAppearTime / speedRate) {
+		while (true) {
+			if (currentWaveIndex == -1 || timer > waves[currentWaveIndex].nextAppearTime / speedRate) {
 
-			timer = 0;
-			++currentWaveIndex;
+				timer = 0;
+				++currentWaveIndex;
 
-			if (currentWaveIndex < waves.Length) {
-				Wave currentWave = Instantiate (waves[currentWaveIndex].wave);
-				currentWave.transform.parent = transform.parent;
+				if (currentWaveIndex < waves.Length && waves[currentWaveIndex].wave != null) {
+					Wave currentWave = Instantiate (waves[currentWaveIndex].wave);
+					currentWave.transform.parent = transform.parent;
 
-				foreach (Enemy enemy in currentWave.GetComponentsInChildren<Enemy>()){
-					enemy.SetSpeedRate (speedRate); 
+					foreach (Enemy enemy in currentWave.GetComponentsInChildren<Enemy> ()) {
+						enemy.SetSpeedRate (speedRate);
+					}
+					Debug.Log ("<color=cyan>CreateWave:</color>" + currentWave);
+
+				} else {
+					Destroy (gameObject);
+					break;
 				}
-				Debug.Log ("<color=cyan>CreateWave:</color>" + currentWave);
 
 			} else {
-				Destroy (gameObject);
+				break;
 			}
-
-		}		
+		}
 	}
 
 	public void SetEnemySpeedRate (float rate) {
