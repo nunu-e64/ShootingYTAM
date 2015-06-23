@@ -19,7 +19,6 @@ public class Stage : MonoBehaviour {
 
 	private float timer;	//waveの出現タイミングを管理するためのタイマー。wave出現ごとにリセット。	
 	private int currentWaveIndex;
-	private bool endEmmit = false;	//すべてのwaveの出現完了
 
 	private float speedRate = 1.0f;	//敵の速度を次第に上げるための倍率。StageManagerから設定。
 
@@ -44,7 +43,9 @@ public class Stage : MonoBehaviour {
 					timer = 0;
 					++currentWaveIndex;
 
-					if (currentWaveIndex < waves.Length && waves[currentWaveIndex].wave != null) {
+					if (waves[currentWaveIndex].wave == null) currentWaveIndex = waves.Length;
+
+					if (currentWaveIndex < waves.Length) {
 						Wave currentWave = Instantiate (waves[currentWaveIndex].wave);
 						currentWave.transform.parent = transform;
 
