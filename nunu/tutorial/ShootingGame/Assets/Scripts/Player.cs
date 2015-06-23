@@ -43,7 +43,6 @@ public class Player : Spaceship {
 	void Start () {
 		shotAudio = GetComponent<AudioSource> ();
 		gaugeManager = FindObjectOfType<GaugeManager> ();
-		gaugeManager.SetPlayer (this);
 		animator = GetComponent<Animator>();
 
 		foreach (BulletData bullet in bullets){

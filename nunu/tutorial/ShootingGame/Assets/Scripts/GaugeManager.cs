@@ -15,7 +15,6 @@ public class GaugeManager : MonoBehaviour {
 
 	public float count = 0.00f;		//ゲージのカウントダウン表示。Animationで値変化
 
-	private Player player = null;
 	private bool isCharging;
 
 	private Animator animator;
@@ -58,10 +57,6 @@ public class GaugeManager : MonoBehaviour {
 			EnergyGauge.transform.localScale = new Vector3 (0.0f, EnergyGauge.transform.localScale.y, EnergyGauge.transform.localScale.z);
 			count = 0.0f;
 		}
-	}
-
-	public void SetPlayer(Player _player) {
-		player = _player;
 	}
 
 	public void BeginCharge () {
