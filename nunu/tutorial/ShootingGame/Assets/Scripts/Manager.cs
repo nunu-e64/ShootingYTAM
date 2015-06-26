@@ -95,7 +95,9 @@ public class Manager : MonoBehaviour {
 		player.transform.position = new Vector3 (pos.x, pos.y, 0);
 		player.GetComponent<Player> ().invincibleModeForTest = isDebug;
 
-		GameObject.FindObjectOfType<TimeCounter> ().SetEnable (true);
+		if (GameObject.FindObjectOfType<TimeCounter> () != null) {
+			GameObject.FindObjectOfType<TimeCounter> ().SetEnable (true);
+		}
 	}
 
 	public IEnumerator GameOver() {
@@ -120,7 +122,9 @@ public class Manager : MonoBehaviour {
 		gameOver.SetActive(true);
 
 
-		GameObject.FindObjectOfType<TimeCounter> ().SetEnable (false);
+		if (GameObject.FindObjectOfType<TimeCounter> () != null) {
+			GameObject.FindObjectOfType<TimeCounter> ().SetEnable (false);
+		}
 	}
 	IEnumerator SendUserScore(int score){
 		string userId = signUp.GetComponent<SignUp>().UserId;

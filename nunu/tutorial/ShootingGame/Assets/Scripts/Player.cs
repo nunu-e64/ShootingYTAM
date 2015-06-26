@@ -139,7 +139,7 @@ public class Player : Spaceship {
 	
 			//DEBUG: 自殺/////////////////////////////////////////////////////////////
 			if (Input.GetMouseButtonDown (2) || Input.GetKeyDown (KeyCode.Escape)) {
-				OnDead ();
+				if (FindObjectOfType<Manager>().isDebug) OnDead ();
 			}
 			//////////////////////////////////////////////////////////////////////////
 
