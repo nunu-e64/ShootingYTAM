@@ -14,10 +14,10 @@ PlayerSettings:
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_ShowUnitySplashScreen: 1
-  defaultScreenWidth: 1024
-  defaultScreenHeight: 768
-  defaultScreenWidthWeb: 600
-  defaultScreenHeightWeb: 450
+  defaultScreenWidth: 400
+  defaultScreenHeight: 640
+  defaultScreenWidthWeb: 800
+  defaultScreenHeightWeb: 1280
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   m_ActiveColorSpace: 0
@@ -27,7 +27,7 @@ PlayerSettings:
   iosShowActivityIndicatorOnLoading: -1
   androidShowActivityIndicatorOnLoading: -1
   iosAppInBackgroundBehavior: 0
-  displayResolutionDialog: 1
+  displayResolutionDialog: 2
   allowedAutorotateToPortrait: 1
   allowedAutorotateToPortraitUpsideDown: 1
   allowedAutorotateToLandscapeRight: 1
@@ -35,7 +35,7 @@ PlayerSettings:
   useOSAutorotation: 1
   use32BitDisplayBuffer: 1
   disableDepthAndStencilBuffers: 0
-  defaultIsFullScreen: 1
+  defaultIsFullScreen: 0
   defaultIsNativeResolution: 1
   runInBackground: 1
   captureSingleScreen: 0
@@ -66,13 +66,13 @@ PlayerSettings:
   psp2PowerMode: 0
   psp2AcquireBGM: 1
   m_SupportedAspectRatios:
-    4:3: 1
+    4:3: 0
     5:4: 0
-    16:10: 0
+    16:10: 1
     16:9: 0
     Others: 0
   bundleIdentifier: jp.YTAM.FullCharge
-  bundleVersion: 0.3
+  bundleVersion: 0.6
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
@@ -126,8 +126,8 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: C:/Users/NUNU/Dropbox/MyDocuments/Works/ShootingYTAM/ShootingYTAM/nunu/tutorial/ShootingGame/user.keystore
+  AndroidKeyaliasName: fullcharge
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1
@@ -140,24 +140,8 @@ PlayerSettings:
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 2800000, guid: bfbc1b16c78d0fa4cac6a0901c6f847c, type: 3}
+    - m_Icon: {fileID: 2800000, guid: 7f983025bc5144042b306d9a9f5159e7, type: 3}
       m_Size: 128
-  - m_BuildTarget: iPhone
-    m_Icons:
-    - m_Icon: {fileID: 2800000, guid: 2c47f804bf07b4c9eb051aa45179dcdf, type: 3}
-      m_Size: 152
-    - m_Icon: {fileID: 2800000, guid: 2c47f804bf07b4c9eb051aa45179dcdf, type: 3}
-      m_Size: 144
-    - m_Icon: {fileID: 2800000, guid: 2c47f804bf07b4c9eb051aa45179dcdf, type: 3}
-      m_Size: 120
-    - m_Icon: {fileID: 2800000, guid: 2c47f804bf07b4c9eb051aa45179dcdf, type: 3}
-      m_Size: 114
-    - m_Icon: {fileID: 2800000, guid: 2c47f804bf07b4c9eb051aa45179dcdf, type: 3}
-      m_Size: 76
-    - m_Icon: {fileID: 2800000, guid: 2c47f804bf07b4c9eb051aa45179dcdf, type: 3}
-      m_Size: 72
-    - m_Icon: {fileID: 2800000, guid: 2c47f804bf07b4c9eb051aa45179dcdf, type: 3}
-      m_Size: 57
   m_BuildTargetBatching:
   - m_BuildTarget: iPhone
     m_StaticBatching: 1
@@ -175,7 +159,7 @@ PlayerSettings:
   - m_BuildTarget: AndroidPlayer
     m_APIs: 08000000
     m_Automatic: 0
-  webPlayerTemplate: APPLICATION:Default
+  webPlayerTemplate: APPLICATION:Black Background
   m_TemplateCustomTags: {}
   actionOnDotNetUnhandledException: 1
   enableInternalProfiler: 0
@@ -296,7 +280,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: CROSS_PLATFORM_INPUT
     2: CROSS_PLATFORM_INPUT
-    4: CROSS_PLATFORM_INPUT;MOBILE_INPUT
+    4: 
     7: CROSS_PLATFORM_INPUT;MOBILE_INPUT
     14: MOBILE_INPUT
     15: CROSS_PLATFORM_INPUT;MOBILE_INPUT
@@ -431,7 +415,7 @@ PlayerSettings:
   WebGL::audioCompressionFormat: 4
   WebGL::exceptionSupport: 0
   WebGL::memorySize: 256
-  iOS::Architecture: 2
+  iOS::Architecture: 0
   iOS::ScriptingBackend: 0
   boolPropertyNames:
   - WebGL::analyzeBuildSize
