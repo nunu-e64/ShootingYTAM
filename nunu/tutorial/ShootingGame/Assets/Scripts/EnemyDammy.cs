@@ -11,6 +11,7 @@ public class EnemyDammy : MonoBehaviour {
 
 	public GameObject enemy;
 	public bool canShot = true;
+	private float speedRate = 1.0f;
 
 
 	void Start () {
@@ -18,10 +19,14 @@ public class EnemyDammy : MonoBehaviour {
 		GameObject go = Instantiate (enemy, transform.position, transform.rotation) as GameObject;
 		go.transform.SetParent(transform.parent);
 
-		enemy.GetComponent<Enemy> ().canShot = canShot;
+		go.GetComponent<Enemy> ().canShot = canShot;
+		go.GetComponent<Enemy> ().SetSpeedRate (speedRate);
 
 		Destroy (gameObject);
 
 	}
 	
+	public void SetSpeedRate (float rate) {		//インスタンス化直後で呼び出すためStartより先に処理される
+		speedRate = rate;
+	}
 }

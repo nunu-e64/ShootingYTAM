@@ -49,7 +49,7 @@ public class Stage : MonoBehaviour {
 						Wave currentWave = Instantiate (waves[currentWaveIndex].wave);
 						currentWave.transform.parent = transform;
 
-						foreach (Enemy enemy in currentWave.GetComponentsInChildren<Enemy> ()) {
+						foreach (EnemyDammy enemy in currentWave.GetComponentsInChildren<EnemyDammy> ()) {
 							enemy.SetSpeedRate (speedRate);
 						}
 						Debug.Log ("<color=cyan>CreateWave:"+ currentWaveIndex +":</color>" + currentWave);
