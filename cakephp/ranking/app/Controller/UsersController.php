@@ -16,7 +16,7 @@ class UsersController extends AppController {
 		$this->autoRender = false;
 		$record['User']['name'] = $this->request->query['name'];
 		if($this->User->save($record)){
-			print_r("save success!!!");
+			// print_r("save success!!!");
 			//ユーザ登録時に発行されたidをUnityのコアデータとして保持
 			$data = $this->User->find('all',array(
 				'fields' => 'User.id',
@@ -29,10 +29,9 @@ class UsersController extends AppController {
 			//最近ユーザ登録されたユーザのIDを返す
 			echo $this->User->getLastInsertID();
 		}else{
-			//ユーザ名が重複している場合
+			//ユーザ名が重複した
 			echo "false";
 		}
-	}
 	//ユーザ消去(ID)
 	//:Unity側にidをコアデータとして渡す。
 	public function userDelete(){
