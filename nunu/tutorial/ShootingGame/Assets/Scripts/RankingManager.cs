@@ -12,29 +12,50 @@ public class RankingManager : MonoBehaviour {
 
 	public GameObject rankingContainer;
 	public RectTransform guiRankingNode;
+
+	public Text message;
+
 	private List<RankingDataNode> rankingDataList = new List<RankingDataNode>();
 
 	void Start () {
 //		TextAsset rankingDataText = Resources.Load ("rankingData") as TextAsset;		//DEBUG: あらかじめ作っておいたソート済みjsonファイルをローカルから読み込み
+		message.gameObject.SetActive (false);
 		StartCoroutine (DownLoad ());
 	}
 
-	IEnumerator DownLoad(){
 		string url = "http://localhost/cakephp/ranking/Scores/ranking";
+	IEnumerator DownLoad () {
+		//message.gameObject.SetActive (true);
+		//message.text = "   サーバー接続中...";
+		//message.color = new Color (180f / 255, 170f / 255, 0f / 255);
+
 		WWW www = new WWW (url);
 
 		yield return www;
 
-		if(www.error != null){
-			Debug.Log (www.error);
+		message.gameObject.SetActive (true);
+		message.color = new Color (230f / 255, 70f / 255, 70f / 255);
+
+		if (www.error != null) {
+			Debug.LogWarning ("WWWERROR: " + www.error);
+			message.text = "通信エラー\n" + www.error;
 			yield break;
-		}else{
+
+		} else if (!www.isDone) {
+			Debug.LogWarning ("WWWERROR: " + "UNDONE");
+			message.text = "通信エラー";
+			yield break;
+
+		} else {
+			message.gameObject.SetActive (false);
 			Debug.Log (www.text);
 		}
 
 		//外部データ（ソート済みjsonファイル）からランキングデータList作成
 		if (!SetRankingData (www.text)) {
-			Debug.LogWarning ("LoadError->RankingData");	//DEBUG: 読み込み失敗の時は警告を表示してreturn
+			Debug.LogWarning ("LoadError->RankingData");
+			message.text = "システムエラー";
+			message.gameObject.SetActive (true);
 			yield break;
 		}
 

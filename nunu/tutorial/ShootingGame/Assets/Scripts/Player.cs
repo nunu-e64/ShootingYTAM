@@ -7,25 +7,34 @@ using System.Collections.Generic;
 /// </summary>
 public class Player : Spaceship {
 
-	public ParticleSystem chargeEffect;		//チャージ中のエフェクト
 	public ParticleSystem failShotEffect;	//チャージ不足の時のエフェクト
 
 	[HeaderAttribute ("PlayerStatus")]
+	public bool canShot;
 	public float shotNum = 1;			//砲台セット数(砲台1個＝弾2発(15/06/09現在))	//Animatorから変更するためにintではなくfloatでないといけない
 	public float touchPosGapY = 1.0f;	//移動の際に指で機体が隠れないようにタップした位置からずらす値
 
+	[System.Serializable]
+	private class BulletData {
+		public GameObject bullet;				//弾のプレハブ
+		[TooltipAttribute ("ChargeBorders=0%~100%")]
+		public int chargeBorder;				//弾が出るチャージ量
+		public ParticleSystem chargeEffect;		//チャージ中のエフェクト
+	}
 
-	[HeaderAttribute ("BulletStatus")]
-	public GameObject[] bullets;		//弾のプレハブ
-	public bool shotable;
+	[SerializeField, HeaderAttribute ("BulletStatus")]
+	private BulletData[] bullets;		//弾のプレハブ
 
 	[System.NonSerialized]
 	public bool IsAppearance;
+	[System.NonSerialized]
+	public bool invincibleModeForTest = false;
 
 	private AudioSource shotAudio;
 	private Animator animator;
 	private GaugeManager gaugeManager;
 	private bool isCharging;
+	private int currentChargeIndex = -1;
 
 	private Vector2 oldTouchPosition;
 	private Vector2 currentTouchPosition;
@@ -34,16 +43,19 @@ public class Player : Spaceship {
 	void Start () {
 		shotAudio = GetComponent<AudioSource> ();
 		gaugeManager = FindObjectOfType<GaugeManager> ();
-		gaugeManager.SetPlayer (this);
 		animator = GetComponent<Animator>();
 
-		chargeEffect.Stop ();
+		foreach (BulletData bullet in bullets){
+			bullet.chargeEffect.Stop ();
+			//Clear
+		}
+
 
 		/*
 		//弾発射ループ
         while (true){
 
-			if (shotable && !IsAppearance) {
+			if (canShot && !IsAppearance) {
 
 				//子要素を全て取得して弾を発射
 				for (int i = 0; i < transform.childCount && i < (int)shotNum; i++) {
@@ -64,11 +76,33 @@ public class Player : Spaceship {
 
 	void Update () {
 
+		//チャージ段階によってエフェクトを切り替える//////////////////////////////
+		if (isCharging) {
+			int count = gaugeManager.GetCount();
+			int newIndex = -1;
+
+			for (int i = 0; i < bullets.Length; i++) {
+				if (count >= bullets[i].chargeBorder) {
+					newIndex = i;
+				}
+			}
+
+			if (currentChargeIndex != newIndex) {
+				if (currentChargeIndex >= 0) bullets[currentChargeIndex].chargeEffect.Stop ();
+				if (newIndex >= 0) bullets[newIndex].chargeEffect.Play ();
+				currentChargeIndex  = newIndex;
+			}
+		}
+		
+
+		//////////////////////////////////////////////////////////////////////////
+
 		//チャージ開始と解除//////////////////////////////////////////////////////
 		if ((Input.GetMouseButton (0) || Input.GetKey (KeyCode.Z)) && !isCharging) {
 			gaugeManager.BeginCharge ();
 			isCharging = true;
-			chargeEffect.Play ();
+			currentChargeIndex = -1;
+
 
 		//} else if ((Input.GetMouseButton (0) || Input.GetKey (KeyCode.Z)) && isCharging) {
 		//	int count  = gaugeManager.GetCount();
@@ -84,26 +118,19 @@ public class Player : Spaceship {
 		//	} else {
 		
 		}else if ((Input.GetMouseButtonUp (0) || Input.GetKeyUp (KeyCode.Z)) && isCharging) {
-			int count = gaugeManager.EndCharge ();
+			gaugeManager.EndCharge ();
 			isCharging = false;
-			chargeEffect.Stop ();
-			chargeEffect.Clear();
-
-			if (count < 10) {
+			
+			if (currentChargeIndex == -1) {
 				GameObject go = (GameObject) Instantiate (failShotEffect.gameObject, transform.position, transform.rotation);
 				go.transform.parent = transform;
-			} else if (count < 20) {
-				Shot (bullets[0]);
-			} else if (count < 50) {
-				Shot (bullets[1]);
-			} else if (count < 100) {
-				Shot (bullets[2]);
-			} else if (count == 100) {
-				Shot (bullets[3]);
 			} else {
-
+				bullets[currentChargeIndex].chargeEffect.Stop ();
+				bullets[currentChargeIndex].chargeEffect.Clear ();
+				Shot (bullets[currentChargeIndex].bullet);
 			}
 
+			currentChargeIndex = -1;
 		}
 		//////////////////////////////////////////////////////////////////////////
 
@@ -112,7 +139,7 @@ public class Player : Spaceship {
 	
 			//DEBUG: 自殺/////////////////////////////////////////////////////////////
 			if (Input.GetMouseButtonDown (2) || Input.GetKeyDown (KeyCode.Escape)) {
-				OnDead ();
+				if (FindObjectOfType<Manager>().isDebug) OnDead ();
 			}
 			//////////////////////////////////////////////////////////////////////////
 
@@ -219,21 +246,34 @@ public class Player : Spaceship {
 		}
 
 		if (layerName == "Bullet(Enemy)" || layerName == "Enemy") {
-			OnDead ();
+			if (!invincibleModeForTest) {
+				OnDead ();
+			} else {
+				Explosion ();
+			}
 		}
 
 	}
 
 	//死亡処理		
-	public void OnDead () {	
+	public void OnDead () {
+		if (isCharging) gaugeManager.EndCharge ();
 		Explosion ();
 		Destroy (gameObject);
 
-		FindObjectOfType<Manager> ().GameOver ();
+		FindObjectOfType<Manager> ().StartCoroutine(FindObjectOfType<Manager> ().GameOver ());
 	}
 
 	//特殊攻撃
 	public void InvokeSpecialAttack(){
 		animator.SetTrigger("Special");
+	}
+
+	//死亡演出
+	public override void Explosion () {
+		for (int i = 0; i < 6; i++) {
+			GameObject go = Instantiate (explosion, new Vector3(transform.position.x + Random.Range(-0.5f, 0.5f),transform.position.y + Random.Range(-0.52f, 0.48f)), transform.rotation) as GameObject;
+			go.GetComponent<Explosion> ().SetTimer (i * 0.2f);
+		}
 	}
 }

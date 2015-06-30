@@ -14,9 +14,11 @@ public class Enemy : Spaceship {
 	private Animator animator;
 
 	[HeaderAttribute ("BulletStatus")]
-	public bool shotable = true;	//弾を発射するか
+	public bool canShot = true;	//弾を発射するか
 	public GameObject bullet;		//弾のプレハブ
 	public float shotDelay;			//弾の発射間隔[s]
+
+	private float speedRate = 1.0f;
 
 	void Start () {
 
@@ -24,12 +26,13 @@ public class Enemy : Spaceship {
 		GetComponent<Rigidbody2D> ().velocity = transform.up.normalized * -1 * speed;
 
 		animator = GetComponent<Animator> ();
-	
+
+		shotTimer = shotDelay;		//画面内に登場した瞬間に打ち始めるように初期値設定
 	}
 
 	void Update(){
 
-		if (!shotable) {
+		if (!canShot) {
 			return ;
 		}
 			
@@ -41,8 +44,9 @@ public class Enemy : Spaceship {
 			Vector3 positionInView = Camera.main.WorldToViewportPoint (transform.position);
 
 			if (positionInView.x > 0 && positionInView.x < 1 && positionInView.y > 0 && positionInView.y < 1) {
-				foreach (Transform shotPosition in transform) { 
-					ObjectPool.Instance.GetGameObject(bullet, shotPosition.position, shotPosition.rotation);
+				foreach (Transform shotPosition in transform) {
+					GameObject go = ObjectPool.Instance.GetGameObject (bullet, shotPosition.position, shotPosition.rotation);
+					go.GetComponent<Rigidbody2D> ().velocity *= speedRate;
 				}
 				shotTimer = 0;
 			}
@@ -59,13 +63,18 @@ public class Enemy : Spaceship {
 
 		if (layerName == "Bullet(Player)") {
 
-			//弾の威力に応じてHPを減らす。弾の威力はEnemyにHP分だけ減じる
+			//弾の威力に応じてEnemyHPを減らし、当たった弾の威力もEnemyにHP分だけ減じる
 			Bullet bullet = c.transform.parent.GetComponent<Bullet>();
+			int i = 0;
+			for (i = 0; i < bullet.transform.childCount; i++) {
+				if (c.transform == bullet.transform.GetChild (i)) break;
+			}
+	
 			int oldHp = hp;
-			hp -= bullet.power;
-			bullet.power -= oldHp;
+			hp -= bullet.bulletPower[i];
+			bullet.bulletPower[i] -= oldHp;
 
-			if (bullet.power <= 0) {
+			if (bullet.bulletPower[i] <= 0) {
 				c.gameObject.SetActive (false);
 			}
 
@@ -77,5 +86,11 @@ public class Enemy : Spaceship {
 				animator.SetTrigger("Damage");
 			}
 		}
+	}
+
+	public void SetSpeedRate (float rate) {		//インスタンス化直後で呼び出すためStartより先に処理される
+		speedRate = rate;
+		speed *= rate;
+		//Debug.Log ("EnemySpeedRate:" + speedRate + ":" + gameObject);
 	}
 }

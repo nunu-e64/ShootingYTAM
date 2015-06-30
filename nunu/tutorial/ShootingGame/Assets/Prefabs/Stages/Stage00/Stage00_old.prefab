@@ -1,0 +1,307 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &122334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 434174}
+  - 114: {fileID: 11468976}
+  m_Layer: 0
+  m_Name: Stage00_old
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &434174
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122334}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 7.21000004, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11468976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3bcd85e04ef4e446b7ace4cb77eca21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - wave: {fileID: 11496872, guid: 8785c286938b0c7488a96d5fe0c74a54, type: 2}
+    nextAppearTime: 5
+  - wave: {fileID: 11489104, guid: aca18d96b771d334bb822877d13f39d4, type: 2}
+    nextAppearTime: 4
+  - wave: {fileID: 11411870, guid: bd8b749b7f51a8f4d99eb2281b2182e6, type: 2}
+    nextAppearTime: 4
+  - wave: {fileID: 11406002, guid: f35d9f118be461e489cd7a634ea7fe8b, type: 2}
+    nextAppearTime: 4
+  - wave: {fileID: 11499140, guid: e627963fda7e3ce4ea6997713c4c8ac1, type: 2}
+    nextAppearTime: 0
+  - wave: {fileID: 11424108, guid: 9e917867e2e3f404aa98a05ea47fd95b, type: 2}
+    nextAppearTime: 4
+  - wave: {fileID: 11431198, guid: 84abdbd97e00caf4f8c4c3a5559daee9, type: 2}
+    nextAppearTime: 4
+  - wave: {fileID: 11477138, guid: 682d58797df361a44b1773e141bc73a2, type: 2}
+    nextAppearTime: 4
+  - wave: {fileID: 11477138, guid: 67724057df1915849bfc265915c366ff, type: 2}
+    nextAppearTime: 4
+  - wave: {fileID: 11431198, guid: 84abdbd97e00caf4f8c4c3a5559daee9, type: 2}
+    nextAppearTime: 3
+  - wave: {fileID: 11499140, guid: e627963fda7e3ce4ea6997713c4c8ac1, type: 2}
+    nextAppearTime: 3
+  - wave: {fileID: 11424108, guid: 9e917867e2e3f404aa98a05ea47fd95b, type: 2}
+    nextAppearTime: 4
+  - wave: {fileID: 11477138, guid: 29bb336d042e1344982e7580dbcbed43, type: 2}
+    nextAppearTime: 3
+  - wave: {fileID: 11407390, guid: c4d2520bab6ea9049ba44b239486eaff, type: 2}
+    nextAppearTime: 3
+  - wave: {fileID: 11499140, guid: e627963fda7e3ce4ea6997713c4c8ac1, type: 2}
+    nextAppearTime: 4
+  - wave: {fileID: 11454406, guid: 11a2bcc7fc4445044a5b1b1d195c82d1, type: 2}
+    nextAppearTime: 3
+  - wave: {fileID: 11424108, guid: 9e917867e2e3f404aa98a05ea47fd95b, type: 2}
+    nextAppearTime: 3
+  - wave: {fileID: 11407390, guid: c4d2520bab6ea9049ba44b239486eaff, type: 2}
+    nextAppearTime: 4
+  - wave: {fileID: 11488636, guid: 8e83f3b6c7da71648b80b39cbbbd553c, type: 2}
+    nextAppearTime: 5
+  - wave: {fileID: 11427974, guid: 6eacc3ddab5761a4e9c7354fc29f622c, type: 2}
+    nextAppearTime: 5
+  - wave: {fileID: 0}
+    nextAppearTime: 0
+  - wave: {fileID: 0}
+    nextAppearTime: 0
+  - wave: {fileID: 0}
+    nextAppearTime: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: waves.Array.size
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[3].wave
+      value: 
+      objectReference: {fileID: 11406002, guid: f35d9f118be461e489cd7a634ea7fe8b,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[3].nextAppearTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[4].wave
+      value: 
+      objectReference: {fileID: 11499140, guid: e627963fda7e3ce4ea6997713c4c8ac1,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[4].nextAppearTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[2].wave
+      value: 
+      objectReference: {fileID: 11411870, guid: bd8b749b7f51a8f4d99eb2281b2182e6,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[2].nextAppearTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[0].nextAppearTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[1].nextAppearTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[0].wave
+      value: 
+      objectReference: {fileID: 11496872, guid: 8785c286938b0c7488a96d5fe0c74a54,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[1].wave
+      value: 
+      objectReference: {fileID: 11489104, guid: aca18d96b771d334bb822877d13f39d4,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[5].wave
+      value: 
+      objectReference: {fileID: 11424108, guid: 9e917867e2e3f404aa98a05ea47fd95b,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[6].wave
+      value: 
+      objectReference: {fileID: 11431198, guid: 84abdbd97e00caf4f8c4c3a5559daee9,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[7].wave
+      value: 
+      objectReference: {fileID: 11477138, guid: 682d58797df361a44b1773e141bc73a2,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[8].wave
+      value: 
+      objectReference: {fileID: 11477138, guid: 67724057df1915849bfc265915c366ff,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[8].nextAppearTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[9].wave
+      value: 
+      objectReference: {fileID: 11431198, guid: 84abdbd97e00caf4f8c4c3a5559daee9,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[9].nextAppearTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[10].nextAppearTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[11].nextAppearTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[12].nextAppearTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[13].nextAppearTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[14].nextAppearTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[15].nextAppearTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[16].nextAppearTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[17].nextAppearTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[18].nextAppearTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[10].wave
+      value: 
+      objectReference: {fileID: 11499140, guid: e627963fda7e3ce4ea6997713c4c8ac1,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[11].wave
+      value: 
+      objectReference: {fileID: 11424108, guid: 9e917867e2e3f404aa98a05ea47fd95b,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[12].wave
+      value: 
+      objectReference: {fileID: 11477138, guid: 29bb336d042e1344982e7580dbcbed43,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[13].wave
+      value: 
+      objectReference: {fileID: 11407390, guid: c4d2520bab6ea9049ba44b239486eaff,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[14].wave
+      value: 
+      objectReference: {fileID: 11499140, guid: e627963fda7e3ce4ea6997713c4c8ac1,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[15].wave
+      value: 
+      objectReference: {fileID: 11454406, guid: 11a2bcc7fc4445044a5b1b1d195c82d1,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[16].wave
+      value: 
+      objectReference: {fileID: 11424108, guid: 9e917867e2e3f404aa98a05ea47fd95b,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[17].wave
+      value: 
+      objectReference: {fileID: 11407390, guid: c4d2520bab6ea9049ba44b239486eaff,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[18].wave
+      value: 
+      objectReference: {fileID: 11488636, guid: 8e83f3b6c7da71648b80b39cbbbd553c,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[19].nextAppearTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[20].nextAppearTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[21].nextAppearTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[19].wave
+      value: 
+      objectReference: {fileID: 11427974, guid: 6eacc3ddab5761a4e9c7354fc29f622c,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[20].wave
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[21].wave
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[22].wave
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[5].nextAppearTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[6].nextAppearTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[7].nextAppearTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: waves.Array.data[22].nextAppearTime
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 122334}
+  m_IsPrefabParent: 1

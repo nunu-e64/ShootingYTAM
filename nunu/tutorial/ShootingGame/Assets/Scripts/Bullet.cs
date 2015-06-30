@@ -9,13 +9,22 @@ public class Bullet : MonoBehaviour {
 	public float speed = 10;
 	public float lifeTime = 5;
 
-	public int power = 1;
-
+	[System.NonSerialized]
+	public int[] bulletPower;
+	public int power;
+	
 	private float livingTimer;
 
 	void OnEnable () {
+
+		bulletPower = new int[Mathf.Max (transform.childCount, 1)];
+		
+		for (int i = 0; i < bulletPower.Length; i++) {
+			bulletPower[i] = power;			
+		}
+
 		livingTimer = 0;
-        GetComponent<Rigidbody2D>().velocity = transform.up.normalized * speed;
+		GetComponent<Rigidbody2D> ().velocity = transform.up.normalized * speed;
 	}
 
 	void Update(){
@@ -24,6 +33,10 @@ public class Bullet : MonoBehaviour {
 		if (livingTimer >= lifeTime) {
 			ObjectPool.Instance.ReleaseGameObject (gameObject);
 		}
+	}
+
+	void SetSpeedRate () {
+
 	}
 	
 }

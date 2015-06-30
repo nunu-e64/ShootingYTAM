@@ -18,8 +18,9 @@ public class Spaceship : MonoBehaviour {
 	[HeaderAttribute ("OtherRef")]
 	public GameObject explosion;
 	
-	public void Explosion() {
-		Instantiate(explosion, transform.position, transform.rotation);
+	public virtual void Explosion() {
+		GameObject go = Instantiate(explosion, transform.position, transform.rotation) as GameObject;
+		//go.transform.localScale = transform.localScale;
 	}
-
+		
 }

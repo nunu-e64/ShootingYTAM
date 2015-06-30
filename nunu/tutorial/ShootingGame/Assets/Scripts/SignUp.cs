@@ -12,6 +12,7 @@ public class SignUp : MonoBehaviour {
 
 	public Button button;
 	public InputField inputField;
+	public Text message;
 
 	private string userNameKey = "userName";	//PlayerPrefsで保存するためのキー;
 	private string userIdKey = "userId";
@@ -34,6 +35,8 @@ public class SignUp : MonoBehaviour {
 		} else {
 			inputField.text = "";	//未登録
 			ChangeButtonStyle (false);
+			message.text = "半角英数8文字以内で\nあなたの名前を入力してください";
+			message.color = new Color (170f / 255, 170f / 255, 170f / 255);
 			return false;
 		}
 	}
@@ -70,14 +73,34 @@ public class SignUp : MonoBehaviour {
 
 	IEnumerator UserRegister(){
 		string url = "http://localhost/cakephp/ranking/Users/userAdd?name=" + userName;
+		message.text = "   サーバー接続中...";
+		message.color = new Color (180f / 255, 170f / 255, 0f / 255);
+		
 		WWW www = new WWW (url);
 
 		yield return www;
+
+		Debug.Log (www.text);
+
+		if (www.error != null && !GameObject.FindObjectOfType<Manager> ().isDebug) {
+			Debug.LogWarning ("WWWERROR: " + www.error);
+			message.text = "通信エラー\n" + www.error;
+			message.color = new Color (230f / 255, 70f / 255, 70f / 255);
+			yield break;
+
+		} else if (!www.isDone && !GameObject.FindObjectOfType<Manager> ().isDebug) {
+			Debug.LogWarning ("WWWERROR: " + "UNDONE");
+			message.text = "通信エラー";
+			message.color = new Color (230f / 255, 70f / 255, 70f / 255);
+			yield break;
+
 		//名前が重複している場合ユーザ登録できない
-		if (www.text == "false") {
+		} else if (www.text == "false" && !GameObject.FindObjectOfType<Manager> ().isDebug) {
 			//名前が重複しておりIDが与えられない。
-			Debug.Log ("名前が重複してます。");
-			UnityEditor.EditorUtility.DisplayDialog ("alert", "既に登録された名前です。", "ok!");
+			Debug.Log ("Already Existed Name.");
+			message.text = "この名前は既に利用されています。\n他の名前を入力してください";
+			message.color = new Color (230f/255, 70f/255, 70f/255);
+			yield break;
 
 		} else {
 			Debug.Log ("登録成功");
@@ -90,3 +113,4 @@ public class SignUp : MonoBehaviour {
 		}
     }
 }
+

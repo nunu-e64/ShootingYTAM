@@ -37,8 +37,8 @@ public class Manager : MonoBehaviour {
 
 	void Start () {
 
-		foreach (GameObject item in GameObject.FindGameObjectsWithTag ("debug")) {
-			item.SetActive (isDebug);
+		foreach (GameObject item in GameObject.FindGameObjectsWithTag ("Debug")) {
+			if (!isDebug) Debug.LogError ("Object Tagged 'Debug' is acitve.:" + item);
 		}
 	
 		ShowSignUp ();
@@ -52,6 +52,11 @@ public class Manager : MonoBehaviour {
 
 		switch (gameMode) {
 		case mode_tag.PLAYING:
+			if (isDebug && Input.GetMouseButtonDown (1)) {
+				Time.timeScale = 5.0f;
+			} else if(isDebug && Input.GetMouseButtonUp (1)){
+				Time.timeScale = 1.0f;
+			}
 			break;
 
 		case mode_tag.TITLE:			//TIPS: 画面タップによるゲームスタートはButtonで実装している
@@ -84,12 +89,20 @@ public class Manager : MonoBehaviour {
 		title.SetActive (false);
 		titleMessage.SetActive (false);
 		gauge.SetActive (true);
+
 		player = Instantiate (playerPrefab) as GameObject;		//自機出現
 		Vector3 pos = Camera.main.ViewportToWorldPoint (new Vector2 (0.5f, 0));
 		player.transform.position = new Vector3 (pos.x, pos.y, 0);
+		player.GetComponent<Player> ().invincibleModeForTest = isDebug;
+
+		if (GameObject.FindObjectOfType<TimeCounter> () != null) {
+			GameObject.FindObjectOfType<TimeCounter> ().SetEnable (true);
+		}
 	}
 
-	public void GameOver() {
+	public IEnumerator GameOver() {
+		yield return new WaitForSeconds (3.0f);
+
 		gameMode = mode_tag.GAMEOVER;
 
 		//スコア取得と表示とセーブ
@@ -101,12 +114,17 @@ public class Manager : MonoBehaviour {
 		if (true) {
 			//SendRanking(signUp.GetComponent<SignUp> ().UserName, score);
 			StartCoroutine (SendUserScore (score));
-			Debug.Log ("SendRanking:" + signUp.GetComponent<SignUp> ().UserName + "," + score);
+			Debug.Log ("RequestSendingScoreToRanking:" + signUp.GetComponent<SignUp> ().UserName + "," + score);
 		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 
 		gauge.SetActive (false);
 		gameOver.SetActive(true);
+
+
+		if (GameObject.FindObjectOfType<TimeCounter> () != null) {
+			GameObject.FindObjectOfType<TimeCounter> ().SetEnable (false);
+		}
 	}
 	IEnumerator SendUserScore(int score){
 		string userId = signUp.GetComponent<SignUp>().UserId;
@@ -117,11 +135,17 @@ public class Manager : MonoBehaviour {
 
 		yield return www;
 
-		if(www.text == "false"){
-			Debug.Log ("スコアの追加失敗");
+		if (www.error != null) {
+			Debug.LogWarning ("WWWERROR: " + www.error);
+			yield break;
+		} else if (!www.isDone) {
+			Debug.LogWarning ("WWWERROR: " + "UNDONE");
+			yield break;
+		} else  if (www.text == "false") {
+			Debug.LogWarning ("WWWERROR: Failed");
 			yield break;
 		}else{
-			Debug.Log ("スコアの追加成");
+			Debug.Log ("Success");
 		}
 	}
 	private void ShowTitle() {

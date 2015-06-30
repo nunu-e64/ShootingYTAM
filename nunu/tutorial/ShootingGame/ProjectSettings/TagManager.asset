@@ -4,9 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - joystick
-  - debug
   - Bullet
+  - Debug
   layers:
   - Default
   - TransparentFX
@@ -49,6 +48,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3394710305
+    locked: 0
+  - name: Explosion
+    uniqueID: 175658309
     locked: 0
   - name: UI
     uniqueID: 1045457795

@@ -15,20 +15,19 @@ public class GaugeManager : MonoBehaviour {
 
 	public float count = 0.00f;		//ゲージのカウントダウン表示。Animationで値変化
 
-	private Player player = null;
-	private bool isShooting;
+	private bool isCharging;
 
 	private Animator animator;
-	private Animation  animation;
- 
 
+
+	void Awake () {
+		animator = GetComponent<Animator> ();
+	}
 
 	void Start () {	
 
 		//Textの位置をゲージに合わせる
 		gaugeText.transform.position = (Vector2) Camera.main.WorldToScreenPoint (transform.position);
-
-		animator = GetComponent<Animator>();
 
 		count = 0.0f;
 
@@ -46,6 +45,9 @@ public class GaugeManager : MonoBehaviour {
 
 	void OnEnable () {
 		gaugeText.gameObject.SetActive (true);
+		isCharging = false;
+		animator.ResetTrigger ("charge");
+		animator.ResetTrigger ("release");
 	}
 
 	void OnDisable () {
@@ -57,28 +59,24 @@ public class GaugeManager : MonoBehaviour {
 		}
 	}
 
-	public void SetPlayer(Player _player) {
-		player = _player;
-	}
-
 	public void BeginCharge () {
 
-		GetComponent<Animator> ().SetTrigger ("charge");
+		if (!isCharging) {
+			isCharging = true;
+			animator.SetTrigger ("charge");
+			gaugeText.gameObject.SetActive (true);
+		}
 
-		isShooting = false;
-		player.shotable = false;
-		gaugeText.gameObject.SetActive (true);
 	}
 
 	public int EndCharge () {
 
-		GetComponent<Animator> ().SetTrigger ("release");
-		
-		isShooting = true;
-		player.shotable = true;
-		//gaugeText.gameObject.SetActive (false);
+		if (isCharging) {
+			isCharging = false;
+			animator.SetTrigger ("release");
+		}
+		return (int) count;
 
-		return (int)count;
 	}
 
 	public int GetCount () {
