@@ -32,6 +32,7 @@ class UsersController extends AppController {
 			//ユーザ名が重複した
 			echo "false";
 		}
+    }
 	//ユーザ消去(ID)
 	//:Unity側にidをコアデータとして渡す。
 	public function userDelete(){

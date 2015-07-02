@@ -72,7 +72,7 @@ public class SignUp : MonoBehaviour {
 	}
 
 	IEnumerator UserRegister(){
-		string url = "http://localhost/cakephp/ranking/Users/userAdd?name=" + userName;
+		string url = "http://hogera.sakura.ne.jp/ytam/cakephp/ranking/Users/userAdd?name=" + userName;
 		message.text = "   サーバー接続中...";
 		message.color = new Color (180f / 255, 170f / 255, 0f / 255);
 		
