@@ -131,7 +131,14 @@ public class Manager : MonoBehaviour {
 		Debug.Log ("userId:"+ userId);
 		Debug.Log ("score:"+ score);
 		string url = "http://hogera.sakura.ne.jp/ytam/cakephp/ranking/Scores/scoreAdd?user_id=" + userId + "&score=" + score.ToString ();
-		WWW www = new WWW (url);
+
+        WWWForm wwwForm = new WWWForm();
+
+        wwwForm.AddField("keyword", "RegisterScore");
+        wwwForm.AddField("user_id", userId);
+        wwwForm.AddField("score", score.ToString());
+
+        WWW www = new WWW(url, wwwForm);
 
 		yield return www;
 
