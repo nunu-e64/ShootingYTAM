@@ -75,8 +75,12 @@ public class SignUp : MonoBehaviour {
 		string url = "http://hogera.sakura.ne.jp/ytam/cakephp/ranking/Users/userAdd?name=" + userName;
 		message.text = "   サーバー接続中...";
 		message.color = new Color (180f / 255, 170f / 255, 0f / 255);
-		
-		WWW www = new WWW (url);
+
+
+        WWWForm wwwForm = new WWWForm();
+        wwwForm.AddField("keyword", "SignUp");
+        wwwForm.AddField("user_name", "userName");
+        WWW www = new WWW (url, wwwForm);
 
 		yield return www;
 

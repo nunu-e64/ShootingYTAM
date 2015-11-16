@@ -25,11 +25,13 @@ public class RankingManager : MonoBehaviour {
 	string url = "http://localhost/nunu/ytam/cakephp_fake/ranking/Scores/ranking";
 	//string url = "http://hogera.sakura.ne.jp/ytam/cakephp/ranking/Scores/ranking";
 	IEnumerator DownLoad () {
-		//message.gameObject.SetActive (true);
-		//message.text = "   サーバー接続中...";
-		//message.color = new Color (180f / 255, 170f / 255, 0f / 255);
+        //message.gameObject.SetActive (true);
+        //message.text = "   サーバー接続中...";
+        //message.color = new Color (180f / 255, 170f / 255, 0f / 255);
 
-		WWW www = new WWW (url);
+        WWWForm wwwForm = new WWWForm();
+        wwwForm.AddField("keyword", "GetRanking");
+		WWW www = new WWW (url, wwwForm);
 
 		yield return www;
 
