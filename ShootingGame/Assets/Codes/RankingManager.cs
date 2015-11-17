@@ -22,8 +22,7 @@ public class RankingManager : MonoBehaviour {
 		message.gameObject.SetActive (false);
 		StartCoroutine (DownLoad ());
 	}
-	string url = "http://localhost/nunu/ytam/cakephp_fake/ranking/Scores/ranking";
-	//string url = "http://hogera.sakura.ne.jp/ytam/cakephp/ranking/Scores/ranking";
+	string url = GameObject.FindObjectOfType<Manager>().GetUrl();
 	IEnumerator DownLoad () {
         //message.gameObject.SetActive (true);
         //message.text = "   サーバー接続中...";

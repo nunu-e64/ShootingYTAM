@@ -72,8 +72,8 @@ public class SignUp : MonoBehaviour {
 	}
 
 	IEnumerator UserRegister(){
-		string url = "http://hogera.sakura.ne.jp/ytam/cakephp/ranking/Users/userAdd?name=" + userName;
-		message.text = "   サーバー接続中...";
+        string url = GameObject.FindObjectOfType<Manager>().GetUrl();
+        message.text = "   サーバー接続中...";
 		message.color = new Color (180f / 255, 170f / 255, 0f / 255);
 
 
@@ -99,7 +99,7 @@ public class SignUp : MonoBehaviour {
 			yield break;
 
 		//名前が重複している場合ユーザ登録できない
-		} else if (www.text == "false" && !GameObject.FindObjectOfType<Manager> ().isDebug) {
+		} else if (www.text == "ng" && !GameObject.FindObjectOfType<Manager> ().isDebug) {
 			//名前が重複しておりIDが与えられない。
 			Debug.Log ("Already Existed Name.");
 			message.text = "この名前は既に利用されています。\n他の名前を入力してください";

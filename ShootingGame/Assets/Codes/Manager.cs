@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.IO;
+using System.Text;
 
 /// <summary>
 /// ゲーム状況の管理クラス
@@ -34,8 +36,10 @@ public class Manager : MonoBehaviour {
 	}
 	private mode_tag gameMode;
 
+    private string url;                                 //接続先URL　外部ファイル(Asset/url.txt)から読み込み
 
-	void Start () {
+
+    void Start () {
 
 		foreach (GameObject item in GameObject.FindGameObjectsWithTag ("Debug")) {
 			if (!isDebug) Debug.LogError ("Object Tagged 'Debug' is acitve.:" + item);
@@ -45,10 +49,25 @@ public class Manager : MonoBehaviour {
 		if (signUp.GetComponent<SignUp> ().Initialize ()) {		//名前が登録済みか確認し登録済みならタイトル画面へ
 			SignUpComplete ();
 		}
-	}
 
+        //URLの読込み/////////////////////////////////////////////////////////////////////
+        FileInfo fi = new FileInfo(Application.dataPath + "/" + "URL.txt"); //記載URLに誤りがあれば404エラー	//TODO: 外部テキストの書き換えによるインジェクションが容易に可能
+        if (fi.Exists) {
+            using (StreamReader sr = new StreamReader(fi.OpenRead(), Encoding.UTF8)) {
+                url = sr.ReadToEnd();
+            }
+        } else {
+            Debug.LogError("FileOpenError:" + Application.dataPath + "/" + "URL.txt");
+        }
+        //////////////////////////////////////////////////////////////////////////////////
 
-	void Update() {
+    }
+
+    public string GetUrl() {
+        return url;
+    }
+
+    void Update() {
 
 		switch (gameMode) {
 		case mode_tag.PLAYING:
@@ -130,7 +149,7 @@ public class Manager : MonoBehaviour {
 		string userId = signUp.GetComponent<SignUp>().UserId;
 		Debug.Log ("userId:"+ userId);
 		Debug.Log ("score:"+ score);
-		string url = "http://hogera.sakura.ne.jp/ytam/cakephp/ranking/Scores/scoreAdd?user_id=" + userId + "&score=" + score.ToString ();
+        string url = GetUrl();
 
         WWWForm wwwForm = new WWWForm();
 
