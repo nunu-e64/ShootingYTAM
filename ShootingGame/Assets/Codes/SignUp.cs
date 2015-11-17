@@ -79,7 +79,7 @@ public class SignUp : MonoBehaviour {
 
         WWWForm wwwForm = new WWWForm();
         wwwForm.AddField("keyword", "SignUp");
-        wwwForm.AddField("user_name", "userName");
+        wwwForm.AddField("user_name", userName);
         WWW www = new WWW (url, wwwForm);
 
 		yield return www;

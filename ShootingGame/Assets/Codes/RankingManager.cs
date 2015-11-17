@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using MiniJSON;
+using System.IO;
+using System.Text;
 
 /// <summary>
 /// ランキング表示
@@ -22,11 +24,25 @@ public class RankingManager : MonoBehaviour {
 		message.gameObject.SetActive (false);
 		StartCoroutine (DownLoad ());
 	}
-	string url = GameObject.FindObjectOfType<Manager>().GetUrl();
-	IEnumerator DownLoad () {
+
+    IEnumerator DownLoad () {
         //message.gameObject.SetActive (true);
         //message.text = "   サーバー接続中...";
         //message.color = new Color (180f / 255, 170f / 255, 0f / 255);
+
+        string url;
+        
+        //URLの読込み/////////////////////////////////////////////////////////////////////
+        FileInfo fi = new FileInfo(Application.dataPath + "/" + "URL.txt"); //記載URLに誤りがあれば404エラー	//TODO: 外部テキストの書き換えによるインジェクションが容易に可能
+        if (fi.Exists) {
+            using (StreamReader sr = new StreamReader(fi.OpenRead(), Encoding.UTF8)) {
+                url = sr.ReadToEnd();
+            }
+        } else {
+            Debug.LogError("FileOpenError:" + Application.dataPath + "/" + "URL.txt");
+            yield break;
+        }
+        //////////////////////////////////////////////////////////////////////////////////
 
         WWWForm wwwForm = new WWWForm();
         wwwForm.AddField("keyword", "GetRanking");
