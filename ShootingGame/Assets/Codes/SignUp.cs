@@ -31,7 +31,9 @@ public class SignUp : MonoBehaviour {
 		userName = PlayerPrefs.GetString (userNameKey, "");		//端末から登録名を取得
 		userId = PlayerPrefs.GetString (userIdKey, "");
 		if (userName.Length > 0) {	//登録済み
-			return true;
+            StartCoroutine(LogIn());
+            Debug.Log("requested");
+            return true;
 		} else {
 			inputField.text = "";	//未登録
 			ChangeButtonStyle (false);
@@ -71,7 +73,33 @@ public class SignUp : MonoBehaviour {
 		StartCoroutine (UserRegister ());
 	}
 
-	IEnumerator UserRegister(){
+    IEnumerator LogIn() {
+        string url = GameObject.FindObjectOfType<Manager>().GetUrl();
+
+        WWWForm wwwForm = new WWWForm();
+        wwwForm.AddField("keyword", "LogIn");
+        wwwForm.AddField("user_id", userId);
+        WWW www = new WWW(url, wwwForm);
+
+        Debug.Log("start id:" + userId);
+        yield return www;
+
+        Debug.Log(www.text);
+
+        if (www.error != null) {
+            Debug.LogWarning("WWWERROR: " + www.error);
+            yield break;
+        } else if (!www.isDone) {
+            Debug.LogWarning("WWWERROR: " + "UNDONE");
+            yield break;
+        } else {
+            Debug.Log("LogIn:Success");
+            yield break;
+        }
+
+    }
+
+    IEnumerator UserRegister(){
         string url = GameObject.FindObjectOfType<Manager>().GetUrl();
         message.text = "   サーバー接続中...";
 		message.color = new Color (180f / 255, 170f / 255, 0f / 255);

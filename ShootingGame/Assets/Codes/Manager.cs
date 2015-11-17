@@ -41,15 +41,6 @@ public class Manager : MonoBehaviour {
 
     void Start () {
 
-		foreach (GameObject item in GameObject.FindGameObjectsWithTag ("Debug")) {
-			if (!isDebug) Debug.LogError ("Object Tagged 'Debug' is acitve.:" + item);
-		}
-	
-		ShowSignUp ();
-		if (signUp.GetComponent<SignUp> ().Initialize ()) {		//名前が登録済みか確認し登録済みならタイトル画面へ
-			SignUpComplete ();
-		}
-
         //URLの読込み/////////////////////////////////////////////////////////////////////
         FileInfo fi = new FileInfo(Application.dataPath + "/" + "URL.txt"); //記載URLに誤りがあれば404エラー	//TODO: 外部テキストの書き換えによるインジェクションが容易に可能
         if (fi.Exists) {
@@ -60,6 +51,16 @@ public class Manager : MonoBehaviour {
             Debug.LogError("FileOpenError:" + Application.dataPath + "/" + "URL.txt");
         }
         //////////////////////////////////////////////////////////////////////////////////
+
+        foreach (GameObject item in GameObject.FindGameObjectsWithTag ("Debug")) {
+			if (!isDebug) Debug.LogError ("Object Tagged 'Debug' is acitve.:" + item);
+		}
+	
+		ShowSignUp ();
+		if (signUp.GetComponent<SignUp> ().Initialize ()) {		//名前が登録済みか確認し登録済みならタイトル画面へ
+			SignUpComplete ();
+		}
+
 
     }
 
