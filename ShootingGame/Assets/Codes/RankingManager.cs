@@ -91,7 +91,6 @@ public class RankingManager : MonoBehaviour {
 	//JsonデータをパースしList作成/////////////////////////////////////////
 	public bool SetRankingData (string dataText) {
 
-		Debug.Log (dataText);	//DEBUG: wwwの内容一覧表示
 		var json = Json.Deserialize (dataText);
 
 		List<object> list;

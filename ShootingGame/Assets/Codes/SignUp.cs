@@ -14,10 +14,14 @@ public class SignUp : MonoBehaviour {
 	public InputField inputField;
 	public Text message;
 
-	private string userNameKey = "userName";	//PlayerPrefsで保存するためのキー;
-	private string userIdKey = "userId";
-	private string userName = "";
+	private const string USER_NAME_KEY = "userName";	//PlayerPrefsで保存するためのキー;
+	private const string USER_ID_KEY = "userId";
+    private const string ACCOUNT_VERSION_KEY = "accountVersion";
+    private const int ACCOUNT_VERSION = 2;
+
+    private string userName = "";
 	private string userId = "";
+    private int accountVersion;
 
 	public string UserName {
 		get { return userName; }
@@ -28,19 +32,22 @@ public class SignUp : MonoBehaviour {
 
 	//初期化…Managerから呼び出す。ローカルデータチェックとInputField,Buttonの初期化
 	public bool Initialize () {
-		userName = PlayerPrefs.GetString (userNameKey, "");		//端末から登録名を取得
-		userId = PlayerPrefs.GetString (userIdKey, "");
-		if (userName.Length > 0) {	//登録済み
+		userName = PlayerPrefs.GetString (USER_NAME_KEY, "");		//端末から登録名を取得
+		userId = PlayerPrefs.GetString (USER_ID_KEY, "");
+        accountVersion = PlayerPrefs.GetInt(ACCOUNT_VERSION_KEY, -1);
+
+        if (accountVersion != ACCOUNT_VERSION || userName == "") {
+            PlayerPrefs.DeleteAll();
+            inputField.text = "";   //未登録
+            ChangeButtonStyle(false);
+            message.text = "半角英数8文字以内で\nあなたの名前を入力してください";
+            message.color = new Color(170f / 255, 170f / 255, 170f / 255);
+            return false;
+        } else {	//登録済み
             StartCoroutine(LogIn());
             Debug.Log("requested");
             return true;
-		} else {
-			inputField.text = "";	//未登録
-			ChangeButtonStyle (false);
-			message.text = "半角英数8文字以内で\nあなたの名前を入力してください";
-			message.color = new Color (170f / 255, 170f / 255, 170f / 255);
-			return false;
-		}
+        }
 	}
 
 	//変数とUIの同期	uGUI(InputField)から呼び出す
@@ -64,12 +71,6 @@ public class SignUp : MonoBehaviour {
 	//新規登録完了	Buttonから呼び出す
 	public void NewNameSignUp () {
 		CheckInputField ();
-
-		////////////////////////////////////////////////////////////////
-		//TODO: DBにアクセスして既に存在している名前かチェックする
-		//・重複(既に存在する)→メッセージを表示してreturn;
-		//・ＯＫ(存在しない)→続行
-		////////////////////////////////////////////////////////////////
 		StartCoroutine (UserRegister ());
 	}
 
@@ -138,8 +139,9 @@ public class SignUp : MonoBehaviour {
 			Debug.Log ("登録成功");
 			userId = www.text as string;
 			Debug.Log ("取得したID:" + userId);
-			PlayerPrefs.SetString (userNameKey, userName);
-			PlayerPrefs.SetString (userIdKey, userId);
+			PlayerPrefs.SetString (USER_NAME_KEY, userName);
+			PlayerPrefs.SetString (USER_ID_KEY, userId);
+            PlayerPrefs.SetInt(ACCOUNT_VERSION_KEY, ACCOUNT_VERSION);
 			PlayerPrefs.Save ();
 			FindObjectOfType<Manager> ().SignUpComplete ();
 		}

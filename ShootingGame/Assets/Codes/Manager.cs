@@ -47,6 +47,7 @@ public class Manager : MonoBehaviour {
             using (StreamReader sr = new StreamReader(fi.OpenRead(), Encoding.UTF8)) {
                 url = sr.ReadToEnd();
             }
+            Debug.Log(url);
         } else {
             Debug.LogError("FileOpenError:" + Application.dataPath + "/" + "URL.txt");
         }
