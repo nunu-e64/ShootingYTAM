@@ -44,8 +44,10 @@ public class SignUp : MonoBehaviour {
             message.color = new Color(170f / 255, 170f / 255, 170f / 255);
             return false;
         } else {	//登録済み
-            StartCoroutine(LogIn());
-            Debug.Log("requested");
+            if (!(FindObjectOfType<SingletonGameManager>().HasLogedIn) ) {
+                StartCoroutine(LogIn());
+                FindObjectOfType<SingletonGameManager>().HasLogedIn = true;
+            }
             return true;
         }
 	}
@@ -75,7 +77,7 @@ public class SignUp : MonoBehaviour {
 	}
 
     IEnumerator LogIn() {
-        string url = GameObject.FindObjectOfType<Manager>().GetUrl();
+        string url = GameObject.FindObjectOfType<SingletonGameManager>().Url;
 
         WWWForm wwwForm = new WWWForm();
         wwwForm.AddField("keyword", "LogIn");
@@ -101,7 +103,8 @@ public class SignUp : MonoBehaviour {
     }
 
     IEnumerator UserRegister(){
-        string url = GameObject.FindObjectOfType<Manager>().GetUrl();
+        string url = GameObject.FindObjectOfType<SingletonGameManager>().Url;
+
         message.text = "   サーバー接続中...";
 		message.color = new Color (180f / 255, 170f / 255, 0f / 255);
 

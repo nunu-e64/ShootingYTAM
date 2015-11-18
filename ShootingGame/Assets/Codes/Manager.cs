@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using System.IO;
-using System.Text;
 
 /// <summary>
 /// ゲーム状況の管理クラス
@@ -36,22 +34,8 @@ public class Manager : MonoBehaviour {
 	}
 	private mode_tag gameMode;
 
-    private string url;                                 //接続先URL　外部ファイル(Asset/url.txt)から読み込み
-
 
     void Start () {
-
-        //URLの読込み/////////////////////////////////////////////////////////////////////
-        FileInfo fi = new FileInfo(Application.dataPath + "/" + "URL.txt"); //記載URLに誤りがあれば404エラー	//TODO: 外部テキストの書き換えによるインジェクションが容易に可能
-        if (fi.Exists) {
-            using (StreamReader sr = new StreamReader(fi.OpenRead(), Encoding.UTF8)) {
-                url = sr.ReadToEnd();
-            }
-            Debug.Log(url);
-        } else {
-            Debug.LogError("FileOpenError:" + Application.dataPath + "/" + "URL.txt");
-        }
-        //////////////////////////////////////////////////////////////////////////////////
 
         foreach (GameObject item in GameObject.FindGameObjectsWithTag ("Debug")) {
 			if (!isDebug) Debug.LogError ("Object Tagged 'Debug' is acitve.:" + item);
@@ -63,10 +47,6 @@ public class Manager : MonoBehaviour {
 		}
 
 
-    }
-
-    public string GetUrl() {
-        return url;
     }
 
     void Update() {
@@ -151,7 +131,7 @@ public class Manager : MonoBehaviour {
 		string userId = signUp.GetComponent<SignUp>().UserId;
 		Debug.Log ("userId:"+ userId);
 		Debug.Log ("score:"+ score);
-        string url = GetUrl();
+        string url = GameObject.FindObjectOfType<SingletonGameManager>().Url;
 
         WWWForm wwwForm = new WWWForm();
 
