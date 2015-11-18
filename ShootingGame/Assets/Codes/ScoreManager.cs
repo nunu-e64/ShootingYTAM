@@ -18,7 +18,7 @@ public class ScoreManager : MonoBehaviour {
 	private int highScore;
 	private Manager manager;
 
-	private string highScoreKey = "highScore";	//PlayerPrefsで保存するためのキー;
+	private const string HIGH_SCORE_KEY = "highScore";	//PlayerPrefsで保存するためのキー;
 
 	IEnumerator Start () {
 		manager = FindObjectOfType<Manager>();
@@ -38,7 +38,7 @@ public class ScoreManager : MonoBehaviour {
 
 	public void Initialize() {
 		score = 0;
-		highScore = PlayerPrefs.GetInt(highScoreKey, 0);
+		highScore = PlayerPrefs.GetInt(HIGH_SCORE_KEY, 0);
 
 		scoreText.text		= score.ToString();
 		highScoreText.text	= highScore.ToString();
@@ -59,7 +59,7 @@ public class ScoreManager : MonoBehaviour {
 	}
 
 	public void Save() {
-		PlayerPrefs.SetInt(highScoreKey, highScore);
+		PlayerPrefs.SetInt(HIGH_SCORE_KEY, highScore);
 		PlayerPrefs.Save();
 	}
 

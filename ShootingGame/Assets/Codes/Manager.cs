@@ -111,13 +111,9 @@ public class Manager : MonoBehaviour {
 		gameOver.transform.Find("Score").GetComponent<Text>().text = "Score " + score.ToString();
 		scoreManager.Save ();
 
-		//TODO: ハイスコア更新時にはランキング送信//////////////////////////////////////////////////////////////
-		if (true) {
-			//SendRanking(signUp.GetComponent<SignUp> ().UserName, score);
-			StartCoroutine (SendUserScore (score));
-			Debug.Log ("RequestSendingScoreToRanking:" + signUp.GetComponent<SignUp> ().UserName + "," + score);
-		}
-		//////////////////////////////////////////////////////////////////////////////////////////////////
+        //スコアログを兼ねるため毎回送信する
+		StartCoroutine (SendUserScore (score));
+		Debug.Log ("RequestSendingScoreToRanking:" + signUp.GetComponent<SignUp> ().UserName + "," + score);
 
 		gauge.SetActive (false);
 		gameOver.SetActive(true);
